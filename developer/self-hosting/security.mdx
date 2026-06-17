@@ -1,0 +1,115 @@
+---
+title: "Security model"
+description: "No private keys on the system, encryption at rest, and responsible disclosure."
+---
+
+BunnyOS is designed so that the agent layer is open and auditable, while the part that actually moves money stays out of its reach. The agent can read, reason, and draft, but it cannot sign. Signing lives in your Base account, and every onchain action is an approval *you* make in Base's own UI. This page explains the guarantees the self-hosted stack makes, the cryptography behind stored secrets, how to report vulnerabilities, and what remains your responsibility as the operator.
+
+<Note>
+  Because BunnyOS is open-source ([AGPL-3.0](https://github.com/bunnyos/base-agent)), you can audit every claim on this page in the source. Nothing here depends on trusting a hosted operator, the cost and the code both live with whoever runs it.
+</Note>
+
+## No private keys on the system
+
+The single most important property of the BunnyOS security model is that **your signing keys never touch the system**.
+
+- Your private keys live in your **Base account**, never in the BunnyOS database, environment, or process memory.
+- The agent has **no write capability of its own**. It cannot sign, broadcast, or move funds.
+- When an action needs to happen onchain, the agent can only ask your Base account to **draft a transaction**: which you then **approve in Base's UI**.
+
+This means the worst case for a compromised or misbehaving agent is a *bad draft*, not a stolen wallet. The agent proposes; you dispose.
+
+```text Flow of an onchain action
+agent reasons over tool data
+        │
+        ▼
+agent drafts an approval (no signing power)
+        │
+        ▼
+you review + approve in Base app   ◄── signing happens here, in your account
+        │
+        ▼
+transaction broadcast by Base
+```
+
+This separation also shapes the [Action system](/developer/self-hosting/overview): autonomous scanners run the same agent loop as chat but with **write tools denied**. A scanner can surface an alert or a recommendation with a one-click execute button, but clicking it only feeds an imperative back into the chat agent, which then drafts an approval URL for you to confirm. No autonomous path ever reaches a signature.
+
+<Warning>
+  Self-hosting does not change this guarantee, but modifying the agent can. If you fork the agent and add custom tools, keep any signing-capable integration out of the agent's tool catalog. The "draft, never sign" boundary is yours to preserve.
+</Warning>
+
+## Encryption at rest and signed sessions
+
+BunnyOS does store some sensitive values, third-party API keys you configure, and the OAuth tokens for your wallet connection. These are never written in plaintext. The cryptography is derived entirely from a single secret you control: `SESSION_SECRET`.
+
+### How the key material is derived
+
+`SESSION_SECRET` (a random string of **16 characters or more**, set in your environment) is run through **HKDF** to derive two domain-separated keys:
+
+- A **cookie HMAC key** that signs session cookies.
+- An **at-rest AES-256-GCM key** that encrypts stored secrets.
+
+Because both keys are derived from `SESSION_SECRET`, the two concerns share one root of trust but never share key material.
+
+| Protected value | Mechanism | Notes |
+|---|---|---|
+| Stored API keys (e.g. OpenRouter, CoinGecko, Moralis) | **AES-256-GCM** | Encrypted at rest, key derived via HKDF from `SESSION_SECRET`. |
+| Wallet OAuth tokens (Base account) | **AES-256-GCM** | Same at-rest scheme as API keys. |
+| Session cookies | **HMAC-signed** | Signed with a key domain-separated from the at-rest key. |
+
+<Warning>
+  **Rotating `SESSION_SECRET` is destructive.** It logs everyone out (the cookie HMAC key changes) and **orphans existing encrypted rows** (the at-rest key changes, so previously stored API keys and OAuth tokens can no longer be decrypted). Treat the secret as long-lived; rotate it only when you intend to re-authenticate and re-enter stored secrets.
+</Warning>
+
+<Tip>
+  Generate a strong value once and keep it stable across restarts and instances. Anything 16 characters or longer is accepted, but longer and fully random is better. For where this and the other required variables live, see [Configuration](/developer/self-hosting/configuration).
+</Tip>
+
+### What this protects against
+
+Encryption at rest means a leaked database dump or backup does not hand an attacker your usable API keys or wallet OAuth tokens, they are ciphertext without `SESSION_SECRET`. Signed sessions mean a forged or tampered cookie is rejected rather than trusted. Neither, however, protects a running process whose environment already holds the secret, which is why the operational responsibilities below still matter.
+
+## Responsible disclosure
+
+If you find a security issue in BunnyOS, please report it privately.
+
+<Steps>
+  <Step title="Do not open a public issue">
+    Avoid GitHub issues, Discord, or any public channel for vulnerabilities. Public disclosure before a fix puts every self-hosted operator at risk.
+  </Step>
+  <Step title="Email the security team">
+    Send details privately to **security@bunnyos.ai**. Include reproduction steps, affected versions or commits, and impact where you can.
+  </Step>
+  <Step title="Allow time for a fix">
+    Give the maintainers a reasonable window to investigate and patch before any public discussion.
+  </Step>
+</Steps>
+
+## Operational disclaimer
+
+BunnyOS is **experimental software**, and self-hosting puts the operational security in your hands. The cryptographic guarantees above are necessary but not sufficient on their own.
+
+Before interacting with onchain systems through the agent:
+
+- **Review every permission and approval.** The agent drafts; the approval you sign in the Base app is the real, irreversible action. Read it.
+- **Validate execution behavior** for any custom scanners you write or code changes you make.
+- **Understand the transaction risks** of any action before you confirm it.
+- **Protect `SESSION_SECRET` and `DATABASE_URL`** like the credentials they are, they gate your encrypted secrets and your data.
+
+<Warning>
+  **You are responsible for your own wallets and approvals.** No part of the BunnyOS stack can sign for you, and no part can undo an approval you make in your Base account. Self-hosting means you also own the security of the environment it runs in.
+</Warning>
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Configuration" icon="settings" href="/developer/self-hosting/configuration">
+    Set `SESSION_SECRET`, `DATABASE_URL`, and `BASE_PATH` correctly.
+  </Card>
+  <Card title="Quickstart" icon="rocket" href="/developer/self-hosting/quickstart">
+    Clone, configure, and run the API on `:3000` and UI on `:5173`.
+  </Card>
+  <Card title="Self-hosting overview" icon="server" href="/developer/self-hosting/overview">
+    The four systems that compose the agent.
+  </Card>
+</CardGroup>

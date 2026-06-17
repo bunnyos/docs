@@ -1,0 +1,101 @@
+---
+title: "Respond to alerts & recommendations"
+description: "Review signals from your running actions and act on them with one click."
+---
+
+Your [actions](/user/actions/builder) run around the clock and post what they find into the **actions inbox**: a feed of signals you can read at a glance and act on without leaving the page. The inbox is one of three views you switch between at the top of the Actions tab: **inbox** (this page), **builder**, and **history**. New signals appear on their own as your actions run.
+
+<Note>
+  The inbox shows what your own actions produce, plus recommendations from creators whose keys you hold. To create the actions that fill it, see [Create actions that run 24/7](/user/actions/builder). To manage existing ones, see [Manage your actions](/user/actions/management).
+</Note>
+
+## Alerts, recommendations, and creator picks
+
+The inbox splits signals into three columns. On a wide screen they sit side by side; on a narrow screen they stack into one scrolling list. Each column header shows how many pending items it holds.
+
+| Column | What it is | Can you execute it? |
+| --- | --- | --- |
+| **your actions** | Suggested moves from your own actions. | Yes, one click |
+| **from creators** | Picks and calls from creators whose keys you hold. | Plain-language calls only; on-chain calls are view only |
+| **alerts** | Heads-up only, no action required. Warnings and info your actions post when conditions trigger. | No, informational |
+
+A colored dot marks each card's kind: **alerts** are yellow (attention) and **recommendations** are green (actionable). Think of alerts as "something happened, look at it" and recommendations as "here is a move you can make right now."
+
+<Tip>
+  The **from creators** column only fills once your wallet is connected to Bunny Exchange. If it is empty and shows a **go to bunny exchange** button, connect first. See [Connect your wallet](/user/getting-started/wallet-connection) and [Buy & sell creator keys](/user/bunnyex/trading).
+</Tip>
+
+## Reading a card
+
+Every card has the same layout so you can scan it fast:
+
+- A **title**: the one-line summary of the signal.
+- The **source**: which of your actions raised it.
+- A **timestamp** like "just now", "5m ago", or "2h ago"; hover it to see the exact time.
+- A short **description** with the detail behind the signal.
+- **Tokens mentioned**, when the signal involves specific tokens. Each token chip shows its symbol and a shortened address; click a chip to copy the full address.
+
+Executable recommendations may also show an **execute** preview, which is the exact instruction that will be handed to chat when you act.
+
+## Acting on a card
+
+<Steps>
+  <Step title="Execute a recommendation">
+    Click **execute** on a recommendation from your own actions. It opens chat and drops the recommendation's instructions into the composer, ready to send.
+  </Step>
+  <Step title="Execute a creator pick">
+    Cards in **from creators** that carry a plain-language call also show **execute**, which fills chat the same way. On-chain calls are view only: read them, then decide how to act yourself.
+  </Step>
+  <Step title="Hide what you have handled">
+    Click **hide** on a card from your own actions or an alert to clear it from the live inbox. Hidden items are restorable: they stay in **history** with an **unhide** button. Use **hide all** in the header to clear every pending card at once.
+  </Step>
+  <Step title="Dismiss a creator call">
+    Creator cards use **dismiss** instead of hide. Dismissing is permanent: it removes the call from your feed for good, with no undo, and sends nothing to chat.
+  </Step>
+</Steps>
+
+<Warning>
+  Executing never moves funds by itself: it only pre-fills the chat composer. You send the message, and you approve every on-chain transaction in your [connected wallet](/user/getting-started/wallet-connection). Review the instructions before you run them.
+</Warning>
+
+## The history view
+
+Switch to the **history** view to see everything your actions have ever posted: pending, executed, and hidden, newest first and grouped by day (**today**, **yesterday**, then dated headers). The header shows a running tally, for example "4 pending, 12 executed, 7 hidden".
+
+Two filter rows let you narrow the list:
+
+| Filter | Options |
+| --- | --- |
+| **kind** | all, recommendations, alerts |
+| **status** | all, pending, executed, hidden |
+
+Each history card repeats the title, kind, status, time, source, description, any tokens, and the original execute instruction. Hidden cards appear dimmed and carry an **unhide** button; click it to restore the item so it shows up under **inbox** again.
+
+<AccordionGroup>
+  <Accordion title="Why did a recommendation disappear before I acted on it?">
+    Creator picks drop off the feed once they are a few days old, so stale calls do not pile up. Your own actions' recommendations and alerts stay until you hide them, and remain visible in history afterward.
+  </Accordion>
+  <Accordion title="I hid something by mistake, can I get it back?">
+    Yes. Open **history**, find the dimmed card, and click **unhide**. (Creator **dismiss** actions are the exception: they cannot be restored.)
+  </Accordion>
+  <Accordion title="Why does a card show no execute button?">
+    Alerts are informational and never have one. For creator picks, see the view-only rule above: only plain-language calls are executable.
+  </Accordion>
+</AccordionGroup>
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Create actions that run 24/7" icon="bell-plus" href="/user/actions/builder">
+    Build the actions that fill your inbox with alerts and one-click recommendations.
+  </Card>
+  <Card title="Manage your actions" icon="sliders-horizontal" href="/user/actions/management">
+    Pause, edit, and tune the actions that post to your inbox.
+  </Card>
+  <Card title="Connect your wallet" icon="wallet" href="/user/getting-started/wallet-connection">
+    Required before you can execute on-chain steps or follow creator picks.
+  </Card>
+  <Card title="Buy & sell creator keys" icon="store" href="/user/bunnyex/trading">
+    Hold a creator's keys to unlock their picks in the from-creators column.
+  </Card>
+</CardGroup>

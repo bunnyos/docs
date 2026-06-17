@@ -1,0 +1,87 @@
+---
+title: "Discover & browse tokens"
+description: "Find Base tokens across trending, recent, and AI-agent lists."
+---
+
+The Research page is where you find Base tokens to dig into. It loads a live list of tokens, lets you narrow that list with filters, sort by the metric you care about, search for anything by name or address, and preview a price chart before handing a token to the agent chat for a full report.
+
+<Note>
+Every market figure on this page (price, market cap, liquidity, 24h volume, and 1h/24h change) reflects onchain trading on Base, so it excludes centralized-exchange activity.
+</Note>
+
+## Ways to find tokens
+
+At the top of the page you switch between lists using the toggle in the header. Each list answers a different question.
+
+| List | What it shows |
+| --- | --- |
+| **Trending** (default) | The Base tokens with the most activity right now. |
+| **AI-agent tokens** | Tradeable AI-agent tokens, ordered so the most actively traded appear first. This list hides inactive tokens with almost no recent trading, and it is the only list with holder counts (so the `min holders` filter has an effect here only). |
+
+<Tip>
+Click the info icon next to the "research" title at any time to see what the currently selected list shows and how it is filtered.
+</Tip>
+
+## Filter the list
+
+Filters refine whichever list is loaded, and they update instantly, so there is no waiting. Click **filters** to expand the panel, type a number into any field, and the table updates as you type. The badge next to "filters" shows how many filters are active.
+
+Each filter sets a minimum (or, for age, a maximum):
+
+| Filter | Field label | Effect |
+| --- | --- | --- |
+| Liquidity | `min liq $` | Hide tokens below this liquidity in USD. |
+| 24h volume | `min 24h vol $` | Hide tokens below this 24h volume. |
+| Market cap | `min mkt cap $` | Hide tokens below this market cap. |
+| Holders | `min holders` | Hide tokens below this holder count (AI-agent list only, see above). |
+| Age | `max age (d)` | Hide tokens older than this many days. |
+| 1h change | `min 1h %` | Hide tokens whose 1h price change is below this percent. |
+| 24h change | `min 24h %` | Hide tokens whose 24h price change is below this percent. |
+
+To clear everything at once, click **clear filters**. If your filters leave nothing behind, the table shows "no tokens match your filters", relax a threshold to bring rows back.
+
+## Sort and search
+
+**Sort** by clicking any column header in the table: market cap, liquidity, 24h volume, 1h, 24h, or age. An arrow shows the active column and direction; click the same header again to flip between descending and ascending. The list defaults to sorting by 24h volume, highest first.
+
+**Search** any Base token from the box at the top, you are not limited to what is in the current list.
+
+<Steps>
+  <Step title="Type a query">
+    Enter a token name, ticker, or full contract address. The placeholder reads "search by name, ticker, or contract address".
+  </Step>
+  <Step title="Run the search">
+    Press Enter or click **search**.
+  </Step>
+  <Step title="Pick a result">
+    A contract address (a `0x…` value with 40 hex characters) opens that token's chart directly. Any other text runs a name/ticker search and shows a dropdown of matching candidates with their price and liquidity, click one to open its chart.
+  </Step>
+</Steps>
+
+<Note>
+If nothing matches, you will see "no tokens matched that search on base."
+</Note>
+
+## Preview a chart and research it
+
+Clicking any row in the table (or picking a search result, or pasting a contract address) opens a side panel with that token's live price chart. The chart follows your light or dark theme automatically.
+
+From the panel you can:
+
+- **Research**: hands the token off to the agent chat, which opens and automatically sends a research prompt so a full report is generated in the conversation. See [Research a token with the agent](/user/tokens/research).
+- **Close**: use the `X` to dismiss the panel and return to the list.
+
+## Refresh the list
+
+To pull the latest data, click **refresh** in the header. The icon spins while the new list loads, and the button is disabled until it finishes.
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Research a token" icon="microscope" href="/user/tokens/research">
+    Generate a full AI research report for any token you find here.
+  </Card>
+  <Card title="Configure services & keys" icon="settings" href="/user/configure/services">
+    Manage the services that power discovery and search.
+  </Card>
+</CardGroup>

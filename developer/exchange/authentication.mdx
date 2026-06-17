@@ -1,0 +1,276 @@
+---
+title: "Authentication"
+description: "Authenticate to the Exchange API with a SIWE JWT or a programmatic x-api-key."
+---
+
+The bunnyOS Exchange API is hosted at `https://api.bunnyos.ai`. It exposes authentication, market and account reads, profiles, recommendations, and threads over REST. Every request that touches user-scoped data must be authenticated, and there are two ways to do that.
+
+<Note>
+  The Exchange REST API does **not** execute trades. Buying and selling creator keys happens on-chain against the bonding-curve contract on Base (chain ID `8453`). This API is for sign-in, reads (profiles, candles, transactions, P&L), and social features. See [Exchange overview](/developer/exchange/overview) for the boundary between on-chain and off-chain.
+</Note>
+
+## Two ways to authenticate
+
+<CardGroup cols={2}>
+  <Card title="SIWE JWT (per-user)" icon="user-check">
+    Sign-In With Ethereum mints a bearer token tied to one wallet. Use it for interactive, user-scoped sessions: P&L, profile create/edit, actions, and threads. Sent as `Authorization: Bearer <jwt>`.
+  </Card>
+  <Card title="x-api-key (programmatic)" icon="key">
+    A long-lived header credential for scripts and backends. Created and managed through the `/auth/api-keys` endpoints (which themselves require a JWT). Sent as the `x-api-key` header.
+  </Card>
+</CardGroup>
+
+Both mechanisms resolve to the same caller identity (your wallet address). The difference is the lifecycle: a JWT is minted per session by signing a challenge, while an `x-api-key` is a durable secret you mint once and reuse.
+
+<Tip>
+  Public reads accept **optional** auth. Endpoints like `GET /exchange/bunnies`, `/candles`, and `/transactions` work with no credential at all and simply return the anonymous view. Authentication only adds viewer-specific data on top.
+</Tip>
+
+## The SIWE sign-in flow
+
+Sign-In With Ethereum is a two-step challenge: fetch a nonce, then return a signed message to exchange it for a JWT.
+
+<Warning>
+  The SIWE message **must** declare `chainId` `8453` (Base mainnet). Any other chain is rejected at the verify endpoint with a `401` **before** the signature is even checked. A wrong-chain message reads like a signing failure when it is really a chain mismatch.
+</Warning>
+
+| Method | Path | Auth |
+| --- | --- | --- |
+| `GET` | `/auth/nonce` | none |
+| `POST` | `/auth/verify` | none |
+
+<Steps>
+  <Step title="Request a nonce">
+    Call `GET /auth/nonce` with no auth. The response is a single value:
+
+    ```bash
+    curl https://api.bunnyos.ai/auth/nonce
+    ```
+
+    ```json
+    { "nonce": "a1b2c3d4e5f6..." }
+    ```
+
+    The nonce is single-use for the duration of one sign-in session. Reusing or delaying it past expiry produces a `401 Invalid or expired nonce` at verify time, so fetch a fresh nonce immediately before signing.
+  </Step>
+  <Step title="Build and sign the SIWE message">
+    Construct a standard SIWE message that embeds the `nonce` from step 1 and sets the chain to Base mainnet (`8453`). Sign it with the wallet you want to authenticate. This is a message signature, never a transaction, so it costs no gas.
+  </Step>
+  <Step title="Verify and receive a JWT">
+    `POST /auth/verify` with the raw `message` and its `signature`:
+
+    ```bash
+    curl -X POST https://api.bunnyos.ai/auth/verify \
+      -H "Content-Type: application/json" \
+      -d '{
+        "message": "<the full SIWE message you signed>",
+        "signature": "0x<signature hex>"
+      }'
+    ```
+
+    On success the server mints a JWT, returned under the `token` field:
+
+    ```json
+    { "token": "<jwt>" }
+    ```
+  </Step>
+</Steps>
+
+### Why a verify can fail
+
+<AccordionGroup>
+  <Accordion title="Wrong chain (most common)">
+    A message signed for chain ID `1` (Ethereum mainnet) or anything other than `8453` returns `401`. The chain is validated before signature verification, so fix the `chainId` in your SIWE message first.
+  </Accordion>
+  <Accordion title="Invalid or expired nonce">
+    Each nonce is single-use per session. A stale or already-consumed nonce returns `401 Invalid or expired nonce`. Always pair a fresh `GET /auth/nonce` with each sign-in attempt.
+  </Accordion>
+  <Accordion title="Undeployed smart wallet (ERC-6492)">
+    A brand-new smart wallet that has never transacted is counterfactual: it has no on-chain code yet. Its signature comes back wrapped as an ERC-6492 payload, and the verifier accepts only EOA signatures and deployed ERC-1271 wallets. Such a request returns `401`. The wallet must perform its first on-chain action (a zero-value self-call on Base activates it) before sign-in will succeed.
+  </Accordion>
+</AccordionGroup>
+
+## Using the JWT
+
+Send the minted token in the `Authorization` header as a bearer credential. This unlocks user-scoped endpoints.
+
+```bash
+curl https://api.bunnyos.ai/exchange/portfolio/pnl \
+  -H "Authorization: Bearer <jwt>"
+```
+
+A JWT is **required** for user-scoped reads and writes (P&L, profile create/edit, actions, and all thread operations) and **optional** for public reads. Each endpoint page lists its auth requirement, and the [Exchange overview](/developer/exchange/overview) collects them by group.
+
+### Graceful degradation on a stale token
+
+Optional-auth reads are forgiving. If you send an expired or invalid JWT to a public read such as `GET /exchange/bunnies/{id}/candles` or `/transactions`, the request does not hard-fail. A `401` or `403` from a stale token causes the credential to be dropped, and the read is retried once with no `Authorization` header, returning the anonymous view.
+
+<Note>
+  Treat this as a safety net, not a strategy. User-scoped endpoints (P&L, threads, actions) still require a valid token and will return `401`/`403` rather than degrading. When you see those statuses on a user-scoped call, re-run the SIWE flow to mint a fresh JWT.
+</Note>
+
+## Errors and status codes
+
+The Exchange API uses conventional HTTP status codes. Authentication and authorization are the most common failure classes, so handle `401` and `403` distinctly.
+
+| Status | Meaning | Typical cause |
+| --- | --- | --- |
+| `200` | OK | Successful read or write. |
+| `204` | No Content | Successful `DELETE` of a moderator or ban (may also return an empty body). |
+| `400` | Bad Request | Invalid params (for example a thread `limit` above 200) or a malformed body. |
+| `401` | Unauthorized | Missing, expired, or invalid JWT, or a sign-in that failed verification (see [Why a verify can fail](#why-a-verify-can-fail)). |
+| `403` | Forbidden | Authenticated but not permitted, for example a non-key-holder posting to a thread (`BunnyOsForbiddenError`). |
+| `404` | Not Found | Bunny unknown to bunnyOS (no profile created), or an unknown post or comment. |
+
+Error bodies are JSON. Some failures carry a human-readable message (for example `"Invalid or expired nonce"`), but treat the **HTTP status as the primary signal** and the message as secondary context.
+
+<Note>
+A `404` does not always mean failure. Several endpoints treat an unknown bunny as an empty result, for example `GET /exchange/bunnies/{id}/actions` returns `[]` when the bunny has no bunnyOS profile yet. Check each endpoint's notes before treating `404` as fatal.
+</Note>
+
+## Checking a wallet's permissions
+
+`GET /exchange/permissions` returns the capability map for the signed-in wallet across one or more bunnies: what it can view, post, and moderate, plus owner, key-holder, and profile-edit flags. Query it to decide which actions a wallet can take before you call a gated route.
+
+| Method | Path | Auth |
+| --- | --- | --- |
+| `GET` | `/exchange/permissions` | optional JWT |
+
+Pass a repeatable `bunnyId` query parameter (up to 50 per call). With a JWT the flags reflect that wallet; called anonymously, every flag is `false`. Unknown ids are omitted from the response.
+
+```bash
+curl "https://api.bunnyos.ai/exchange/permissions?bunnyId=42&bunnyId=43" \
+  -H "Authorization: Bearer <jwt>"
+```
+
+The response carries the caller `address`, a global `isAdmin` flag, and a `bunnies` array. Each entry reports `roles` (`isOwner`, `isKeyHolder`), `profile.canEdit`, and per-feature flags for `thread` (`canView`, `canPost`, `canModerate`) and `recommendation` (`canView`, `canCreate`, `canManage`):
+
+```json
+{
+  "address": "0xabc...",
+  "isAdmin": false,
+  "bunnies": [
+    {
+      "id": "42",
+      "roles": { "isOwner": false, "isKeyHolder": true },
+      "profile": { "canEdit": false },
+      "thread": { "canView": true, "canPost": true, "canModerate": false },
+      "recommendation": { "canView": true, "canCreate": false, "canManage": false }
+    }
+  ]
+}
+```
+
+## Programmatic x-api-keys
+
+For unattended scripts and backends, mint an `x-api-key`. Unlike a JWT, it does not expire on a session timer (unless you set an expiry) and is sent in its own header. All management operations are performed under the `/auth/api-keys` namespace and **every one of them requires a valid JWT**: you sign in once with SIWE to administer your keys, then the keys themselves carry the auth for subsequent API calls.
+
+| Method | Path | Auth | Purpose |
+| --- | --- | --- | --- |
+| `GET` | `/auth/api-keys` | JWT | List your keys (metadata only) |
+| `POST` | `/auth/api-keys` | JWT | Create a new key (secret returned once) |
+| `PATCH` | `/auth/api-keys/{keyId}` | JWT | Rename and/or change expiry |
+| `POST` | `/auth/api-keys/{keyId}/revoke` | JWT | Revoke a key immediately |
+| `POST` | `/auth/api-keys/{keyId}/regenerate` | JWT | Issue a new secret under the same name |
+
+### Create a key
+
+```bash
+curl -X POST https://api.bunnyos.ai/auth/api-keys \
+  -H "Authorization: Bearer <jwt>" \
+  -H "Content-Type: application/json" \
+  -d '{ "name": "trading-bot", "expiresAt": null }'
+```
+
+`name` is required. `expiresAt` is an optional ISO datetime that must be in the future, or `null` for a key that never expires. The response includes the full credential under `key`:
+
+```json
+{
+  "id": "...",
+  "name": "trading-bot",
+  "prefix": "<short identifying prefix>",
+  "createdAt": "2026-06-16T12:00:00Z",
+  "lastUsedAt": null,
+  "expiresAt": null,
+  "expired": false,
+  "revokedAt": null,
+  "revoked": false,
+  "key": "<full secret>"
+}
+```
+
+<Warning>
+  The full secret in the `key` field is shown **exactly once** (here on create, and again on regenerate). It is never persisted server-side and never returned again. Capture it immediately and store it in a secret manager. If you lose it, regenerate the key to mint a new secret.
+</Warning>
+
+### List, rotate, and revoke
+
+`GET /auth/api-keys` returns the metadata array under the `apiKeys` field, never the secret. Each entry carries `id`, `name`, `prefix`, `createdAt`, `lastUsedAt`, `expiresAt`, `expired`, `revokedAt`, and `revoked`. Use the `prefix` to recognize a key without ever seeing its secret.
+
+```bash
+curl https://api.bunnyos.ai/auth/api-keys \
+  -H "Authorization: Bearer <jwt>"
+```
+
+The remaining operations all target a single `{keyId}` and require the JWT:
+
+| Operation | Request | Result |
+| --- | --- | --- |
+| **Rename / re-expire** | `PATCH /auth/api-keys/{keyId}` with at least one of `name` or `expiresAt` | Returns the updated metadata |
+| **Rotate** | `POST /auth/api-keys/{keyId}/regenerate` | Issues a fresh secret under the same name and metadata; the old secret stops working at once. Returns the new secret in `key`, [shown only this once](#create-a-key) |
+| **Revoke** | `POST /auth/api-keys/{keyId}/revoke` | The key stops working immediately. Returns the updated metadata with `revoked` set to `true` |
+
+```bash
+# Rename
+curl -X PATCH https://api.bunnyos.ai/auth/api-keys/<keyId> \
+  -H "Authorization: Bearer <jwt>" \
+  -H "Content-Type: application/json" \
+  -d '{ "name": "trading-bot-prod" }'
+
+# Rotate (returns a new secret in the key field)
+curl -X POST https://api.bunnyos.ai/auth/api-keys/<keyId>/regenerate \
+  -H "Authorization: Bearer <jwt>"
+
+# Revoke
+curl -X POST https://api.bunnyos.ai/auth/api-keys/<keyId>/revoke \
+  -H "Authorization: Bearer <jwt>"
+```
+
+### Calling the API with an x-api-key
+
+Once you hold a secret, send it in the `x-api-key` header. It substitutes for the `Authorization: Bearer` header on the data endpoints:
+
+```bash
+curl https://api.bunnyos.ai/exchange/portfolio/pnl \
+  -H "x-api-key: <full secret>"
+```
+
+## Managing keys in the app
+
+You do not have to script key management. The bunnyOS terminal lets you mint and manage `x-api-key` credentials from the Configure area once your wallet is connected, with the same create, rename, set-expiry, regenerate, and revoke operations described above. The secret is surfaced once at creation, mirroring the API behavior.
+
+<CardGroup cols={2}>
+  <Card title="bunnyOS account" icon="user-cog" href="/user/configure/bunnyos-account">
+    Connect your wallet (SIWE) and mint or revoke `x-api-key` credentials in-app.
+  </Card>
+  <Card title="Connect your wallet" icon="wallet" href="/user/getting-started/wallet-connection">
+    Sign in with a Base wallet first, the prerequisite for any SIWE session.
+  </Card>
+</CardGroup>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Market Data" icon="chart-candlestick" href="/developer/exchange/market-data">
+    Listings, OHLC candles, the trade tape, and your P&L.
+  </Card>
+  <Card title="Profile" icon="id-card" href="/developer/exchange/profile">
+    A bunny's name, bio, photo, socials, and methodology.
+  </Card>
+  <Card title="Threads" icon="messages-square" href="/developer/exchange/threads">
+    Post, comment, vote, and moderate in key-holder-gated threads.
+  </Card>
+  <Card title="Exchange overview" icon="compass" href="/developer/exchange/overview">
+    What the Exchange API covers and how it fits together.
+  </Card>
+</CardGroup>

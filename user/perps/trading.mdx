@@ -1,0 +1,95 @@
+---
+title: "Trade perpetual futures"
+description: "Open leveraged long or short positions on Base, reviewed in chat and signed in your own wallet."
+---
+
+The Perps page lets you open leveraged long or short positions on perpetual futures on Base. You pick a market, choose your direction, set your collateral and leverage, then hand the trade to the agent chat to review before you sign it in your own Base wallet.
+
+<Note>
+The agent prepares the trade and you sign it in your wallet: nothing moves without your signature (see [Connect your wallet](/user/getting-started/wallet-connection)). If you see a message that perps trading is turned off, enable it in **configure** first.
+</Note>
+
+## Pick a market
+
+The **markets** panel lists every market you can trade. Choose one from the **pair** dropdown, for example `ETH/USD` or `BTC/USD`. Your choice drives the whole page: the price chart, the live price, the leverage limits, and the trade form all update to match it.
+
+Once a market is selected you can see its current stats at a glance:
+
+| Stat | What it shows |
+| --- | --- |
+| `price` | The live market price for the pair. |
+| `max lev` | The most leverage allowed on this market, shown as `Nx`. |
+| `spread` | The pair's spread, as a percentage. |
+
+A live price chart for the pair is shown alongside the controls. To have the agent work up a fresh technical read on the selected market, use **prep in chat**, which opens the chat and asks the agent to analyze the pair for you.
+
+## Choose side, collateral, and leverage
+
+Set up the trade in the **open position** panel. The pair is already filled in from your selection above.
+
+<Steps>
+  <Step title="Pick a direction">
+    Choose **long** (you profit if the price rises) or **short** (you profit if the price falls). The selected side is highlighted.
+  </Step>
+  <Step title="Enter collateral in USDC">
+    Type the amount of USDC you want to put up as collateral. This is your own money at risk in the position.
+  </Step>
+  <Step title="Set leverage">
+    Enter a leverage multiplier. The field shows the allowed range for the pair next to the **leverage** label, and the default is `2`. Leverage must stay within the pair's minimum and maximum.
+  </Step>
+</Steps>
+
+As you type, the panel computes the **notional** size of the trade: your collateral multiplied by leverage. The minimum position size is `100` USDC of notional, and the panel reminds you of this. The **review in chat** button stays disabled until your inputs are valid: collateral above zero, leverage inside the pair's range, and notional at or above the minimum.
+
+<Warning>
+Leverage multiplies both gains and losses. A position can be liquidated and lose its full collateral if the price moves against you far enough. Only commit USDC you can afford to lose.
+</Warning>
+
+## Preview the live price and notional
+
+Below the inputs, the panel shows the **live price** and the calculated **notional**, both updating on their own while the page is open so you preview against a current price rather than a stale one.
+
+<Note>
+To see how close your trade would sit to liquidation, along with fees, send the trade to the agent in the next step: the agent surfaces the trade details before you sign.
+</Note>
+
+## Review in chat, then approve in your wallet
+
+When your inputs are valid, click **review in chat**. This does not place a trade. It opens the agent chat and pre-fills a plain-language request such as:
+
+```text
+open a 2x long on ETH/USD with 100 USDC
+```
+
+Send the message when you are ready, and the agent walks the setup with you.
+
+<Steps>
+  <Step title="Confirm the details with the agent">
+    The agent confirms the pair, side, collateral, and leverage, and prepares the trade.
+  </Step>
+  <Step title="Approve in your wallet">
+    The trade is sent to your connected wallet for you to sign. Review and approve it in your wallet to open the position.
+  </Step>
+</Steps>
+
+<Tip>
+You need a connected Base wallet before any trade can be prepared. If you have not connected yet, see [Connect your wallet](/user/getting-started/wallet-connection).
+</Tip>
+
+## Find your open positions
+
+Once a trade is live, your open positions appear in the **positions** panel at the bottom of the page. For how to read that panel and close a position, see [Close a position](/user/perps/close).
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Connect your wallet" icon="wallet" href="/user/getting-started/wallet-connection">
+    Connect a Base wallet so you can sign trades and see your positions.
+  </Card>
+  <Card title="Chat with the agent" icon="message-circle" href="/user/getting-started/chat-intro">
+    The agent prepares and confirms every open and close before you sign.
+  </Card>
+  <Card title="Close a position" icon="circle-x" href="/user/perps/close">
+    Read the positions panel and close a position from its row.
+  </Card>
+</CardGroup>

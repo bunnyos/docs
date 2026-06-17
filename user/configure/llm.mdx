@@ -1,0 +1,74 @@
+---
+title: "Select AI provider & model"
+description: "Choose which AI model powers the Bunny agent."
+---
+
+The Bunny agent runs on an AI model, and you choose which provider and model it uses. You make this choice on the **Configure** page, in the **Services** tab, under the AI section.
+
+<Note>
+This section is hidden under BunnyDS. See [data & keys](/user/getting-started/data-and-keys) for managed versus your own keys.
+</Note>
+
+## The available providers
+
+Each provider appears as a row in the AI section with its name, a **set api** button to enter your key, and a toggle to make it active. The default provider is **OpenRouter**.
+
+| Provider | Where to get a key |
+| --- | --- |
+| Surplus Intelligence | [surplusintelligence.ai](https://www.surplusintelligence.ai) |
+| Venice | [venice.ai/settings/api](https://venice.ai/settings/api) |
+| EconomyOS (Virtuals Protocol) | [compute.virtuals.io](https://compute.virtuals.io) |
+| OpenRouter | [openrouter.ai/keys](https://openrouter.ai/keys) |
+
+<Tip>
+The provider list may grow over time. Whatever is listed is what BunnyOS currently supports.
+</Tip>
+
+## Activating a provider
+
+<Steps>
+  <Step title="Add a key">
+    Use the **set api** button to add a key for the provider you want.
+  </Step>
+  <Step title="Turn it on">
+    Turn on the toggle next to that provider to make it the active one. Only one provider is active at a time.
+  </Step>
+  <Step title="Pick a model">
+    Open the model picker and choose a model (see below).
+  </Step>
+</Steps>
+
+## Choosing a model
+
+Below the provider list is a **Model** picker. It becomes available once the active provider has a key. Open it to see that provider's models. **Free models are listed first**, each marked with a green **free** label; paid models show their price. There is a search box at the top so you can filter a long list by name. Select a model to make it the agent's current model.
+
+Switching is instant: pick a model and it takes effect right away.
+
+<Note>
+When you turn on a different provider, your previously chosen model is cleared and a sensible default is selected for the new provider. After switching, open the model picker again to confirm or change the selected model.
+</Note>
+
+## Notes per provider
+
+<AccordionGroup>
+  <Accordion title="EconomyOS and Venice">
+    The Bunny agent needs a model that can use tools so it can act, not just chat. On **EconomyOS** and **Venice**, make sure the model you pick supports tool use.
+  </Accordion>
+</AccordionGroup>
+
+## What's next
+
+<CardGroup cols={2}>
+  <Card title="Bring your own API keys" icon="key" href="/user/configure/api-keys">
+    Run on your own provider accounts instead of the managed option.
+  </Card>
+  <Card title="Managed data & AI" icon="server" href="/user/bunnyds/overview">
+    Let BunnyDS handle the AI so you need no keys at all.
+  </Card>
+  <Card title="Connect your wallet" icon="wallet" href="/user/getting-started/wallet-connection">
+    Link the wallet the agent acts from.
+  </Card>
+  <Card title="Data: managed vs your own keys" icon="database" href="/user/getting-started/data-and-keys">
+    Compare the two ways to power the agent.
+  </Card>
+</CardGroup>

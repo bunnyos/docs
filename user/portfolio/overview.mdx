@@ -1,0 +1,79 @@
+---
+title: "View your portfolio dashboard"
+description: "Monitor your total value, token holdings, and recent transactions on Base."
+---
+
+The portfolio dashboard is your home base in BunnyOS. It brings everything your Base account holds into one read-only view: your total value in USD, the tokens you hold, any DeFi and staking positions, and your most recent on-chain activity. Nothing here moves funds, it is purely a snapshot of where your wallet stands.
+
+<Note>
+  You need a connected Base account to see your portfolio. If you have not done that yet, start with [Connect your wallet](/user/getting-started/wallet-connection).
+</Note>
+
+## The dashboard at a glance
+
+The top of the page is a summary panel split into two figures:
+
+- **Total value**: the combined USD value of your token holdings plus your DeFi positions. This is the single number that tells you what your account is worth right now.
+- **Total $OS**: your balance of the $OS token, shown alongside its logo.
+
+Just under your total value, your Base wallet address appears in shortened form (the first six and last four characters). Click it to copy the full address to your clipboard, you will see a brief "address copied" confirmation. Next to it, **manage account** opens your Base account in a new tab.
+
+Under your $OS balance, **buy $OS** hands the purchase off to the agent: the chat opens and pre-fills a buy command for you. The agent works the swap, and you still sign the transaction yourself.
+
+<Tip>
+  Use the copy-address button whenever you need to receive a transfer or paste your address into a block explorer, it is faster and safer than retyping it.
+</Tip>
+
+## Token holdings
+
+The **token holdings** section lists every token your wallet holds on Base, sorted by USD value (largest first). The section header shows the combined value of all your tokens. Each row shows:
+
+| Field | What it shows |
+| --- | --- |
+| Token | The symbol (or name) and logo |
+| Balance | How much of the token you hold |
+| USD value | The current value of that holding |
+| 24h change | The price move over the last 24 hours, green when up, red when down |
+
+### Hiding zero-balance tokens
+
+By default, tokens worth essentially nothing (under half a cent) are hidden so your list stays focused on what matters. When any such tokens exist, a toggle appears in the section header:
+
+- **show $0** reveals the hidden dust tokens.
+- **hide $0** collapses them again.
+
+If you hold no tokens at all, the section reads "no tokens yet."
+
+<Note>
+  A separate **defi positions** section sits alongside your tokens and shows any staking, lending, or liquidity-pool positions, with the protocol, underlying tokens, and value.
+</Note>
+
+## Recent transactions
+
+The **recent transactions** section shows your most recent meaningful wallet activity on Base, up to around 20 entries. Each row shows the transaction type and token, the date and time, the amount, and its USD value at the time. Low-signal noise such as zero-value events and inbound airdrops is filtered out so the feed stays readable.
+
+Click any transaction to open it in the Base block explorer in a new tab, where you can inspect the full detail.
+
+## Refreshing your data
+
+Use the refresh icon in the page header to reload every section at once: holdings, positions, and transactions. Your dashboard shows your live balances and prices, and the refresh button updates everything on demand.
+
+<AccordionGroup>
+  <Accordion title="My total value looks slightly different from my wallet panel">
+    The wallet panel and the portfolio total can differ slightly because they count different things, so a small gap between them is normal.
+  </Accordion>
+  <Accordion title="A section says holdings or transactions are unavailable">
+    If a section asks you to enable something, head to the configure screen. See [Connect data providers](/user/getting-started/data-and-keys).
+  </Accordion>
+</AccordionGroup>
+
+## Where to next
+
+<CardGroup cols={2}>
+  <Card title="Connect your wallet" icon="wallet" href="/user/getting-started/wallet-connection">
+    Link your Base account to populate the dashboard.
+  </Card>
+  <Card title="Connect data providers" icon="plug" href="/user/getting-started/data-and-keys">
+    Set up what fills in your holdings, positions, and transactions.
+  </Card>
+</CardGroup>

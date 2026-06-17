@@ -1,0 +1,107 @@
+---
+title: "First steps with Bunny chat"
+description: "Talk to the Bunny agent in natural language to research, trade, and automate on Base."
+---
+
+Bunny is the agent at the heart of BunnyOS. You talk to it in plain language and it does the on-chain legwork: reading live data, researching tokens, and building transactions for you to approve. The agent proposes; you stay the final authority on anything that touches your funds.
+
+Make sure you're signed in first, see [Sign in with your Base wallet](/user/getting-started/wallet-connection) if you haven't connected yet.
+
+## Open the floating chat
+
+Chat is the single entry point to the agent, and it follows you everywhere. On every terminal page you'll see a small launcher pinned to the **bottom-right corner**: a rounded button with the Bunny icon and an **`open agent`** label.
+
+<Steps>
+  <Step title="Click open agent">
+    Select the **`open agent`** button in the bottom-right corner. A chat panel slides up over the page.
+  </Step>
+  <Step title="Pick up where you left off">
+    There's one shared conversation across the whole terminal, so opening chat on any surface resumes where you were. Your messages don't reset when you switch tabs.
+  </Step>
+  <Step title="Close it any time">
+    The button now reads **`close`** (an `X`). Closing the panel does not stop the agent, a running request keeps going in the background.
+  </Step>
+</Steps>
+
+<Tip>
+  When the panel is closed and the agent is still working, a small pulsing green dot appears on the launcher so you know a response is in progress. Reopen it any time to watch the rest stream in.
+</Tip>
+
+## What you can ask
+
+Type your request in the input box (placeholder: **`type your instructions here`**) and press **Enter** to send, or **Shift + Enter** for a new line. Bunny interprets what you want, pulls whatever data it needs, and either answers directly or proposes a transaction.
+
+| You can ask | What Bunny does |
+| --- | --- |
+| `show my portfolio` | Reads your connected wallet and lists your live holdings |
+| `research a token` | Looks up live market data and security findings for a token |
+| `buy 10 OS` | Prepares the swap and hands it to your wallet to sign |
+| `set a price alert` | Sets up an automated action that watches for your condition |
+
+<Note>
+  Bunny can only interface with the protocols and services you've enabled. An empty conversation shows the reminder: *"bunnyOS can interface directly with protocols and services you enable."* See [Getting data: managed vs your own keys](/user/getting-started/data-and-keys) for how to power the agent.
+</Note>
+
+## Watch live progress
+
+As Bunny works, it shows its steps inline instead of leaving you waiting. A status line under the agent's message tells you what it's doing right now:
+
+- **`thinking…`**, deciding what to do next
+- **`running…`**, looking something up or preparing an action
+- **`responding…`**, writing its answer
+
+When the turn ends, the status line settles on **`done`** (green). If the agent stops early, for example the response is interrupted, it shows **`stopped`** instead, so you're never left guessing whether it's still working.
+
+## Approve on-chain actions
+
+When a request needs a signature, the agent builds the transaction and surfaces an approval button right in the chat, labeled **`approve transaction in base app →`** (or **`open base app to approve →`**).
+
+<Steps>
+  <Step title="Review what Bunny proposes">
+    Read the agent's message so you know exactly what's being signed.
+  </Step>
+  <Step title="Click the approval button">
+    Selecting it opens a popup pointed at your Base app's approval screen. If your browser blocks the popup, it falls back to opening a new tab.
+  </Step>
+  <Step title="Sign in your Base app">
+    Approve (or reject) the transaction in the Base app, exactly as you would for any wallet request.
+  </Step>
+</Steps>
+
+<Note>
+  Nothing moves without your signature. See [What is BunnyOS?](/user/getting-started/introduction) for the non-custodial model.
+</Note>
+
+## Track confirmation and saved history
+
+After you've signed in your Base app, come back to the chat and click **`click here once done →`** under the approval button. Bunny then checks and reports back:
+
+| Status | What it means |
+| --- | --- |
+| **`checking…`** | Bunny is looking up the transaction's status |
+| **`congrats — transaction confirmed`** | The transaction went through. A **`view on basescan ↗`** link appears when available |
+| **`still pending — check your wallet`** | Not confirmed yet, wait and use **`check again`** |
+| **`transaction failed`** | The transaction was rejected, reverted, or expired |
+
+<Accordion title="Why doesn't it confirm automatically?">
+  If the status isn't clear, you can always verify the transaction directly on Basescan.
+</Accordion>
+
+Your conversations are saved automatically. Use **`new chat`** in the panel header to start fresh, or **`history`** to reopen a past conversation (the count of **`saved chats`** shows next to it). Each saved chat lists its title and last-updated time; hover one to delete it. Because the conversation is shared across the terminal, anything you start in chat is there when you come back.
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="See your portfolio" icon="wallet" href="/user/portfolio/overview">
+    Ask Bunny about your live holdings and balances on Base.
+  </Card>
+  <Card title="Research a token" icon="search" href="/user/tokens/research">
+    Dig into market data and security findings before you trade.
+  </Card>
+  <Card title="Automate with actions" icon="zap" href="/user/actions/inbox">
+    Turn a request into a reusable action that runs around the clock.
+  </Card>
+  <Card title="Getting data and keys" icon="key-round" href="/user/getting-started/data-and-keys">
+    Choose between managed BunnyDS and your own keys.
+  </Card>
+</CardGroup>

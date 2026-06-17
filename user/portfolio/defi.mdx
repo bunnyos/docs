@@ -1,0 +1,70 @@
+---
+title: "Track DeFi yields & rewards"
+description: "See your lending, staking, and LP positions and unclaimed rewards on Base, then claim or manage them through chat."
+---
+
+The **defi positions** section of your portfolio shows where your capital is working across Base protocols, lending markets, staking, and liquidity pools, alongside any rewards you have earned but not yet claimed. It sits next to your [token holdings](/user/portfolio/overview) on the portfolio page, so you can see idle balances and deployed capital in one view.
+
+## What the section shows
+
+Each row is one position, read top to bottom and left to right:
+
+| Element | What it tells you |
+| --- | --- |
+| Protocol | The app or protocol holding the position (with its logo), for example a lending market or staking vault. |
+| Position detail | A short sub-line combining the position type and underlying assets, for example USDC and WETH. |
+| Current value | The position's current USD value, on the right of the row. |
+| Unclaimed rewards | When you have rewards waiting, a green unclaimed line appears under the value. It only shows when you have rewards above zero. |
+
+The section header shows a subtotal, the combined USD value of all your positions, whenever you have at least one. That subtotal feeds your portfolio's [total value](/user/portfolio/overview).
+
+<Tip>
+  Use the **refresh** button in the page header to update your positions and rewards on demand.
+</Tip>
+
+Your positions and unclaimed rewards reflect your live balances on Base, with no manual entry.
+
+## Claim or manage rewards through chat
+
+The DeFi section is a read-only view: it surfaces your positions and any unclaimed rewards, but you act on them through the agent in chat. Describe what you want in plain language and the agent prepares the transaction for you to sign.
+
+<Steps>
+  <Step title="Open chat">
+    Switch to the Chat tab from anywhere in the terminal.
+  </Step>
+  <Step title="Describe the action">
+    Try a request like "claim my rewards on [protocol]", "unstake my position", or "withdraw my USDC from [protocol]". The agent reads your live position and builds the matching transaction.
+  </Step>
+  <Step title="Approve in your wallet">
+    BunnyOS proposes the transaction; you review and sign it yourself. The agent never moves funds on its own. See [Connect your wallet](/user/getting-started/wallet-connection) for how signing works.
+  </Step>
+</Steps>
+
+<Warning>
+  The agent prepares the transaction; you sign it yourself. See [how this works](/user/getting-started/introduction).
+</Warning>
+
+## When the section is empty or disabled
+
+The section can show a short message instead of positions:
+
+<AccordionGroup>
+  <Accordion title="DeFi positions are unavailable">
+    If the section asks you to enable something, turn it on in the configure screen. See [Data sources & keys](/user/configure/api-keys), and your positions will load.
+  </Accordion>
+  <Accordion title="No wallet connected yet">
+    There is no wallet linked to your account. Follow [Connect your wallet](/user/getting-started/wallet-connection) and the section will populate once a Base wallet is connected.
+  </Accordion>
+  <Accordion title="No DeFi positions">
+    Your wallet is connected, but BunnyOS found no lending, staking, or LP positions for this address. Deposit into a protocol through chat and the position will appear here.
+  </Accordion>
+</AccordionGroup>
+
+<CardGroup cols={2}>
+  <Card title="Portfolio overview" icon="wallet" href="/user/portfolio/overview">
+    Your token holdings, total value, and recent transactions on Base.
+  </Card>
+  <Card title="Data sources & keys" icon="key-round" href="/user/configure/api-keys">
+    Set up what fills in your positions and rewards.
+  </Card>
+</CardGroup>

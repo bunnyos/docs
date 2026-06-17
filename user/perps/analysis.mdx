@@ -1,0 +1,59 @@
+---
+title: "Technical analysis for perps pairs"
+description: "Get AI-driven directional bias and key levels for any perpetual pair, straight from the agent chat."
+---
+
+Before you size a long or short, ask the agent for a technical read on the pair. It looks at the live price and recent price action, then replies with a plain-language report: where the market is leaning, the levels that matter, and the risks to watch. It is research, not a recommendation: the agent never opens a trade for you.
+
+<Note>
+A technical-analysis (TA) report is read-only: it reviews the market and reasons over it, but never signs or sends anything. When you are ready to act, you set up and approve the trade yourself. See [Trade perpetual futures](/user/perps/trading).
+</Note>
+
+## Generate a TA report for a pair
+
+The fastest way to get a report is from the **Perps** page, on the pair you already have selected.
+
+<Steps>
+  <Step title="Select the pair">
+    In the **markets** panel, pick the pair you want from the **pair** dropdown, for example `ETH/USD` or `BTC/USD`. The whole page, including the chart, follows your selection.
+  </Step>
+  <Step title="Click prep in chat">
+    Above the price chart, click **prep in chat**. This opens the agent chat and automatically asks it to analyze the selected pair, so you do not have to type anything. You can also just ask in chat: for any listed pair, type something like "give me a technical read on `BTC/USD`" and the agent runs the same analysis.
+  </Step>
+  <Step title="Read the report in the conversation">
+    The agent runs the analysis and replies with a structured read on the pair. Follow up in plain language, ask about a specific level, or how a long would sit against the current market.
+  </Step>
+</Steps>
+
+## What the report includes
+
+Expect to see:
+
+- **Directional bias**: whether the setup leans bullish, bearish, or neutral, based on how the price is trending.
+- **Support and resistance levels**: the key prices to watch, drawn from recent highs, lows, and trends.
+- **Positioning**: how the market is leaning long versus short, which is part of the risk picture. A heavily one-sided market can lead to sharp moves.
+- **Cost to hold**: the ongoing cost of keeping the position open, showing which side is paying to stay in the trade.
+- **Risk summary**: what could go wrong, such as stretched momentum, crowded positioning, or volatility that widens your liquidation distance.
+
+<Warning>
+A TA report is a snapshot of probabilities, not a prediction. Markets move against strong-looking setups, and leverage magnifies every move. Treat it as one input, size conservatively, and never risk USDC you cannot afford to lose.
+</Warning>
+
+The **Perps** page also shows a live price chart for the selected pair, so you can eyeball the levels the agent calls out. See [Trade perpetual futures](/user/perps/trading).
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Trade perpetual futures" icon="trending-up" href="/user/perps/trading">
+    Turn a read into a position: pick a side, set leverage, and review the trade in chat.
+  </Card>
+  <Card title="Close positions & realize P&L" icon="circle-x" href="/user/perps/close">
+    Exit a position and settle your profit or loss.
+  </Card>
+  <Card title="Chat with the agent" icon="message-circle" href="/user/getting-started/chat-intro">
+    Ask follow-up questions about any level, bias, or risk the report surfaces.
+  </Card>
+  <Card title="Managed vs your own keys" icon="key" href="/user/getting-started/data-and-keys">
+    Choose BunnyDS or BYOK to power the agent's data and inference.
+  </Card>
+</CardGroup>

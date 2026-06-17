@@ -1,0 +1,51 @@
+---
+title: "Bring your own API keys"
+description: "Add your own provider keys, or let BunnyDS handle it for you."
+---
+
+By default, BunnyOS handles your data lookups and AI model for you, so you never have to deal with a provider key. If you would rather run on your own accounts, you can turn that off and add your own keys instead. For when to choose each, see [Managed data or your own keys](/user/getting-started/data-and-keys).
+
+You manage keys under **Configure**, in the **Services** tab. With the managed option off, a key field appears for each data source and AI provider, and one key is required before pricing and token lookups will work. The rest are optional and turn on extra data sources. For what each source covers, see [Services](/user/configure/services); to pick your AI provider and model, see [Select AI provider and model](/user/configure/llm).
+
+<Note>
+A data source returns results only when both its key is set and the matching service is turned on. Adding a key on its own does not turn the source on. See [Services](/user/configure/services).
+</Note>
+
+## Add or remove a key
+
+Adding and removing keys is simple. Each service row has a **set api** button.
+
+<Steps>
+  <Step title="Open the key field">
+    In **Configure**, Services tab, find the service row and select **set api**. A small panel opens with a link to grab a key from the provider.
+  </Step>
+  <Step title="Paste the key">
+    Enter your key. It is hidden as you type.
+  </Step>
+  <Step title="Save">
+    Select **Save**. The status updates to show your key is in use.
+  </Step>
+  <Step title="Remove (optional)">
+    To remove a key you added, reopen the panel and select **Clear**.
+  </Step>
+</Steps>
+
+For your safety, BunnyOS never shows a full key back to you, only a masked version. In some setups a key may already be in place for you by whoever runs the app; in that case there is nothing for you to add.
+
+<AccordionGroup>
+  <Accordion title="The model list is empty" icon="circle-help">
+    Add a key for the AI provider you turned on, then the models load.
+  </Accordion>
+  <Accordion title="A data source returns no results" icon="circle-help">
+    A source returns data only when both its key is set and the matching service is turned on. Check both in the [Services](/user/configure/services) tab.
+  </Accordion>
+</AccordionGroup>
+
+<CardGroup cols={2}>
+  <Card title="BunnyDS overview" icon="server" href="/user/bunnyds/overview">
+    Skip keys entirely and let BunnyDS handle data and AI for you.
+  </Card>
+  <Card title="Connect your wallet" icon="wallet" href="/user/getting-started/wallet-connection">
+    Set up the wallet your agent trades from.
+  </Card>
+</CardGroup>

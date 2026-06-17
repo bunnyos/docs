@@ -1,0 +1,104 @@
+---
+title: "Create custom scheduled actions"
+description: "Build automated monitoring and trading workflows in plain language."
+---
+
+Actions run on a schedule, even while you're away. Each one follows instructions you write in plain language, looks up the data it needs, and posts any findings to your [inbox](/user/actions/inbox) as **alerts** or **recommendations**. Actions never move funds on their own; you stay in control of every transaction. See the [inbox](/user/actions/inbox) for what those two posting types mean and how the **Execute** button works.
+
+This page covers the **Actions builder**, where you create and tune those workflows.
+
+## Starter actions vs. your custom actions
+
+The builder's left rail lists your actions in two groups:
+
+| Group | What it is |
+| --- | --- |
+| **Starter actions** | A starter pack that ships with BunnyOS, ready to use out of the box. |
+| **Custom actions** | Actions you write yourself, or import. |
+
+Starter actions come pre-written and run by default. You can switch one on or off, but you can't edit its instructions, schedule, or tools in place, and you can't delete it. To change a starter action, open it and use **save as custom copy**: BunnyOS creates an editable duplicate and leaves the starter untouched. Each row shows a status dot (green when enabled), how often it runs, how many tools it can use, and when it last ran.
+
+<Note>
+  Starter actions can only be paused, not deleted. If you don't want one running, just switch it off; it stays in the list for later.
+</Note>
+
+## Create an action
+
+<Steps>
+  <Step title="Add a new action">
+    Click **new** in the actions rail. A blank custom action opens in the editor, paused and set to a default schedule.
+  </Step>
+  <Step title="Name it">
+    Type a clear **name** so you can spot it in the list and in your inbox.
+  </Step>
+  <Step title="Pick a schedule">
+    Use the **every** dropdown to choose how often it runs, from every few minutes up to once a day. Shorter intervals mean faster alerts but more usage.
+  </Step>
+  <Step title="Write the instructions">
+    In the **instructions** box, describe the trigger and what to do in plain language. Be specific about the condition and the threshold. For example:
+
+    - "alert me if my USDC supply APY on aave-base drops below 4%."
+    - "every hour, check my wallet's net pnl. if it moves more than 5% since last check, post an info alert."
+    - "scan the top 5 yield opportunities for USDC on base. if any beats my current best by more than 1%, recommend moving 100 USDC into it."
+
+    Your wording decides which post type lands in your inbox: ask it to flag or notify and it posts an alert, ask it to recommend or suggest a move and it posts a recommendation.
+  </Step>
+  <Step title="Save">
+    Click **save**. On a starter action this button reads **save as custom copy** and creates an editable duplicate.
+  </Step>
+</Steps>
+
+<Tip>
+  Phrase thresholds as percentages (a share of wallet value, a relative APY gap, a percent price move) rather than fixed dollar amounts. Actions keep recommended trade sizes small by default, so you can adjust the amount before executing.
+</Tip>
+
+## Limit what an action can do
+
+The **tools** section controls which data sources an action may use. Tools are grouped by category, and the list reflects whichever services you have enabled.
+
+- Leave the **all** switch on to let the action use every available tool.
+- Turn **all** off to pick exactly what it can use. Use a group's **all** / **none** toggle to flip a whole group, or click individual tool chips to enable just the ones you want. Hover a chip to see what the tool does.
+
+Narrowing the list keeps an action focused and faster to run. An action with tools it doesn't need will simply do less work.
+
+<Warning>
+  Actions are read-only by design: even with every tool enabled, they can only read data, never sign or send a transaction.
+</Warning>
+
+## Enable it and test with Run now
+
+A saved action does nothing until it's switched on. Use the **enabled / paused** switch at the top of the editor to turn it on; once enabled, BunnyOS runs it automatically on its schedule.
+
+Before trusting a new action to the schedule, test it with **Run now**. This runs the action immediately and shows a summary of what happened: its status and any alerts or recommendations it posted, or a "no findings" note if nothing met your conditions. Anything it posts lands in your inbox just like a scheduled run. To avoid duplicate posts, an action skips anything that repeats its own recent findings, so a clean test run with no new findings is normal and expected.
+
+<Note>
+  **Run now** is unavailable until the instructions box has text.
+</Note>
+
+A few things to keep in mind:
+
+<AccordionGroup>
+  <Accordion title="Run now says you're going too fast">
+    If you test too many times in a row, wait a moment and try again. Scheduled runs are unaffected.
+  </Accordion>
+  <Accordion title="The action needs a model and data to run">
+    Every run uses your chosen model and data sources. Make sure you've set up either the managed [BunnyDS gateway](/user/bunnyds/overview) or your own [provider keys](/user/configure/api-keys) first, or runs will fail.
+  </Accordion>
+  <Accordion title="Why did a run error?">
+    If the most recent run failed, the editor shows the error at the bottom. Common causes are a missing key, a disconnected data source, or instructions the action couldn't act on. Fix the cause and use **Run now** to retry.
+  </Accordion>
+  <Accordion title="Share an action">
+    Use **export** to download an action as a file, and the import button in the actions rail to load one back in. Imported actions always come in as custom, so importing a previously exported starter action gives you an editable copy.
+  </Accordion>
+</AccordionGroup>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Your inbox" icon="inbox" href="/user/actions/inbox">
+    See the alerts and recommendations your actions post, and execute suggested moves.
+  </Card>
+  <Card title="Manage actions" icon="sliders-horizontal" href="/user/actions/management">
+    Enable, pause, edit, and organize your actions over time.
+  </Card>
+</CardGroup>

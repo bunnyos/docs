@@ -1,0 +1,85 @@
+---
+title: "Getting data: managed vs your own keys"
+description: "Choose between the managed BunnyDS option (zero keys) or bringing your own provider keys."
+---
+
+BunnyOS needs outside data to act on your behalf: **market and security data** (token prices, trending, wallet history, portfolio positions, token security) and the **AI** that powers the agent's reasoning. You can supply both in one of two ways, and you switch between them in the app.
+
+## Two ways to power the agent
+
+<CardGroup cols={2}>
+  <Card title="BunnyDS (managed)" icon="zap" href="/user/bunnyds/overview">
+    Data and AI are handled for you by BunnyOS. Nothing to set up, it just works. Free for a limited time.
+  </Card>
+  <Card title="Bring your own keys" icon="key" href="/user/configure/api-keys">
+    You paste your own provider keys and pick your own AI provider. Full control, but you manage the accounts and credits.
+  </Card>
+</CardGroup>
+
+<Note>
+  You don't have to pick one forever. A key you supply yourself always takes priority for that provider, so you can mix and match.
+</Note>
+
+## BunnyDS (managed), recommended
+
+This is the simplest path and the one most users want. On the **bunny data services** page you'll see a single switch. Flip **bunnyDS active** on and the agent's market data and AI are handled for you. The status line reads:
+
+> data and inference handled for you. no setup needed, it just works.
+
+While BunnyDS is on, you don't need any provider keys, and the AI-provider and key sections in the Configure tab are hidden.
+
+<Tip>
+  BunnyDS is **free for a limited time**, so there's no spending limit to set. The page shows a **spending limit** section, but it stays disabled while it's free.
+</Tip>
+
+<Warning>
+  On some setups the managed option isn't available. If so, the page tells you that turning BunnyDS on "won't route anything yet." When you see that message, bring your own keys instead.
+</Warning>
+
+See [the BunnyDS overview](/user/bunnyds/overview) for the full picture of what the managed option covers.
+
+## Bring your own keys
+
+If you're running the open-source build, or you simply prefer to use your own accounts, you can supply each provider key yourself. Open [Configure](/user/configure/api-keys) and use the **api** tab. There you'll find:
+
+- An **AI provider** group (marked `*required`) where you paste your provider key, then pick the provider and choose a model in the **llm** tab.
+- Keys for market and wallet data providers.
+
+Each key has a **set api** button with a link to grab a key from the provider, and a dot that turns green once a key is configured. A green dot means "configured"; an empty dot means "no key set." Keys you enter yourself can be cleared at any time.
+
+<Note>
+  At minimum, this needs an AI provider key (the `*required` one) plus the data keys for the providers you want the agent to use. See [Configuration: API keys](/user/configure/api-keys) for what each key unlocks.
+</Note>
+
+## How to switch
+
+<Steps>
+  <Step title="Turn BunnyDS on (managed)">
+    Open the **bunny data services** page and flip the switch to **bunnyDS active**. The agent uses the managed option right away, and your own key fields are hidden in Configure.
+  </Step>
+  <Step title="Turn BunnyDS off (your own keys)">
+    Flip the same switch off. The page note then reads that data and AI "use your own keys from the configure tab," and the provider and key sections reappear in [Configure](/user/configure/api-keys).
+  </Step>
+  <Step title="Set your keys">
+    With BunnyDS off, open the **api** tab in Configure, paste your AI provider key, then add any data keys. Pick your AI provider and choose a model in the **llm** tab and you're ready.
+  </Step>
+</Steps>
+
+## What each unlocks
+
+| | BunnyDS (managed) | Bring your own keys |
+| --- | --- | --- |
+| Setup | None, one switch | Paste a key per provider |
+| Provider keys needed | Zero | You supply each one |
+| AI provider | Handled for you | You pick and configure |
+| Cost | Free for a limited time | Whatever your providers charge |
+| Best for | Getting started fast | Open-source builds, full control |
+
+<AccordionGroup>
+  <Accordion title="Can I use BunnyDS for data but my own AI?">
+    BunnyDS is a single switch covering both data and AI, so there's no way to split them. Turn it off and set your keys in Configure to run your own AI provider.
+  </Accordion>
+  <Accordion title="What happens to keys I already set if I turn BunnyDS on?">
+    They're kept but not used. While BunnyDS is active the agent uses the managed option, so your saved keys aren't used until you turn it off again.
+  </Accordion>
+</AccordionGroup>

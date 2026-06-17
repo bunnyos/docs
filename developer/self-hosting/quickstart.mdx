@@ -1,0 +1,120 @@
+---
+title: "Quickstart"
+description: "Clone, install, configure, and run BunnyOS locally in a few commands."
+---
+
+BunnyOS is an open-source AI agent for the Base ecosystem, and the first open-source project built on top of [Base MCP](https://mcp.base.org). It is designed to be self-hosted: you run it, you own your keys, and you can audit the whole stack. This page gets a local instance running end to end.
+
+The source lives at [github.com/bunnyos/base-agent](https://github.com/bunnyos/base-agent). By the end of these steps you will have the API server running on port `3000` and the web interface on port `5173`, talking to your own Postgres database.
+
+<Note>
+  BunnyOS holds **no private keys**. Your signing keys stay in your Base account, and the agent can only ask Base to draft a transaction that *you* approve. Self-hosting does not change that model, see [Security](/developer/self-hosting/security).
+</Note>
+
+## Requirements
+
+Make sure the following are installed and on your `PATH` before you start.
+
+| Tool | Version | Notes |
+|---|---|---|
+| [Node.js](https://nodejs.org) | **24** | The monorepo targets Node 24. |
+| [pnpm](https://pnpm.io) | latest | Used for the workspace install and per-package scripts. |
+| [PostgreSQL](https://www.postgresql.org) | **18** | All persistent state lives here. |
+
+<Tip>
+  Check your versions with `node --version`, `pnpm --version`, and `postgres --version`. If you do not have pnpm yet, the quickest path is `corepack enable` (bundled with Node), or follow the [pnpm install guide](https://pnpm.io/installation).
+</Tip>
+
+## Run it
+
+<Steps>
+  <Step title="Clone and install">
+    Clone the repository and install all workspace dependencies from the root.
+
+    ```bash
+    git clone https://github.com/bunnyos/base-agent
+    cd base-agent
+    pnpm install
+    ```
+
+    `pnpm install` resolves every package in the monorepo at once, the API server (`@workspace/api-server`), the interface (`@workspace/interface`), the database package (`@workspace/db`), and the shared libraries under `lib/*`.
+  </Step>
+
+  <Step title="Configure your environment">
+    Copy the example file and fill in the required values.
+
+    ```bash
+    cp .env.example .env
+    ```
+
+    Three variables are required to boot:
+
+    | Variable | Required | What it does |
+    |---|---|---|
+    | `DATABASE_URL` | yes | Postgres connection string for your local database. |
+    | `SESSION_SECRET` | yes | A random string of **16 characters or more**. Set it once and do not rotate it casually. How it protects sessions and data at rest is covered in [Security](/developer/self-hosting/security). |
+    | `BASE_PATH` | yes | The base path the interface is served under. Use `/` for local dev. |
+
+    <Warning>
+      Set `SESSION_SECRET` to a 16+ character random value once, and do not rotate it casually. Full environment reference in [Configuration](/developer/self-hosting/configuration).
+    </Warning>
+  </Step>
+
+  <Step title="Push the database schema">
+    With `DATABASE_URL` pointing at your Postgres 18 instance, push the schema into it.
+
+    ```bash
+    pnpm --filter @workspace/db run push
+    ```
+
+    This applies the Drizzle schema from `@workspace/db` directly to your database, no migration files to manage for local development.
+  </Step>
+
+  <Step title="Start the two dev servers">
+    BunnyOS runs as two processes. Open **two separate terminals** from the repo root.
+
+    ```bash
+    # Terminal 1: API server on :3000
+    pnpm --filter @workspace/api-server run dev
+    ```
+
+    ```bash
+    # Terminal 2: interface on :5173
+    pnpm --filter @workspace/interface run dev
+    ```
+
+    The interface proxies `/api` requests through to the API server on `:3000`, so both need to be running for the app to work.
+  </Step>
+
+  <Step title="Open the UI">
+    Visit the interface in any browser:
+
+    ```text
+    http://localhost:5173
+    ```
+
+    You should see the BunnyOS terminal. From here you can connect your Base account, toggle protocols, and start chatting with the agent.
+  </Step>
+</Steps>
+
+## What you just started
+
+For how the systems compose and what running BunnyOS yourself involves, see the [self-hosting overview](/developer/self-hosting/overview). For which tool sources need a per-user key, see the key-required matrix in [Configuration](/developer/self-hosting/configuration).
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Self-hosting overview" icon="server" href="/developer/self-hosting/overview">
+    How the pieces fit together and what running BunnyOS yourself involves.
+  </Card>
+  <Card title="Configuration" icon="sliders-horizontal" href="/developer/self-hosting/configuration">
+    Every environment variable, protocol toggle, and per-user key explained.
+  </Card>
+  <Card title="Security model" icon="shield-check" href="/developer/self-hosting/security">
+    No private keys on the system, at-rest encryption, and signed sessions.
+  </Card>
+</CardGroup>
+
+<Note>
+  BunnyOS is experimental software, licensed under **AGPL-3.0**. Always review permissions and understand transaction risks before interacting with onchain systems, you are responsible for your own wallets and approvals. Report security issues privately to **security@bunnyos.ai**, never in a public issue.
+</Note>

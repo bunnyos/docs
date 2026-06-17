@@ -1,14 +1,14 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "almond",
-  "name": "Product Guide",
-  "description": "Step-by-step guides for every product—platform setup, analytics, and integrations in one place.",
+  "name": "BunnyOS",
+  "description": "Guides and references for discovering, deploying, and managing autonomous DeFi agents on BunnyOS.",
   "colors": {
-    "primary": "#166E3F",
-    "light": "#26BD6C",
-    "dark": "#166E3F"
+    "primary": "#2962FF",
+    "light": "#5B82FF",
+    "dark": "#1E4FD6"
   },
-  "favicon": "/favicon.ico",
+  "favicon": "/favicon.png",
   "icons": {
     "library": "lucide"
   },
@@ -27,71 +27,168 @@
           "href": "/"
         },
         {
-          "anchor": "Changelog",
-          "icon": "scroll-text",
-          "href": "https://www.mintlify.com/docs/changelog"
-        },
-        {
-          "anchor": "Help",
-          "icon": "life-buoy",
-          "href": "https://www.mintlify.com/docs/contact-support"
+          "anchor": "GitHub",
+          "icon": "github",
+          "href": "https://github.com/bunnyos/base-agent"
         }
       ]
     },
-    "directory": "card",
-    "groups": [
+    "tabs": [
       {
-        "group": "Platform",
-        "icon": "layers",
-        "expanded": true,
-        "pages": [
-          "platform/quickstart",
-          "platform/key-concepts",
-          "platform/configuration/settings",
-          "platform/configuration/user-management",
-          "platform/administration/roles-permissions"
+        "tab": "User Guide",
+        "icon": "book-open",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "icon": "rocket",
+            "expanded": true,
+            "pages": [
+              "user/getting-started/introduction",
+              "user/getting-started/wallet-connection",
+              "user/getting-started/chat-intro",
+              "user/getting-started/data-and-keys"
+            ]
+          },
+          {
+            "group": "Portfolio",
+            "icon": "wallet",
+            "pages": [
+              "user/portfolio/overview",
+              "user/portfolio/defi"
+            ]
+          },
+          {
+            "group": "Token Research",
+            "icon": "search",
+            "pages": [
+              "user/tokens/discovery",
+              "user/tokens/research"
+            ]
+          },
+          {
+            "group": "Bunny Exchange",
+            "icon": "key-round",
+            "pages": [
+              "user/bunnyex/trading",
+              "user/bunnyex/profiles",
+              "user/bunnyex/pnl"
+            ]
+          },
+          {
+            "group": "Perpetuals",
+            "icon": "trending-up",
+            "pages": [
+              "user/perps/trading",
+              "user/perps/close",
+              "user/perps/analysis"
+            ]
+          },
+          {
+            "group": "Actions",
+            "icon": "zap",
+            "pages": [
+              "user/actions/inbox",
+              "user/actions/builder",
+              "user/actions/management"
+            ]
+          },
+          {
+            "group": "BunnyDS",
+            "icon": "server",
+            "pages": [
+              "user/bunnyds/overview",
+              "user/bunnyds/spending"
+            ]
+          },
+          {
+            "group": "Configuration",
+            "icon": "settings",
+            "pages": [
+              "user/configure/api-keys",
+              "user/configure/llm",
+              "user/configure/services",
+              "user/configure/memory",
+              "user/configure/bunnyos-account"
+            ]
+          }
         ]
       },
       {
-        "group": "Analytics",
-        "icon": "chart-bar",
-        "expanded": true,
-        "pages": [
-          "analytics/quickstart",
-          "analytics/connect-data",
-          "analytics/dashboards/create-dashboard",
-          "analytics/reports/scheduled-reports"
+        "tab": "Developer",
+        "icon": "code",
+        "groups": [
+          {
+            "group": "Introduction",
+            "icon": "book-open",
+            "expanded": true,
+            "pages": [
+              "developer/overview"
+            ]
+          },
+          {
+            "group": "Exchange API",
+            "icon": "key-round",
+            "expanded": true,
+            "pages": [
+              "developer/exchange/overview",
+              "developer/exchange/authentication",
+              "developer/exchange/market-data",
+              "developer/exchange/profile",
+              "developer/exchange/recommendations",
+              "developer/exchange/threads"
+            ]
+          },
+          {
+            "group": "Self-Hosting",
+            "icon": "server",
+            "expanded": true,
+            "pages": [
+              "developer/self-hosting/overview",
+              "developer/self-hosting/quickstart",
+              "developer/self-hosting/configuration",
+              "developer/self-hosting/security"
+            ]
+          }
         ]
       },
       {
-        "group": "Integrations",
-        "icon": "plug",
-        "expanded": true,
-        "pages": [
-          "integrations/quickstart",
-          "integrations/authentication",
-          "integrations/connectors/crm",
-          "integrations/webhooks/configure"
+        "tab": "Whitepaper",
+        "icon": "scroll-text",
+        "groups": [
+          {
+            "group": "Whitepaper",
+            "icon": "file-text",
+            "expanded": true,
+            "pages": [
+              "whitepaper/abstract",
+              "whitepaper/introduction",
+              "whitepaper/architecture",
+              "whitepaper/bunny-exchange",
+              "whitepaper/tokenomics",
+              "whitepaper/security",
+              "whitepaper/roadmap",
+              "whitepaper/disclaimers"
+            ]
+          }
         ]
       }
     ]
   },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/logo/light.png",
+    "dark": "/logo/dark.png"
   },
   "navbar": {
     "links": [],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "label": "Launch App",
+      "href": "https://bunnyos.ai"
     }
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/yourcompany",
-      "linkedin": "https://linkedin.com/company/yourcompany"
+      "x": "https://x.com/bunnyos"
     }
   }
 }

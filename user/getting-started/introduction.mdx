@@ -1,0 +1,70 @@
+---
+title: "What is BunnyOS?"
+description: "Overview of the BunnyOS DeFi agent and its main surfaces on Base."
+---
+
+BunnyOS is an open-source DeFi agent and terminal built on [Base](https://base.org). You talk to it in plain language and it does the on-chain legwork for you: it can research tokens, build transactions, and automate recurring work that runs around the clock. The agent reads live market data and your wallet, builds the transaction, and hands it to you to approve. Nothing moves without your signature.
+
+## A tour of the surfaces
+
+BunnyOS opens as a tabbed terminal. Each surface is a tab you can open, reorder, and close, so you can keep research, chat, and your portfolio side by side.
+
+<CardGroup cols={2}>
+  <Card title="Chat" icon="message-circle" href="/user/getting-started/chat-intro">
+    Talk to the agent in natural language. It interprets what you want, pulls the data it needs, and proposes transactions for you to approve.
+  </Card>
+  <Card title="Portfolio & Wallet" icon="wallet" href="/user/portfolio/overview">
+    See your connected Base wallet and live holdings. The agent reads your balances to answer questions and size trades.
+  </Card>
+  <Card title="Token Research" icon="search" href="/user/tokens/discovery">
+    Explore trending tokens and recent launches, then dig into a token with live market data and security findings.
+  </Card>
+  <Card title="Bunny Exchange" icon="key-round" href="/user/bunnyex/trading">
+    The `bunnyEX` surface for trading *creator keys*, settled in `$OS`. Holding keys unlocks a creator's gated feed and threads.
+  </Card>
+  <Card title="Perpetuals" icon="trending-up" href="/user/perps/trading">
+    The `perps` surface for leveraged long and short positions on Base.
+  </Card>
+  <Card title="Actions" icon="zap" href="/user/actions/inbox">
+    Build, share, and run reusable actions that work for you around the clock, with an inbox and history to track what ran.
+  </Card>
+  <Card title="BunnyDS" icon="server" href="/user/bunnyds/overview">
+    The managed option that powers research and security lookups without you bringing your own keys.
+  </Card>
+</CardGroup>
+
+## Non-custodial by design
+
+<Steps>
+  <Step title="You ask">
+    Describe what you want in chat, for example a swap, a transfer, or a research request.
+  </Step>
+  <Step title="The agent prepares">
+    BunnyOS reads live data and assembles the transaction, then shows you what it intends to do.
+  </Step>
+  <Step title="You approve in your own wallet">
+    The transaction is sent to your connected Base wallet, where you sign it yourself or reject it.
+  </Step>
+</Steps>
+
+<Warning>
+  BunnyOS never holds your funds and nothing moves without your signature. Always review a transaction in your wallet before signing: you are the final authority on every on-chain action.
+</Warning>
+
+## How to get started
+
+<Steps>
+  <Step title="Connect to Base">
+    From the landing page, choose **connect to base** to sign in with your Base wallet. See [Sign in with your Base wallet](/user/getting-started/wallet-connection) for the full walkthrough.
+  </Step>
+  <Step title="Open the terminal">
+    Once connected, select **open terminal** to enter BunnyOS and its tabbed surfaces.
+  </Step>
+  <Step title="Start a conversation">
+    Head to the Chat tab and try your first request. See [First steps with Bunny chat](/user/getting-started/chat-intro) for example prompts and what to expect.
+  </Step>
+</Steps>
+
+<Accordion title="Do I need any keys to start?">
+  No. BunnyOS works out of the box with the managed **BunnyDS** option. See [Getting data: managed vs your own keys](/user/getting-started/data-and-keys).
+</Accordion>

@@ -1,0 +1,57 @@
+---
+title: "BunnyDS: data & AI, ready to go"
+description: "Turn on BunnyDS to use BunnyOS with no API keys of your own."
+---
+
+BunnyDS lets you use the full BunnyOS terminal without setting up any API keys of your own. When it's on, BunnyOS provides the market data, token security info, and the AI for you. No setup is needed: it works the moment you turn it on.
+
+## What you get when BunnyDS is on
+
+With BunnyDS active, BunnyOS supplies everything the agent needs:
+
+| Capability | What it covers |
+| --- | --- |
+| Market & wallet data | Prices, trends, and wallet reads for your portfolio and tokens |
+| Token security | Risk and rug checks on tokens |
+| AI | The agent's chat and reasoning, provided for you |
+
+<Note>
+While BunnyDS is on, the AI provider and model controls in the **Configure** tab are hidden, because BunnyOS handles the AI for you.
+</Note>
+
+## Turning BunnyDS on or off
+
+Open the **BunnyDS** page (titled *bunny data services*) and use the toggle at the top of the card.
+
+<Steps>
+  <Step title="Open the BunnyDS page">
+    Go to the BunnyDS tab. The page shows a status card and a spending-limit card.
+  </Step>
+  <Step title="Read the status indicator">
+    A colored dot and label tell you the current state. A green dot with **bunnyDS active** means BunnyOS is providing your data and AI. A grey dot with **bunnyDS off** means the agent is using your own keys.
+  </Step>
+  <Step title="Flip the toggle">
+    Use the switch on the right of the status card to turn BunnyDS on or off. The status updates as soon as the change is saved.
+  </Step>
+</Steps>
+
+<Warning>
+If a save fails, you'll see a brief "couldn't update bunnyDS, try again" message and the toggle returns to its previous position. Just try again.
+</Warning>
+
+## BunnyDS vs. your own keys
+
+Turning BunnyDS **off** means you bring your own keys instead. For when to use each option, see [Data & keys](/user/getting-started/data-and-keys).
+
+BunnyDS is free for now, so spending limits are disabled. See [Spending limits](/user/bunnyds/spending).
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Configuration: API keys" icon="key" href="/user/configure/api-keys">
+    Set your own providers and keys to bring your own keys.
+  </Card>
+  <Card title="Connect your wallet" icon="wallet" href="/user/getting-started/wallet-connection">
+    Link the wallet the agent trades from.
+  </Card>
+</CardGroup>

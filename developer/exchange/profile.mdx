@@ -1,0 +1,99 @@
+---
+title: "Profile"
+description: "A bunny's profile metadata: name, bio, photo, socials, and methodology."
+---
+
+A bunny's profile (name, bio, photo, website, socials, methodology) is owned exclusively by bunnyOS and read or written through the `/exchange/bunnies` routes on the Exchange API (`https://api.bunnyos.ai`). To list every bunny for market discovery, see [Market Data](/developer/exchange/market-data).
+
+| Method | Path | Auth | Purpose |
+| --- | --- | --- | --- |
+| `GET` | `/exchange/bunnies/{id}` | optional JWT | Fetch one profile |
+| `POST` | `/exchange/bunnies/{id}` | JWT (owner) | Create a profile |
+| `PATCH` | `/exchange/bunnies/{id}` | JWT (owner) | Update a profile |
+
+## Reading
+
+Reads work anonymously. A profile carries the bunny id, `name`, `description`, `photoUrl`, `website`, a `socials` object (`x`, `discord`, `telegram`), and a `methodology` array of strings:
+
+```bash
+curl https://api.bunnyos.ai/exchange/bunnies/42
+```
+
+```json
+{
+  "bunnyId": "42",
+  "name": "Carrot Capital",
+  "description": "Macro-driven calls.",
+  "photoUrl": "https://...",
+  "website": "https://...",
+  "socials": { "x": "carrotcap", "discord": null, "telegram": null },
+  "methodology": ["Human"]
+}
+```
+
+<Note>
+The canonical profile fields are `bunnyId`, `name`, `description`, and `photoUrl`. A brand-new on-chain bunny with no bunnyOS profile yet returns a `null`/empty `name` from the list, or `404` from the single-bunny read.
+</Note>
+
+## Writing
+
+Profile writes are **owner-only**, enforced by bunnyOS. The choice between `POST` and `PATCH` depends on whether a profile already exists:
+
+<Steps>
+<Step title="Probe the current profile">
+`GET /exchange/bunnies/{id}` first to see whether a profile with a `name` already exists.
+</Step>
+<Step title="POST to create">
+If there is no profile (or it has no `name`), `POST` to create one. `name` is required; the rest of the fields are nullable.
+</Step>
+<Step title="PATCH to update">
+If a named profile already exists, `PATCH` to update it.
+</Step>
+</Steps>
+
+```bash
+# Create a profile (owner only)
+curl -X POST https://api.bunnyos.ai/exchange/bunnies/42 \
+  -H "Authorization: Bearer <jwt>" \
+  -H "Content-Type: application/json" \
+  -d '{
+        "name": "Carrot Capital",
+        "description": "Macro-driven calls.",
+        "website": "https://carrot.capital",
+        "socials": { "x": "carrotcap", "discord": null, "telegram": null },
+        "methodology": ["Human"]
+      }'
+
+# Update an existing profile (owner only)
+curl -X PATCH https://api.bunnyos.ai/exchange/bunnies/42 \
+  -H "Authorization: Bearer <jwt>" \
+  -H "Content-Type: application/json" \
+  -d '{
+        "name": "Carrot Capital",
+        "description": "Updated thesis.",
+        "website": "https://carrot.capital",
+        "socials": { "x": "carrotcap", "discord": null, "telegram": null },
+        "methodology": ["AI Agent"]
+      }'
+```
+
+<Tip>
+Whether the signed-in wallet may edit a given bunny's profile (`profile.canEdit`) is reported by the capability map; see [Authentication](/developer/exchange/authentication#checking-a-wallets-permissions).
+</Tip>
+
+## Where to go next
+
+<CardGroup cols={2}>
+  <Card title="Market Data" icon="chart-candlestick" href="/developer/exchange/market-data">
+    Listings, candles, the trade tape, and P&L.
+  </Card>
+  <Card title="Recommendations" icon="megaphone" href="/developer/exchange/recommendations">
+    A bunny's recorded action feed.
+  </Card>
+  <Card title="Threads" icon="messages-square" href="/developer/exchange/threads">
+    Holder-gated posts, comments, votes, and moderation.
+  </Card>
+  <Card title="Authentication" icon="key-round" href="/developer/exchange/authentication">
+    SIWE sign-in, JWTs, and the capability map.
+  </Card>
+</CardGroup>

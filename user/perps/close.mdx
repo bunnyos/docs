@@ -1,0 +1,86 @@
+---
+title: "Close positions & realize P&L"
+description: "Exit perpetual positions and settle gains or losses through your connected Base wallet."
+---
+
+When you are ready to take profit, cut a loss, or simply step out of the market, you close your open perpetual position. The trade settles at the live market price, realizes your profit or loss, and returns your remaining collateral to your wallet, all in a single transaction that you sign yourself.
+
+<Note>
+BunnyOS never holds your keys and never signs on your behalf. Closing a position prepares a trade that you approve in your wallet. Make sure you have [connected your wallet](/user/getting-started/wallet-connection) first.
+</Note>
+
+## Find your open position
+
+Open the **Perps** tab and scroll to the **Positions** panel at the bottom of the page. This panel lists every position your connected wallet currently holds. Each row shows:
+
+| What you see | Meaning |
+| --- | --- |
+| `LONG` / `SHORT` badge | The direction of the trade. Green for long, red for short. |
+| Pair | The market, for example `ETH/USD`. |
+| Leverage | Your multiplier, shown as `2.0x`, `10x`, and so on. |
+| Collateral | The margin you put up, in USDC. |
+| P&L | Your current profit (green, with a `+`) or loss (red). |
+
+The Positions panel refreshes automatically, and prices update on their own as well. You can also force a refresh with the **Refresh** button in the page header.
+
+<Tip>
+If the panel reads "no positions," you have nothing open for this wallet. If it asks you to connect a wallet, head to [Connect your wallet](/user/getting-started/wallet-connection) first: positions are tied to your address.
+</Tip>
+
+## Close the position
+
+Each position row has a **Close** button on the right.
+
+<Steps>
+<Step title="Click Close">
+BunnyOS opens the agent chat and prefills a close request for that exact position, including its pair. Nothing is sent automatically: you stay in control.
+</Step>
+<Step title="Review the agent's plan">
+Send the prefilled message. The agent reads the position and prepares the close. By default it closes the **full** position; you can tell it in chat to close only part of it by naming the amount of collateral to release. The exit is priced at the current live price, so your realized profit or loss reflects the market at the moment the trade lands.
+</Step>
+<Step title="Confirm the details">
+The agent summarizes the close: the pair, the position, and the collateral being closed, before handing you anything to sign. Read it over to make sure it matches the position you intended to exit.
+</Step>
+</Steps>
+
+The price you see in a position's P&L is an estimate that moves with the market; your final realized number is fixed at the moment the trade is confirmed.
+
+## Approve the close in your wallet
+
+When you approve the agent's plan, BunnyOS sends the prepared trade to your wallet for signing. Your wallet will pop up asking you to confirm the close.
+
+- Closing a position is a single step, unlike opening one.
+- Review the transaction in your wallet, then sign it. If you reject it, nothing changes and your position stays open.
+
+<Warning>
+Once you sign and the trade confirms, the close is final. A position closed at a loss realizes that loss permanently. If the market is moving fast, the price at confirmation can differ from what you saw a moment earlier.
+</Warning>
+
+## Settlement and your returned funds
+
+After your wallet confirms the trade, the close settles:
+
+- Your profit or loss is **realized** against your collateral.
+- Your remaining collateral, plus any profit (or minus any loss and fees), is returned to your wallet as USDC.
+- The position disappears from the **Positions** panel once it updates. Use **Refresh** if you want to confirm immediately rather than waiting for the next refresh.
+
+<AccordionGroup>
+<Accordion title="Can I close only part of a position?">
+Yes. Tell the agent in chat how much collateral you want to close, for example, half, and it prepares a partial close. Omitting an amount closes the entire position.
+</Accordion>
+<Accordion title="My position is gone but funds haven't appeared yet.">
+The position list and your balances can update a few seconds apart. Hit **Refresh** in the header to re-read both your positions and your balances.
+</Accordion>
+<Accordion title="Why did my realized P&L differ from the panel?">
+The P&L shown on a row is an estimate that tracks the live price. Your realized result is locked in at the price when the trade confirms, after fees, so small differences are normal in a moving market.
+</Accordion>
+</AccordionGroup>
+
+<CardGroup cols={2}>
+<Card title="Open a position" icon="trending-up" href="/user/perps/trading">
+Enter a long or short with leverage on a Base perp market.
+</Card>
+<Card title="Connect your wallet" icon="wallet" href="/user/getting-started/wallet-connection">
+Link your Base wallet so positions and closes can settle.
+</Card>
+</CardGroup>

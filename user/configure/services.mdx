@@ -1,0 +1,89 @@
+---
+title: "Turn services on & off"
+description: "Control which data sources and trading features the agent can use."
+---
+
+The agent can connect to price feeds, wallet data, market intelligence, and trade execution. The **Services** tab in [Configure](/user/configure/api-keys) is where you decide which ones are switched on. Anything you turn off is not used by the agent.
+
+## The Services tab
+
+Open **Configure** and select the **services** tab. You'll see services grouped into a few sections:
+
+- **your wallet**: the connection that lets the agent read your balances and build send, swap, and sign transactions for you to approve (shown as **base mcp**).
+- **bunny core**: the main data sources, on by default (price, market, wallet, and research tools).
+- **bunny optional**: extra sources that are **off by default**, so you opt in only to what you need.
+- **notifications**: the Telegram push toggle (covered in [Actions inbox](/user/actions/inbox)).
+
+Each row has a label, a short status line, and a toggle on the right.
+
+<Steps>
+  <Step title="Find the service">
+    Scroll to the right section. The status line tells you its state: on, off, or needs a key.
+  </Step>
+  <Step title="Flip the toggle">
+    Use the switch on the right of the row to turn the service on or off.
+  </Step>
+  <Step title="(Optional) set a key">
+    Services that need their own key show a **set api** button; managed ones show **powered by bunnyDS** instead.
+  </Step>
+</Steps>
+
+<Note>
+  Two services are always on and cannot be turned off: your **wallet** (how the agent acts for you) and **coingecko** (the price source almost every other tool relies on). Their toggles appear but stay locked.
+</Note>
+
+## What each service does
+
+| Service | Section | What it does |
+| --- | --- | --- |
+| **base mcp** | your wallet | Reads your balances and portfolio, and builds send, swap, and sign transactions for you to approve. |
+| **OS native** | bunny core | Research tools that combine market data and token safety findings into one answer. |
+| **coingecko** | bunny core | Prices, market listings, search, trending, and fresh-token data. |
+| **defillama** | bunny core | Protocol and chain data: TVL, yields, volumes, fees, and stablecoins. No key needed. |
+| **bankr** | bunny core | A feed of the most recent token launches. No key needed. |
+| **avantis** | bunny core | Perpetuals and leverage market data, plus building open and close positions for your approval. See [Perps](/user/perps/trading). |
+| **gmgn** | bunny core | Meme and degen intel: token safety checks, smart-money feeds, and new-launch discovery. View only. |
+| **coinstats** | bunny core | Wallet balances, DeFi positions, transaction history, profit and loss, news, and NFTs. View only. |
+| **moralis** | bunny optional | Multi-chain wallet history, token balances and prices, NFTs, and DeFi positions. |
+| **zerion** | bunny optional | Portfolio data: overview, positions, profit and loss, value over time, transactions, and NFTs. |
+| **definitive** | bunny optional | Swap execution, signed in your own wallet. |
+
+<Note>
+  The exact rows you see depend on your setup. See [Getting data: managed vs your own keys](/user/getting-started/data-and-keys).
+</Note>
+
+## Why turn services off
+
+Turning off services you don't use keeps the agent focused, and avoids unnecessary calls on any provider key you supply yourself. Some optional sources overlap with what the core sources already cover, which is why they ship off by default. Turn them on only when you want their extra data.
+
+<Tip>
+  A good default is to leave **bunny core** on and only turn on a **bunny optional** service when you have a concrete reason, for example switching on **definitive** when you want the agent to execute swaps. Trade execution stays opt-in: the agent only builds transactions, and you sign every one in your own wallet ([how this works](/user/getting-started/wallet-connection)).
+</Tip>
+
+## Dependencies and timing
+
+<AccordionGroup>
+  <Accordion title="Some services need an API key">
+    When [BunnyDS](/user/bunnyds/overview) is on, several sources are handled for you and show **powered by bunnyDS** instead of a key button. With BunnyDS off, add your own key via the **set api** button. A service that's on but missing a key shows it needs one. See [Getting data: managed vs your own keys](/user/getting-started/data-and-keys).
+  </Accordion>
+  <Accordion title="Changes take effect immediately">
+    Toggling a service saves right away, there is no separate save step. A service you just turned on is available immediately, and one you just turned off is no longer used.
+  </Accordion>
+</AccordionGroup>
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Managed vs your own keys" icon="key" href="/user/getting-started/data-and-keys">
+    Choose between BunnyDS and bringing your own provider keys.
+  </Card>
+  <Card title="BunnyDS overview" icon="zap" href="/user/bunnyds/overview">
+    Run the full terminal with zero keys.
+  </Card>
+  <Card title="Token research" icon="search" href="/user/tokens/research">
+    How the agent turns data into token analysis.
+  </Card>
+  <Card title="Perps trading" icon="trending-up" href="/user/perps/trading">
+    Use Avantis for leverage and perpetuals.
+  </Card>
+</CardGroup>

@@ -1,0 +1,288 @@
+---
+title: "Market Data"
+description: "Read creator-key listings, price candles, trade history, and profit-and-loss."
+---
+
+The bunnyOS Exchange REST API exposes the read side of the marketplace: the list of creators (bunnies), per-key price history, the global trade tape, and a caller's profit-and-loss ledger. These endpoints power dashboards, bots, and analytics without ever touching a private key.
+
+<Note>
+**Reads, not trades.** Buying and selling creator keys happens **on-chain**, against the bonding-curve contract on **Base mainnet (chainId `8453`)**, not through this REST API. The endpoints on this page are read-only market and account data. See [Authentication](/developer/exchange/authentication) for how to mint a JWT and [Exchange overview](/developer/exchange/overview) for the full picture.
+</Note>
+
+All requests target the hosted base URL:
+
+```
+https://api.bunnyos.ai
+```
+
+## Authentication for reads
+
+Reads accept an optional JWT or `x-api-key`; P&L endpoints require a JWT because they describe *your* positions. See [Authentication](/developer/exchange/authentication) for how to mint either credential.
+
+| Endpoint | Method | Auth |
+| --- | --- | --- |
+| `/exchange/bunnies` | `GET` | Optional JWT |
+| `/exchange/bunnies/{id}` | `GET` | Optional JWT |
+| `/exchange/bunnies/{id}/candles` | `GET` | Optional JWT |
+| `/exchange/bunnies/{id}/transactions` | `GET` | Optional JWT |
+| `/exchange/bunnies/{id}/pnl` | `GET` | JWT required |
+| `/exchange/portfolio/pnl` | `GET` | JWT required |
+
+## Listing creators (bunnies)
+
+A "bunny" is a creator whose keys trade on the bonding curve. Each bunny is identified by an on-chain id (its token id) and may also have a bunnyOS-hosted profile.
+
+| Endpoint | Method | Auth |
+| --- | --- | --- |
+| `/exchange/bunnies` | `GET` | Optional JWT |
+| `/exchange/bunnies/{id}` | `GET` | Optional JWT |
+
+`GET /exchange/bunnies` returns every bunny, and `GET /exchange/bunnies/{id}` returns a single bunny. The list response wraps entries under `bunnies`, and each entry carries `bunnyId` for identity plus profile fields (`name`, `description`, `photoUrl`, and more). For the full profile schema and owner-only writes, see [Profile](/developer/exchange/profile).
+
+```bash
+curl https://api.bunnyos.ai/exchange/bunnies
+
+curl https://api.bunnyos.ai/exchange/bunnies/42
+```
+
+<Note>
+A bunny can exist **on-chain** (its keys trade) before anyone creates a bunnyOS profile for it. In that case the profile fields are empty or `null` (no `name`), and `GET /exchange/bunnies/{id}` returns **404** when bunnyOS has no profile at all for that id. The absence of a profile does **not** mean the bunny can't be traded, price and trade data still exist on-chain.
+</Note>
+
+## Price candles (OHLC)
+
+`GET /exchange/bunnies/{id}/candles` returns real OHLC price history for a bunny's keys.
+
+| Endpoint | Method | Auth |
+| --- | --- | --- |
+| `/exchange/bunnies/{id}/candles` | `GET` | Optional JWT |
+
+### Query parameters
+
+| Param | Required | Notes |
+| --- | --- | --- |
+| `interval` | Yes | One of `1m`, `5m`, `15m`, `1h`, `4h`, `1d`, `1w`. |
+| `limit` | No | `1`-`1000`. Defaults to unlimited (capped at 1000). |
+| `from` | No | ISO datetime lower bound. |
+| `to` | No | ISO datetime upper bound. |
+| `fill` | No | Boolean; fill gaps in the series. |
+
+### Response
+
+```json
+{
+  "bunnyId": "42",
+  "interval": "1h",
+  "candles": [
+    {
+      "bucketStart": "2026-06-16T12:00:00Z",
+      "open": "1010000000000000",
+      "high": "1180000000000000",
+      "low": "1000000000000000",
+      "close": "1150000000000000",
+      "volumeKeys": "37",
+      "volumeValue": "42000000000000000",
+      "tradeCount": 12
+    }
+  ]
+}
+```
+
+```bash
+curl "https://api.bunnyos.ai/exchange/bunnies/42/candles?interval=1h&limit=200"
+```
+
+<Warning>
+`open`, `high`, `low`, `close`, and `volumeValue` are wei decimal strings (see [token units](#bonding-curve-context--token-units) below). `interval` is required, omitting it is an error. `limit` is clamped to `1000`.
+</Warning>
+
+## Trade history (the trade tape)
+
+`GET /exchange/bunnies/{id}/transactions` returns the **global** trade tape for a bunny, every trade by every trader, newest first.
+
+| Endpoint | Method | Auth |
+| --- | --- | --- |
+| `/exchange/bunnies/{id}/transactions` | `GET` | Optional JWT |
+
+### Query parameters
+
+| Param | Required | Notes |
+| --- | --- | --- |
+| `limit` | No | `1`-`1000`. |
+| `cursor` | No | Opaque pagination cursor from a prior response. |
+
+### Response
+
+```json
+{
+  "bunnyId": "42",
+  "transactions": [
+    {
+      "pricePerKey": "1150000000000000",
+      "amount": "3",
+      "total": "3450000000000000",
+      "timestamp": "2026-06-16T12:31:04Z",
+      "trader": "0xabc...",
+      "side": "buy"
+    }
+  ],
+  "nextCursor": "eyJ...",
+  "hasMore": true
+}
+```
+
+```bash
+# First page
+curl "https://api.bunnyos.ai/exchange/bunnies/42/transactions?limit=100"
+
+# Next page
+curl "https://api.bunnyos.ai/exchange/bunnies/42/transactions?limit=100&cursor=eyJ..."
+```
+
+<Steps>
+  <Step title="Request the first page">
+    Call the endpoint with a `limit`. Read `transactions` (newest first).
+  </Step>
+  <Step title="Check hasMore">
+    If `hasMore` is `true` and `nextCursor` is non-null, more pages remain.
+  </Step>
+  <Step title="Pass the cursor forward">
+    Send `nextCursor` as the `cursor` query param on the next call. Stop when `hasMore` is `false` or `nextCursor` is `null`.
+  </Step>
+</Steps>
+
+<Note>
+`pricePerKey` and `total` are wei decimal strings; `amount` is a count of keys. `side` distinguishes buys from sells. This is the public tape, so it works anonymously.
+</Note>
+
+## Profit & loss (P&L)
+
+P&L endpoints report your realized and unrealized gains against your **cost basis**. They are the official ledger authority for a connected account and therefore **require a JWT**.
+
+| Endpoint | Method | Auth |
+| --- | --- | --- |
+| `/exchange/bunnies/{id}/pnl` | `GET` | JWT required |
+| `/exchange/portfolio/pnl` | `GET` | JWT required |
+
+### Per-bunny P&L
+
+```bash
+curl https://api.bunnyos.ai/exchange/bunnies/42/pnl \
+  -H "Authorization: Bearer <jwt>"
+```
+
+```json
+{
+  "bunnyId": "42",
+  "balance": "5",
+  "costBasis": "5000000000000000",
+  "realizedPnl": "200000000000000",
+  "unrealizedPnl": "1500000000000000",
+  "totalPnl": "1700000000000000"
+}
+```
+
+### Portfolio P&L
+
+`GET /exchange/portfolio/pnl` aggregates across every bunny you hold and adds `totals`.
+
+```bash
+curl https://api.bunnyos.ai/exchange/portfolio/pnl \
+  -H "Authorization: Bearer <jwt>"
+```
+
+```json
+{
+  "bunnies": [
+    {
+      "bunnyId": "42",
+      "balance": "5",
+      "costBasis": "5000000000000000",
+      "realizedPnl": "200000000000000",
+      "unrealizedPnl": "1500000000000000",
+      "totalPnl": "1700000000000000"
+    }
+  ],
+  "totals": {
+    "costBasis": "5000000000000000",
+    "realizedPnl": "200000000000000",
+    "unrealizedPnl": "1500000000000000",
+    "totalPnl": "1700000000000000"
+  }
+}
+```
+
+### Cost basis vs invested / returned
+
+The P&L ledger is built around **cost basis**, which is a more precise concept than a naive "total invested minus total returned":
+
+- **`costBasis`** is the accounting cost of the keys you **currently still hold**. As you sell, the matching portion of cost is removed from the basis and the difference between sale proceeds and that removed cost is booked into `realizedPnl`. So `costBasis` is *not* the same as everything you ever put in; it shrinks as you exit positions.
+- **`realizedPnl`** is locked-in profit or loss from keys you have already sold.
+- **`unrealizedPnl`** is the mark-to-market gain or loss on keys you still hold, measured against their cost basis at the current curve price.
+- **`totalPnl`** combines both: `realizedPnl + unrealizedPnl`.
+
+<Tip>
+If you only track gross invested and gross returned, you will misattribute gains across partial exits. Use `costBasis` together with `realizedPnl` and `unrealizedPnl` to reconcile a position correctly. Every field except `balance` is a wei decimal string.
+</Tip>
+
+<Warning>
+**No JWT, no P&L.** P&L has no anonymous form. Without a valid JWT you get no position ledger, so calling code should treat the account as **`connected: false`** and prompt the user to sign in rather than rendering zeroed numbers as if they were real. (Optional-auth reads instead retry anonymously; see [Authentication](/developer/exchange/authentication).)
+</Warning>
+
+## Bonding-curve context & token units
+
+Key prices on bunnyOS are set by a **bonding curve** on Base: each successive key costs more than the last along a deterministic curve, so price is a function of supply. Trades execute against that contract on-chain; the REST API observes the resulting state. That is why:
+
+- **Candles** describe per-key price movement as the curve advances and retreats with buys and sells.
+- **Transactions** are the realized fills against the curve (`pricePerKey`, `amount`, `total`, `side`).
+- **P&L** values your holdings at the current curve price (`unrealizedPnl`) versus what you paid (`costBasis`).
+
+Two unit conventions matter throughout:
+
+1. **`amount` / `balance` / `volumeKeys`** are **counts of keys**: small integers.
+2. **All price and value fields** (`open`/`high`/`low`/`close`, `volumeValue`, `pricePerKey`, `total`, `costBasis`, `realizedPnl`, `unrealizedPnl`, `totalPnl`) are **wei decimal strings**.
+
+Always wrap a wei string in `BigInt` before any arithmetic (parsing it as a `Number` loses precision), then convert to human-readable token units with big-integer math:
+
+```ts
+import { formatUnits } from "viem";
+
+// decimals from the exchange config (token-unit conversion)
+const tokenUnits = formatUnits(BigInt(weiString), decimals);
+```
+
+This wei-string convention applies to every money field the Exchange API returns.
+
+### Worked example: read a bunny end to end
+
+```bash
+# 1. Resolve the bunny's profile (may 404 if no bunnyOS profile yet)
+curl https://api.bunnyos.ai/exchange/bunnies/42
+
+# 2. Pull hourly candles for charting
+curl "https://api.bunnyos.ai/exchange/bunnies/42/candles?interval=1h&limit=168"
+
+# 3. Pull the latest trades
+curl "https://api.bunnyos.ai/exchange/bunnies/42/transactions?limit=50"
+
+# 4. (Authenticated) read your position in this bunny
+curl https://api.bunnyos.ai/exchange/bunnies/42/pnl \
+  -H "Authorization: Bearer <jwt>"
+```
+
+## Where to go next
+
+<CardGroup cols={2}>
+  <Card title="Authentication" icon="key-round" href="/developer/exchange/authentication">
+    Mint a SIWE JWT (chainId 8453) or an x-api-key for these reads.
+  </Card>
+  <Card title="Profile" icon="id-card" href="/developer/exchange/profile">
+    A bunny's name, bio, photo, socials, and methodology.
+  </Card>
+  <Card title="Exchange overview" icon="store" href="/developer/exchange/overview">
+    How auth, reads, social, and on-chain trading fit together.
+  </Card>
+  <Card title="Threads" icon="messages-square" href="/developer/exchange/threads">
+    Holder-gated posts, comments, votes, and moderation.
+  </Card>
+</CardGroup>

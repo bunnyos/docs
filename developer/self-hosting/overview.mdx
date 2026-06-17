@@ -1,0 +1,116 @@
+---
+title: "Self-hosting overview"
+description: "Run the open-source BunnyOS agent yourself: architecture and the four core systems."
+---
+
+BunnyOS is the first open-source `@base` agent, built on the [Base MCP](https://mcp.base.org). The entire agent is open-source, self-hostable, auditable, and extensible. This page explains what you run when you self-host, how the system is put together, and where to go next.
+
+The authoritative source is the [repository](https://github.com/bunnyos/base-agent) and its README. Everything below tracks it faithfully.
+
+## What you self-host, and why
+
+When you self-host BunnyOS you run the whole agent yourself: the API server, the web interface, the database, and the first-party tool libraries. Nothing about the agent depends on a hosted BunnyOS backend.
+
+The project is open-source on purpose. The team believes the agent layer for crypto should be open, not a black-box execution platform, not a custodial layer, and not proprietary infrastructure users are forced to trust. Two ideas drive that stance:
+
+- **Trust takes time.** People are right to be cautious about handing autonomous systems their keys. Open code lets anyone audit exactly what the agent can and cannot do.
+- **Security and business model should align.** Running an AI agent costs money per request (inference, tool calls, scanners, retries, long context), not per seat. Monetizing execution (fees, spreads, custody) pulls the operator's incentives against the user's. Open-source removes the bind: the cost lives with whoever runs the agent, and the user can audit, or fully self-host, the entire stack.
+
+<Note>
+Self-hosting means **you** run the agent and **you** hold the operating cost. In return you get a non-custodial, auditable stack where you control execution and own your keys through the Base app.
+</Note>
+
+The code is licensed under **AGPL-3.0**.
+
+## The four systems
+
+BunnyOS is small on purpose. Four systems compose the whole thing.
+
+<CardGroup cols={2}>
+  <Card title="Action system" icon="radar">
+    Autonomous scanners on user-defined cadences emit alerts and recommendations.
+  </Card>
+  <Card title="Tab management" icon="layout-panel-left">
+    A terminal UI where each tab is an isolated, state-preserving context.
+  </Card>
+  <Card title="Memory" icon="notebook-pen">
+    A single user-authored markdown file that shapes every prompt.
+  </Card>
+  <Card title="MCP and tooling" icon="plug">
+    Native MCP plus a first-party tool library, each source a toggle.
+  </Card>
+</CardGroup>
+
+### Action system
+
+Autonomous **scanners** run on cadences you define (anywhere from 1 minute to 24 hours) against live tool data and emit two kinds of rows:
+
+- **Alerts** are FYI or risk notices, for example "Your USDC vault APY dropped 40%."
+- **Recommendations** are actionable and carry a one-click *execute* button. Clicking it feeds a pre-written imperative back into the chat agent, for example "move 20% of idle USDC into the steakhouse vault on base", which then drafts the actual approval URL.
+
+A scanner is the same agent loop as chat, but with **write tools denied** and two emit tools added. You write your own scanner in plain English and it runs forever.
+
+### Tab management system
+
+The UI is a terminal with tabs. Each tab is an isolated context: a chat thread, the action inbox, the memory editor, a configure screen, or the portfolio panel. Open as many as you want, switch instantly, and state is preserved per tab.
+
+### Memory system
+
+The memory system follows the markdown-as-memory pattern Karpathy popularized: the agent stays stateless and the file holds the state. Your chains, your risk tolerance, the protocols you will never use, all live in one file the agent reads before every move. It learns your preferences as you trade and writes them back.
+
+### MCP and tooling system
+
+BunnyOS speaks MCP natively and ships a first-party tool library on top. The agent draws on wallet and portfolio data, multi-chain history and pricing, token security checks, DeFi and lending data, and token-launch feeds. Each source is a toggle: flip it off and its tools disappear from the agent's catalog. For the full source catalog and which sources need keys, see [Configuration](/developer/self-hosting/configuration).
+
+<Tip>
+Writing your own scanners in plain English is the main extension path (see the [actions guide](/user/actions/builder)), and the rest of the agent is open source to [fork](https://github.com/bunnyos/base-agent).
+</Tip>
+
+## Repo and monorepo layout
+
+BunnyOS is a `pnpm` workspace monorepo. When you clone [`bunnyos/base-agent`](https://github.com/bunnyos/base-agent), the pieces you run map to a few workspace packages:
+
+| Package | Role |
+|---|---|
+| `@workspace/api-server` | The agent loop, scanners, tool dispatch, and HTTP API. Runs on port `3000`. |
+| `@workspace/interface` | The terminal-style web UI. Runs on port `5173` and proxies `/api` to the API server. |
+| `@workspace/db` | Database schema and the `push` command that applies it to Postgres. |
+| `lib/*` | Shared libraries, including the first-party tool libraries wired into the agent's dispatcher. |
+
+The two long-running processes are the API server and the interface. The database package is a one-shot schema push you run before first start (and again after schema changes). For the install, schema-push, and dev-server commands, see the [Quickstart](/developer/self-hosting/quickstart).
+
+## How the agent stays non-custodial
+
+This is the property to understand before you run anything in production.
+
+<Warning>
+**No private keys ever live on the system you run.** Your signing keys live in your Base account, never in BunnyOS. The agent has no write capability of its own.
+</Warning>
+
+The principle is always the same: the agent can only draft a transaction, and you approve it in the Base app with your own keys, so nothing moves onchain without your signature. Sensitive values the operator does store are encrypted at rest. For the full draft-never-sign trust model and the at-rest encryption mechanism, read the [Security](/developer/self-hosting/security) page.
+
+<Note>
+Report security issues privately to **security@bunnyos.ai**. Do not open a public issue.
+</Note>
+
+BunnyOS is experimental software. Always review permissions, validate execution behavior, and understand transaction risks before interacting with onchain systems. You are responsible for your own wallets and approvals.
+
+## Requirements at a glance
+
+You need **Node 24**, **pnpm**, and **Postgres 18**. For the full setup walkthrough see the [Quickstart](/developer/self-hosting/quickstart), and for the required environment variables see [Configuration](/developer/self-hosting/configuration).
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Quickstart" icon="rocket" href="/developer/self-hosting/quickstart">
+    Clone, install, push the schema, and run the two dev processes.
+  </Card>
+  <Card title="Configuration" icon="settings" href="/developer/self-hosting/configuration">
+    Environment variables, ports, and the configure screen for protocols and keys.
+  </Card>
+  <Card title="Security" icon="shield-check" href="/developer/self-hosting/security">
+    The non-custodial model, at-rest encryption, and how to report issues.
+  </Card>
+</CardGroup>
+
+Looking for the hosted side or the data APIs instead? Start at the [Developer overview](/developer/overview) or the [Exchange overview](/developer/exchange/overview).

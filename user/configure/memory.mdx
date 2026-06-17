@@ -1,0 +1,98 @@
+---
+title: "Store memory & context"
+description: "Give the Bunny agent lasting context about your preferences and goals."
+---
+
+The Bunny agent starts each conversation fresh, but **memory** lets you carry context across all of them. Memory is a single free-form note about you that the agent reads, so it can personalize its suggestions without you repeating yourself each time.
+
+You manage it on the **Configure** page, in the **memory** tab.
+
+## The memory tab
+
+The memory tab is one large text editor. There is no rigid form, just a note you write in your own words. Whatever you type here becomes lasting context the agent can draw on.
+
+A few things to know:
+
+- It is **plain text**. Headings, bullet lists, and emphasis all work, but plain sentences are fine too.
+- Changes are not saved as you type. Edit freely, then commit with **save**, or discard your edits with **revert**.
+
+<Steps>
+  <Step title="Open the memory tab">
+    Go to the **Configure** page and select the **memory** tab.
+  </Step>
+  <Step title="Write your note">
+    Type free-form notes about your preferences, goals, and constraints, for example your risk tolerance, time horizon, tokens to avoid, and recurring plans.
+  </Step>
+  <Step title="Save">
+    Click **save**. You will see a confirmation. Use **revert** instead if you want to throw away unsaved edits.
+  </Step>
+</Steps>
+
+## What to put in it
+
+The most useful memory describes the things the agent cannot look up on its own. Your live balances and positions are already shown in the [portfolio](/user/portfolio/overview) view, so you do not need to paste those in. Memory is for the judgment behind your decisions.
+
+Good things to capture:
+
+| Topic | Examples |
+| --- | --- |
+| Investment style | Long-term holder vs. active trader, sectors you favor (DeFi, memecoins, blue chips) |
+| Risk tolerance | How much volatility you accept, max position sizes, leverage comfort on [perps](/user/perps/trading) |
+| Strategies | Recurring plans like DCA schedules, rebalancing rules, take-profit and stop-loss habits |
+| Constraints | Tokens or protocols to avoid, time horizon, amounts you never want to exceed |
+| Goals | What you are trying to achieve: yield, accumulation, capital preservation |
+
+<Tip>
+Write memory as instructions to a knowledgeable assistant, not as a database. A line like "I never put more than 5% of the portfolio in a single memecoin, and I avoid bridging to other chains" is far more useful than a bare list of token symbols.
+</Tip>
+
+<Warning>
+Memory is for preferences and context, not secrets. Never paste private keys, seed phrases, or passwords here. Wallet connection and signing are handled separately, see [Connect your wallet](/user/getting-started/wallet-connection).
+</Warning>
+
+## How the agent uses it
+
+The agent keeps your saved note in view and draws on it when it makes suggestions: tailoring recommendations to the style, risk tolerance, and goals you described, respecting your constraints, and picking up recurring plans without you re-explaining them each session.
+
+Keep the note focused. A tight, well-organized memory steers the agent more reliably than a long, rambling one.
+
+<Note>
+Memory applies whether you use [BunnyDS](/user/bunnyds/overview) or [bring your own keys](/user/configure/api-keys). It is your context, attached to your settings.
+</Note>
+
+## Import and export
+
+Two buttons sit above the editor:
+
+- **export**: downloads your current memory as a file. Use this to back it up or edit it in your own text editor.
+- **import**: opens a file picker, then saves the chosen file's contents.
+
+<Warning>
+Importing overwrites your existing memory entirely, it does not merge. Export your current note first if you want to keep it.
+</Warning>
+
+<AccordionGroup>
+  <Accordion title="Can I just leave memory empty?">
+    Yes. Memory is optional. With it empty, the agent simply has no extra personal context and uses its default judgment.
+  </Accordion>
+  <Accordion title="Does saving memory affect past conversations?">
+    No. Memory shapes future messages. A change takes effect on your next message to the agent.
+  </Accordion>
+</AccordionGroup>
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Select AI provider & model" icon="cpu" href="/user/configure/llm">
+    Choose which model reads your memory.
+  </Card>
+  <Card title="Configure API keys" icon="key" href="/user/configure/api-keys">
+    Bring your own keys for AI and data.
+  </Card>
+  <Card title="Your portfolio" icon="wallet" href="/user/portfolio/overview">
+    Live balances and positions, so no need to copy them into memory.
+  </Card>
+  <Card title="Chat with the agent" icon="message-square" href="/user/getting-started/chat-intro">
+    See how the agent uses your context in conversation.
+  </Card>
+</CardGroup>

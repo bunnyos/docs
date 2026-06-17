@@ -1,0 +1,166 @@
+---
+title: "Configuration"
+description: "Environment variables and the toggleable protocol and tooling sources for self-hosted BunnyOS."
+---
+
+BunnyOS is configured in two places: a small set of **environment variables** that the
+API server and interface read at boot, and a set of **runtime toggles** for MCP and
+tooling sources that you flip inside the running app under `configure → protocols`.
+
+This page covers both. If you have not yet cloned and started the agent, begin with the
+[quickstart](/developer/self-hosting/quickstart); for the trust and encryption model that
+backs these settings, see [security](/developer/self-hosting/security).
+
+<Note>
+  BunnyOS requires **node 24**, **pnpm**, and **postgres 18**. The API server runs on
+  `:3000` and the interface on `:5173` (the UI proxies `/api` to the API). Do not
+  introduce ports, services, or environment variables beyond the ones documented here.
+</Note>
+
+## Environment variables
+
+All three variables below are **required**. Copy the example file and fill them in before
+pushing the schema or starting either process:
+
+```bash
+cp .env.example .env
+```
+
+| var | required | what it does |
+|---|---|---|
+| `DATABASE_URL` | yes | Postgres connection string. All persistent state, users, chats, actions, protocol toggles, memory, and encrypted secrets, lives in Postgres. |
+| `SESSION_SECRET` | yes | A random string of **at least 16 characters**. Signs the session cookie and encrypts stored API keys and wallet OAuth tokens at rest. See below. |
+| `BASE_PATH` | yes | The base path the interface is served under. Use `/` for local dev. |
+
+<Tip>
+  Generate a strong `SESSION_SECRET` with a single command, for example
+  `openssl rand -base64 32`. Treat it like a production credential, never commit it,
+  and keep it stable across restarts.
+</Tip>
+
+### DATABASE_URL
+
+`DATABASE_URL` points the agent at your Postgres 18 instance. The monorepo's
+`@workspace/db` package owns the schema; after setting the variable you push it with:
+
+```bash
+pnpm --filter @workspace/db run push
+```
+
+Because **all persistent state lives in Postgres**, this connection string is the single
+source of truth for everything the agent remembers between restarts.
+
+### SESSION_SECRET
+
+`SESSION_SECRET` does double duty: it signs the session cookie and it encrypts stored API
+keys and wallet OAuth tokens at rest, so sensitive values are never written to Postgres in
+plaintext. The full derivation (signed sessions and AES-256-GCM at-rest encryption) is
+covered in [security](/developer/self-hosting/security).
+
+#### What rotating SESSION_SECRET costs
+
+<Warning>
+  **Rotating `SESSION_SECRET` logs everyone out and orphans existing encrypted rows.**
+  Existing session cookies were signed with the old key and will no longer verify, and
+  previously encrypted API keys and wallet OAuth tokens can no longer be decrypted with
+  the new key.
+</Warning>
+
+In practice that means a rotation is not a free operation. After changing the value:
+
+- Every user must sign in again (their old session cookie is now invalid).
+- Stored secrets encrypted under the old key become unreadable. Each affected user will
+  need to re-enter their API keys and re-authorize their wallet connection.
+
+Choose the value once, store it securely, and keep it stable. Only rotate it deliberately
+, for example if you believe the secret has leaked, and accept that you are forcing a
+full re-authentication and re-keying pass. For the full encryption and session model,
+see [security](/developer/self-hosting/security).
+
+### BASE_PATH
+
+`BASE_PATH` is the path prefix the interface is served under. For local development set it
+to `/` and visit the UI at `localhost:5173`. Change it only if you mount the interface
+under a sub-path behind a reverse proxy.
+
+## MCP and tooling sources
+
+BunnyOS speaks **MCP** natively and ships a first-party tool library on top of it. Each
+source is exposed to the agent as a catalog of tools, and each one is an independent
+**toggle** you control at runtime.
+
+In the monorepo, the interface (`@workspace/interface`) and the API server
+(`@workspace/api-server`) sit alongside the database package (`@workspace/db`) and the
+shared `lib/*` packages, where the per-source tool libraries and integrations live. The
+result is that turning a source on or off is a runtime setting, not a code change.
+
+| source | what it gives the agent | key required |
+|---|---|---|
+| **Base account MCP** | Wallet, balances, portfolio, sends, swaps, and EIP-5792 batched calls. | yes |
+| **Moralis** | Multi-chain EVM history, token balances and USD values, NFTs, DeFi positions, and trending tokens. | yes |
+| **CoinGecko** | Token quotes, listings, metadata, and on-chain DEX pairs. | yes |
+| **GoPlus** | Token security and risk checks. | no |
+| **DeFi Llama** | TVL, yield pools, stablecoin flows, and DEX volumes. | no |
+| **Bankr** | Recent token launches. | yes |
+| **Morpho MCP** | Lending markets and vault data. | yes |
+
+### Toggling sources
+
+The MCP and tooling system is the fourth of the four systems that compose BunnyOS. Each
+source is a toggle in **`configure → protocols`**:
+
+<Steps>
+  <Step title="Open the configure screen">
+    In the terminal UI, open a `configure` tab. Configure screens are isolated contexts
+    like any other tab, so you can keep one open while you work.
+  </Step>
+  <Step title="Go to protocols">
+    Switch to the `protocols` section. Every MCP and tooling source listed above appears
+    here with its own toggle.
+  </Step>
+  <Step title="Flip a source on or off">
+    Toggle a source off and its tools **disappear from the agent's catalog**: the agent
+    can no longer call them in chat or in scanners. Toggle it back on to restore them.
+  </Step>
+</Steps>
+
+<Note>
+  Toggling is per-source and takes effect for the agent's tool catalog. This is the same
+  catalog the chat agent and the autonomous scanners draw from, so disabling a source
+  removes its capabilities everywhere at once.
+</Note>
+
+### Which sources need keys
+
+Most sources require credentials, but two are usable with no key at all:
+
+<CardGroup cols={2}>
+  <Card title="No key required" icon="unlock">
+    **GoPlus** (token security and risk checks) and **DeFi Llama** (TVL, yield pools,
+    stablecoin flows, DEX volumes) work without any API key. You can toggle them on
+    immediately.
+  </Card>
+  <Card title="Key required" icon="key">
+    **Base account MCP**, **Moralis**, **CoinGecko**, **Bankr**, and **Morpho MCP**
+    require credentials. Provide each source's key before enabling it so its tools work.
+  </Card>
+</CardGroup>
+
+<Tip>
+  Keys you enter are encrypted at rest, never persisted in plaintext. For how that
+  encryption works, see [security](/developer/self-hosting/security).
+</Tip>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Quickstart" icon="rocket" href="/developer/self-hosting/quickstart">
+    Clone, install, push the schema, and run the API and UI.
+  </Card>
+  <Card title="Security model" icon="shield" href="/developer/self-hosting/security">
+    How sessions are signed, how secrets are encrypted, and why no keys live on the system.
+  </Card>
+  <Card title="Self-hosting overview" icon="server" href="/developer/self-hosting/overview">
+    The four systems and how the open-source agent fits together.
+  </Card>
+</CardGroup>
