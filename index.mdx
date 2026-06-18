@@ -5,14 +5,19 @@ mode: frame
 ---
 
 <div data-product-guide-index className="flex w-full flex-col gap-8 max-w-5xl mx-auto px-4 md:px-8 lg:px-12 py-10 lg:gap-14 lg:py-16">
-  <div className="flex max-w-[540px] flex-col gap-2 self-center text-center">
-    <h1 className="text-[30px] font-medium leading-9 tracking-tight text-gray-900 dark:text-gray-50">
-      BunnyOS
-    </h1>
+  <div className="flex max-w-[600px] flex-col items-center gap-4 self-center text-center">
+    <img src="/logo/light.png" alt="BunnyOS" className="block h-14 w-auto dark:hidden" />
+    <img src="/logo/dark.png" alt="BunnyOS" className="hidden h-14 w-auto dark:block" />
     <p className="text-balance text-base leading-relaxed tracking-tight text-gray-600 dark:text-gray-400">
       Your autonomous DeFi agent on Base. Chat to research tokens, trade creator keys and perps, and automate it all, non-custodially.
     </p>
   </div>
+
+  <img
+    src="/images/app/terminal-chat.png"
+    alt="The BunnyOS terminal with the agent chat open, researching ETH and preparing a swap"
+    className="w-full rounded-2xl border border-border shadow-sm shadow-gray-950/5 dark:shadow-black/20"
+  />
 
   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
     <Card
