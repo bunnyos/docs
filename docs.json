@@ -154,23 +154,7 @@
       {
         "tab": "Whitepaper",
         "icon": "scroll-text",
-        "groups": [
-          {
-            "group": "Whitepaper",
-            "icon": "file-text",
-            "expanded": true,
-            "pages": [
-              "whitepaper/abstract",
-              "whitepaper/introduction",
-              "whitepaper/architecture",
-              "whitepaper/bunny-exchange",
-              "whitepaper/tokenomics",
-              "whitepaper/security",
-              "whitepaper/roadmap",
-              "whitepaper/disclaimers"
-            ]
-          }
-        ]
+        "href": "https://bunnyos.ai/litepaper"
       }
     ]
   },
