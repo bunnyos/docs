@@ -1,9 +1,9 @@
 ---
 title: "Select AI provider & model"
-description: "Choose which AI model powers the Bunny agent."
+description: "Choose which AI model powers the agent."
 ---
 
-The Bunny agent runs on an AI model, and you choose which provider and model it uses. You make this choice on the **Configure** page, in the **services** tab.
+The agent runs on an AI model, and you choose which provider and model it uses. You make this choice on the **Configure** page, in the **services** tab.
 
 <Note>
 This tab is for when you bring your own provider keys. If bunnyCompute is handling your AI for you, you do not need to set a provider here. See [Managed data or your own keys](/user/getting-started/data-and-keys).
@@ -24,20 +24,20 @@ The **inference provider** picker lists every provider you can run on. Pick one.
 | venice | [venice.ai/settings/api](https://venice.ai/settings/api) |
 | economyos (virtuals protocol) | [compute.virtuals.io](https://compute.virtuals.io) |
 
-You add each provider's key in the **api** tab, then come back here to pick the provider. See [Bring your own API keys](/user/configure/api-keys).
+You add each provider's key right on its row in the **services** tab, then pick the provider. See [Bring your own API keys](/user/configure/api-keys).
 
 <Tip>
-The provider list may grow over time. Whatever is listed is what BunnyOS currently supports.
+The provider list may grow over time. Whatever is listed is what bunnyOS currently supports.
 </Tip>
 
 ## Choosing a provider and model
 
 <Steps>
   <Step title="Add a key">
-    In the **api** tab, add a key for the provider you want to use.
+    In the **services** tab, add a key for the provider you want to use on its row.
   </Step>
   <Step title="Pick the provider">
-    In the **llm** tab, select your provider under **inference provider**. Only one provider is active at a time.
+    In the same **services** tab, select your provider under **inference provider**. Only one provider is active at a time.
   </Step>
   <Step title="Pick a model">
     Open the **model** picker and choose a model (see below).
@@ -54,7 +54,7 @@ If no key is set yet for the provider, the picker prompts you to set an API key 
 
 <AccordionGroup>
   <Accordion title="venice and economyos">
-    The Bunny agent needs a model that can use tools so it can act, not just chat. On **venice** and **economyos**, make sure the model you pick supports tool calling.
+    The agent needs a model that can use tools so it can act, not just chat. On **venice** and **economyos**, make sure the model you pick supports tool calling.
   </Accordion>
 </AccordionGroup>
 

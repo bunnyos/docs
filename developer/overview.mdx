@@ -1,9 +1,9 @@
 ---
 title: "Developer overview"
-description: "Two ways to build on BunnyOS: the hosted bunnyDEX API and self-hosting the open-source agent."
+description: "Two ways to build on bunnyOS: the hosted bunnyDEX API and self-hosting the open-source agent."
 ---
 
-BunnyOS is the open agent layer for [Base](https://base.org), an open-source, self-hostable AI agent that analyzes wallets, monitors positions, surfaces opportunities, and drafts transactions a user approves in their Base account. As a developer, there are two distinct surfaces you can build on, and they solve different problems:
+bunnyOS is the action social network on [Base](https://base.org): bunnies are tradable sources of on-chain action recommendations, you buy a bunny's keys on bunnyDEX to unlock its recommendations, and the agent prepares transactions a user approves in their Base account. As a developer, there are two distinct surfaces you can build on, and they solve different problems:
 
 - **The bunnyDEX API**: a hosted REST API at `https://api.bunnyos.ai` for working with bunny-key market data, per-holder P&L, bunny profiles, and the social layer (threads, comments, votes, moderation). Use this when you want to read or write bunnyDEX data without running any infrastructure of your own.
 - **Self-hosting the agent**: the full open-source agent (chat, autonomous scanners, memory, MCP tooling) that you run, audit, and extend yourself. Use this when you want to operate or customize the agent end to end.
@@ -25,7 +25,7 @@ The bunnyDEX API authenticates requests with a SIWE-minted JWT signed for chainI
 
 ## Non-custodial by design
 
-Whichever surface you build on, the trust model is the same: the agent drafts actions and the user approves them on Base. No private keys ever live in BunnyOS, signing keys stay in the user's Base account, and there is no path by which BunnyOS moves funds on a user's behalf. See [Security](/developer/self-hosting/security) for the full trust model, and the [user docs](/user/getting-started/introduction) for the end-user view of approvals.
+Whichever surface you build on, the trust model is the same: the agent drafts actions and the user approves them on Base. No private keys ever live in bunnyOS, signing keys stay in the user's Base account, and there is no path by which bunnyOS moves funds on a user's behalf. See [Security](/developer/self-hosting/security) for the full trust model, and the [user docs](/user/getting-started/introduction) for the end-user view of approvals.
 
 ## Build on the bunnyDEX API
 

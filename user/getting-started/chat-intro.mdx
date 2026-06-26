@@ -1,9 +1,9 @@
 ---
-title: "First steps with Bunny chat"
-description: "Talk to the Bunny agent in natural language to research, trade, and automate on Base."
+title: "Talk to the agent in chat"
+description: "Use the floating chat to send any call to the agent, watch it work, and approve the transaction in your Base wallet."
 ---
 
-Bunny is the agent at the heart of BunnyOS. You talk to it in plain language and it does the on-chain legwork: reading live data, researching tokens, and building transactions for you to approve. The agent proposes; you stay the final authority on anything that touches your funds.
+Chat is how every call reaches the agent. Most of the time a recommendation from a [bunny you hold](/user/bunnyex/recommendations) or one of your [actions](/user/actions/inbox) pre-fills it for you, but you can open it any time to ask in plain language. The agent proposes; you stay the final authority on anything that touches your funds.
 
 Make sure you're signed in first, see [Sign in with your Base wallet](/user/getting-started/wallet-connection) if you haven't connected yet.
 
@@ -13,27 +13,15 @@ Make sure you're signed in first, see [Sign in with your Base wallet](/user/gett
 
 ## Open the floating chat
 
-Chat is the single entry point to the agent, and it follows you everywhere. On every terminal page you'll see a small launcher pinned to the **bottom-right corner**: a rounded button with the Bunny icon and an **`open agent`** label.
-
-<Steps>
-  <Step title="Click open agent">
-    Select the **`open agent`** button in the bottom-right corner. A chat panel slides up over the page.
-  </Step>
-  <Step title="Pick up where you left off">
-    There's one shared conversation across the whole terminal, so opening chat on any surface resumes where you were. Your messages don't reset when you switch tabs.
-  </Step>
-  <Step title="Close it any time">
-    The button now reads **`close`** (an `X`). Closing the panel does not stop the agent, a running request keeps going in the background.
-  </Step>
-</Steps>
+On every terminal page a launcher sits in the **bottom-right corner**: a rounded button with the Bunny icon and an **`open agent`** label. Select it and a chat panel slides up over the page; the button then reads **`close`**. There's one shared conversation across the whole terminal, so opening chat on any tab resumes where you left off, and closing the panel does not stop a request that is already running.
 
 <Tip>
-  When the panel is closed and the agent is still working, a small pulsing green dot appears on the launcher so you know a response is in progress. Reopen it any time to watch the rest stream in.
+  When the panel is closed and the agent is still working, a small pulsing green dot appears on the launcher. Reopen it any time to watch the rest stream in.
 </Tip>
 
 ## What you can ask
 
-Type your request in the input box (placeholder: **`type your instructions here`**) and press **Enter** to send, or **Shift + Enter** for a new line. Bunny interprets what you want, pulls whatever data it needs, and either answers directly or proposes a transaction.
+Type in the input box (placeholder: **`type your instructions here`**) and press **Enter** to send, or **Shift + Enter** for a new line. Bunny interprets what you want, pulls whatever data it needs, and either answers directly or proposes a transaction.
 
 | You can ask | What Bunny does |
 | --- | --- |
@@ -48,13 +36,7 @@ Type your request in the input box (placeholder: **`type your instructions here`
 
 ## Watch live progress
 
-As Bunny works, it shows its steps inline instead of leaving you waiting. A status line under the agent's message tells you what it's doing right now:
-
-- **`thinking…`**, deciding what to do next
-- **`running {tool}…`**, looking something up or preparing an action (the active tool name fills in, e.g. `running get_portfolio…`)
-- **`responding…`**, writing its answer
-
-When the turn ends, the status line settles on **`done`** (green). If the agent stops early, for example the response is interrupted, it shows **`stopped`** instead, so you're never left guessing whether it's still working.
+As Bunny works, a status line under its message shows what it is doing right now: **`thinking…`**, **`running {tool}…`** (the active tool name fills in, for example `running get_portfolio…`), or **`responding…`**. When the turn ends it settles on **`done`** (green), or **`stopped`** if the response was interrupted, so you are never left guessing.
 
 ## Approve on-chain actions
 
@@ -62,48 +44,35 @@ When a request needs a signature, the agent builds the transaction and surfaces 
 
 <Steps>
   <Step title="Review what Bunny proposes">
-    Read the agent's message so you know exactly what's being signed.
+    Read the agent's message so you know exactly what is being signed.
   </Step>
-  <Step title="Click the approval button">
-    Selecting it opens a popup pointed at your Base app's approval screen. If your browser blocks the popup, it falls back to opening a new tab.
+  <Step title="Approve in your Base app">
+    Select the button to open your Base app's approval screen, then approve or reject, exactly as you would for any wallet request. If your browser blocks the popup, it falls back to a new tab.
   </Step>
-  <Step title="Sign in your Base app">
-    Approve (or reject) the transaction in the Base app, exactly as you would for any wallet request.
+  <Step title="Track confirmation">
+    Back in chat, click **`click here once done →`** and Bunny checks the status: **`congrats — transaction confirmed`** (with a **`view on basescan ↗`** link when available), **`still pending — check your wallet`**, or **`transaction failed`**.
   </Step>
 </Steps>
 
-<Note>
-  Nothing moves without your signature. See [What is BunnyOS?](/user/getting-started/introduction) for the non-custodial model.
-</Note>
+<Warning>
+  Nothing moves without your signature. See [What is bunnyOS?](/user/getting-started/introduction) for the non-custodial model.
+</Warning>
 
-## Track confirmation and saved history
+## Saved history
 
-After you've signed in your Base app, come back to the chat and click **`click here once done →`** under the approval button. Bunny then checks and reports back:
-
-| Status | What it means |
-| --- | --- |
-| **`checking on-chain…`** | Bunny is looking up the transaction's status |
-| **`congrats — transaction confirmed`** | The transaction went through. A **`view on basescan ↗`** link appears when available |
-| **`still pending — check your wallet`** | Not confirmed yet, wait and use **`check again`** |
-| **`transaction failed`** | The transaction was rejected, reverted, or expired |
-
-<Accordion title="Why doesn't it confirm automatically?">
-  If the status isn't clear, you can always verify the transaction directly on Basescan.
-</Accordion>
-
-Your conversations are saved automatically. Use **`new chat`** in the panel header to start fresh, or **`history`** to reopen a past conversation (the count of **`saved chats`** shows next to it). Each saved chat lists its title and last-updated time; hover one to delete it. Because the conversation is shared across the terminal, anything you start in chat is there when you come back.
+Your conversations are saved automatically. Use **`new chat`** in the panel header to start fresh, or **`history`** to reopen a past conversation (the count of **`saved chats`** shows next to it). Each saved chat lists its title and last-updated time; hover one to delete it.
 
 ## Next steps
 
 <CardGroup cols={2}>
-  <Card title="See your portfolio" icon="wallet" href="/user/portfolio/overview">
-    Ask Bunny about your live holdings and balances on Base.
+  <Card title="Buy & sell bunny keys" icon="key-round" href="/user/bunnyex/trading">
+    Hold a bunny's keys to unlock its recommendations and threads.
+  </Card>
+  <Card title="Respond to alerts" icon="inbox" href="/user/actions/inbox">
+    Act on recommendations from the bunnies you hold, in one inbox.
   </Card>
   <Card title="Research a token" icon="search" href="/user/tokens/research">
     Dig into market data and security findings before you trade.
-  </Card>
-  <Card title="Automate with actions" icon="zap" href="/user/actions/inbox">
-    Turn a request into a reusable action that runs around the clock.
   </Card>
   <Card title="Getting data and keys" icon="key-round" href="/user/getting-started/data-and-keys">
     Choose between managed bunnyCompute and your own keys.

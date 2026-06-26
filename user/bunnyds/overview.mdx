@@ -1,9 +1,9 @@
 ---
 title: "bunnyCompute: data & AI, ready to go"
-description: "Turn on bunnyCompute to run BunnyOS data and AI through the managed gateway, billed to your wallet in USDC."
+description: "Turn on bunnyCompute to run bunnyOS data and AI through the managed gateway, billed to your wallet in USDC."
 ---
 
-bunnyCompute lets you use the full BunnyOS terminal without setting up any API keys of your own. When it's on, BunnyOS routes the agent's market data, token security, and AI through its **managed gateway**, and usage is metered against your wallet in USDC on Base. There's nothing to install: turn it on, connect your wallet, approve a spending allowance, and the agent is ready.
+bunnyCompute lets you use the full bunnyOS terminal without setting up any API keys of your own. When it's on, bunnyOS routes the agent's market data, token security, and AI through its **managed gateway**, and usage is metered against your wallet in USDC on Base. There's nothing to install: turn it on, connect your wallet, approve a spending allowance, and the agent is ready.
 
 <Note>
   bunnyCompute only charges once metering is enabled on the gateway. Until then it runs free and no allowance is needed. See [Spending & billing](/user/bunnyds/spending).
@@ -11,21 +11,20 @@ bunnyCompute lets you use the full BunnyOS terminal without setting up any API k
 
 ## What you get when bunnyCompute is on
 
-With bunnyCompute active, BunnyOS supplies what the agent needs to read markets and reason, with no personal keys required:
+With bunnyCompute active, bunnyOS supplies what the agent needs to read markets and reason, with no personal keys required:
 
 | Capability | What it covers |
 | --- | --- |
 | Market & token data | Prices, markets, trending, and on-chain pool data |
-| Portfolio & wallet data | Your holdings and wallet reads for the portfolio dashboard |
 | Token security | Risk and rug checks on Base tokens |
 | AI | The agent's chat and reasoning, on the managed model |
 
 <Note>
-  A few providers still use your own key even with bunnyCompute on. If a data source on the **configure** page keeps its **set api** button while bunnyCompute is active, paste a key there to enable it. See [Configuration: API keys](/user/configure/api-keys).
+  While bunnyCompute is on, the data sources it covers (such as coingecko, moralis, and gmgn) show **powered by bunnyCompute** on the **configure** page instead of a **set api** button, so there's nothing to paste. See [Configuration: services](/user/configure/services).
 </Note>
 
 <Note>
-  While bunnyCompute is on, the AI-provider and model controls in the **configure** tab are greyed out, because BunnyOS supplies the model for you.
+  While bunnyCompute is on, the inference-provider and model controls on the **services** tab are hidden, because bunnyOS supplies the model for you. Turn bunnyCompute off to bring your own provider and keys.
 </Note>
 
 ## The bunny compute services page
@@ -79,7 +78,7 @@ Turning bunnyCompute **off** means you bring your own keys instead. For when to 
   <Card title="Spending & billing" icon="wallet" href="/user/bunnyds/spending">
     Approve a USDC allowance and read your live billing figures.
   </Card>
-  <Card title="Configuration: API keys" icon="key" href="/user/configure/api-keys">
+  <Card title="Configuration: services" icon="key" href="/user/configure/services">
     Bring your own providers and keys instead of the managed gateway.
   </Card>
 </CardGroup>

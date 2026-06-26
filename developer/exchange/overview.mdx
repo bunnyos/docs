@@ -18,7 +18,7 @@ https://api.bunnyos.ai
 Every path in this documentation is relative to that base URL. For example, the SIWE nonce endpoint is `GET https://api.bunnyos.ai/auth/nonce`.
 
 <Note>
-  All sign-in (SIWE) messages **must** use `chainId` **8453** (Base mainnet). Requests signed for any other chain are rejected at the verify step before the signature is even checked.
+  All sign-in (SIWE) messages **must** declare `chainId` **8453** (Base mainnet). A message signed for any other chain is rejected by `/auth/verify` with an "Unexpected chain" error.
 </Note>
 
 ## What the API provides

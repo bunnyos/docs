@@ -117,7 +117,7 @@ The bunnyDEX API uses conventional HTTP status codes. Authentication and authori
 | --- | --- | --- |
 | `200` | OK | Successful read or write. |
 | `204` | No Content | Successful `DELETE` of a moderator or ban (may also return an empty body). |
-| `400` | Bad Request | Invalid params (for example a thread `limit` above 200) or a malformed body. |
+| `400` | Bad Request | Invalid params (for example an out-of-range `limit`) or a malformed body. |
 | `401` | Unauthorized | Missing, expired, or invalid JWT, or a sign-in that failed verification (see [Why a verify can fail](#why-a-verify-can-fail)). |
 | `403` | Forbidden | Authenticated but not permitted, for example a non-key-holder posting to a thread (`BunnyOsForbiddenError`). |
 | `404` | Not Found | Bunny unknown to bunnyOS (no profile created), or an unknown post or comment. |
@@ -205,7 +205,7 @@ curl -X POST https://api.bunnyos.ai/auth/api-keys \
 
 ### List, rotate, and revoke
 
-`GET /auth/api-keys` returns the metadata array under the `apiKeys` field, never the secret. Each entry carries `id`, `name`, `prefix`, `createdAt`, `lastUsedAt`, `expiresAt`, `expired`, `revokedAt`, and `revoked`. Use the `prefix` to recognize a key without ever seeing its secret.
+`GET /auth/api-keys` returns your keys' metadata, never the secret. Each entry carries `id`, `name`, `prefix`, `createdAt`, `lastUsedAt`, `expiresAt`, `expired`, `revokedAt`, and `revoked`. Use the `prefix` to recognize a key without ever seeing its secret.
 
 ```bash
 curl https://api.bunnyos.ai/auth/api-keys \

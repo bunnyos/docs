@@ -13,10 +13,10 @@ The builder's left rail lists your actions in two groups:
 
 | Group | What it is |
 | --- | --- |
-| **Native Actions** | A starter pack that ships with BunnyOS, ready to use out of the box: **yield finder**, **trending tokens**, and **daily summary**. |
+| **Native Actions** | A starter pack that ships with bunnyOS, ready to use out of the box: **yield finder**, **trending tokens**, and **daily summary**. |
 | **Custom Actions** | Actions you write yourself, or import. |
 
-Native Actions come pre-written and run by default. You can switch one on or off, but you can't edit its instructions, schedule, or tools in place, and you can't delete it. To change one, open it and use **save as custom copy**: BunnyOS creates an editable duplicate under Custom Actions and leaves the original intact. Each row shows a status dot (green when enabled), how often it runs, how many tools it can use, and when it last ran.
+Native Actions come pre-written and ship switched off, ready for you to turn on. You can switch one on or off, but you can't edit its instructions, schedule, or tools in place, and you can't delete it. To change one, open it and use **save as custom copy**: bunnyOS creates an editable duplicate under Custom Actions and leaves the original intact. Each row shows a status dot (green when enabled), how often it runs, how many tools it can use, and when it last ran.
 
 <Note>
   A Native Action can only be paused, not deleted. If you don't want one running, just switch it off; it stays in the list for later.
@@ -58,7 +58,7 @@ Native Actions come pre-written and run by default. You can switch one on or off
 
 ## Limit what an action can do
 
-The **tools** section controls which tools an action may call. Tools are grouped by category, and the list reflects whichever services you have enabled in [Configure, Services](/user/configure/services). If the list is empty, enable some services there first.
+The **tools** section controls which tools an action may call. Tools are grouped by the service they belong to, and the list reflects whichever services you have enabled in [Configure, Services](/user/configure/services). If the list is empty, enable some services there first.
 
 - Leave the **all** switch on to let the action use every available tool.
 - Turn **all** off to pick exactly what it can use. Use a group's **all** / **none** toggle to flip a whole group, or click individual tool chips to enable just the ones you want. Hover a chip to see what the tool does.
@@ -75,7 +75,7 @@ Every action is screened before it reaches your inbox. This is always on and can
 
 ## Enable it and test with Run now
 
-A saved action does nothing until it's switched on. Use the **enabled / paused** switch at the top of the editor to turn it on; once enabled, BunnyOS runs it automatically on its schedule.
+A saved action does nothing until it's switched on. Use the **enabled / paused** switch at the top of the editor to turn it on; once enabled, bunnyOS runs it automatically on its schedule.
 
 Before trusting a new action to the schedule, test it with **Run now**. This runs the action immediately and shows a summary of what happened: its status and any alerts or recommendations it posted, or a "no findings" note if nothing met your conditions. Anything it posts lands in your inbox just like a scheduled run. To avoid duplicate posts, an action skips anything that repeats its own recent findings, so a clean test run with no new findings is normal and expected.
 

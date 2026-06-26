@@ -3,9 +3,9 @@ title: "Bring your own API keys"
 description: "Add your own provider keys, or let bunnyCompute handle it for you."
 ---
 
-By default, BunnyOS handles your data lookups and AI model for you, so you never have to deal with a provider key. Each managed row is **managed by bunnyCompute. turn it off to bring your own keys.** If you would rather run on your own accounts, turn that off and add your own keys instead. For when to choose each, see [Managed data or your own keys](/user/getting-started/data-and-keys).
+By default, bunnyOS handles your data lookups and AI model for you, so you never have to deal with a provider key. While bunnyCompute is on, data and inference rows show a **powered by bunnyCompute** badge and there is nothing for you to add. If you would rather run on your own accounts, turn bunnyCompute off on its own page and add your own keys instead. For when to choose each, see [Managed data or your own keys](/user/getting-started/data-and-keys).
 
-You manage keys under **Configure**, in the **Services** tab. With the managed option off, a key field appears for each data source and AI provider. Your AI provider key is required before the model list will load, and a CoinGecko key is required before pricing and token lookups will work. The rest are optional and turn on extra data sources. For what each source covers, see [Services](/user/configure/services); to pick your AI provider and model, see [Select AI provider and model](/user/configure/llm).
+You manage keys under **Configure**, in the **Services** tab. With bunnyCompute off, an inference provider section and a **set api** button on each data row appear. Your inference provider key is required before the model list will load, and a CoinGecko key is required before pricing and token lookups will work. The rest are optional and turn on extra data sources. For what each source covers, see [Services](/user/configure/services); to pick your inference provider and model, see [Select AI provider and model](/user/configure/llm).
 
 <Note>
 A data source returns results only when both its key is set and the matching service is turned on. Adding a key on its own does not turn the source on. See [Services](/user/configure/services).
@@ -20,13 +20,13 @@ Pick one AI provider, then add the data keys you want. These are the on-screen l
 - **openrouter** is the default. Grab a key at openrouter.ai/keys and add about $1 in credits, which covers thousands of agent turns on cheaper models.
 - **surplus intelligence** is an alternative provider. Paste your buyer key from surplusintelligence.ai.
 - **venice** is a privacy-first option. Paste your key from venice.ai, then choose a model that supports tool calling.
-- **economyos (virtuals)** uses Virtuals compute. Paste your Virtuals key from compute.virtuals.io, then choose a model that supports tool calling.
+- **economyos (virtuals protocol)** uses Virtuals compute. Paste your Virtuals key from compute.virtuals.io, then choose a model that supports tool calling.
 
 After adding a provider key, pick that provider and a model in the same Services tab. See [Select AI provider and model](/user/configure/llm).
 
 **Data keys:**
 
-- **coingecko** is **required**. BunnyOS uses it for token pricing, market data, and discovery. The free Demo tier needs no card.
+- **coingecko** is **required**. bunnyOS uses it for token pricing, market data, and discovery. The free Demo tier needs no card.
 - **moralis** unlocks wallet history, NFTs, DeFi positions, and token data across chains. The free tier is enough to start.
 - **gmgn** is **optional**. It unlocks read-only meme and degen intel such as trending tokens, token security, and wallet P&L. After adding the key, enable gmgn in the **Services** tab.
 
@@ -49,7 +49,7 @@ Adding and removing keys is simple. Each service row has a **set api** button.
   </Step>
 </Steps>
 
-For your safety, BunnyOS never shows a full key back to you, only a masked version. In some setups a key may already be in place for you by whoever runs the app; in that case there is nothing for you to add.
+For your safety, bunnyOS never shows a full key back to you, only a masked version. In some setups a key may already be in place for you by whoever runs the app; in that case there is nothing for you to add.
 
 <AccordionGroup>
   <Accordion title="The model list is empty" icon="circle-help">

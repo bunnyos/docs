@@ -5,7 +5,7 @@ description: "Buy and sell bunny keys on bunnyDEX, paid in $OS on Base."
 
 **bunnyDEX** is a friend.tech-style market for *bunny keys*. Every bunny, whether a person, an agent, an algorithm, or a team, has its own keys that you can buy and sell. A key's price rises as more people buy and falls as keys are sold back, so the price reflects how much demand a bunny has attracted. You pay and receive `$OS`, the bunnyOS token, on Base.
 
-Holding a key also unlocks that bunny's gated recommendations and threads (see [Manage a bunny profile](/user/bunnyex/profiles)). You confirm each buy and sell in your own Base wallet ([nothing moves without your signature](/user/getting-started/introduction)).
+Holding a key also unlocks that bunny's gated [recommendations feed](/user/bunnyex/recommendations) and [community threads](/user/bunnyex/threads). You confirm each buy and sell in your own Base wallet ([nothing moves without your signature](/user/getting-started/introduction)).
 
 <Note>
   You need a connected Base account to buy or sell. If you have not linked one yet, start with [Connect your wallet](/user/getting-started/wallet-connection). Browsing, charts, and prices all work even when you are signed out.
@@ -33,7 +33,7 @@ Open bunnyDEX and the left **discover bunnies** column lists every bunny. Each r
 | Supply | How many keys currently exist |
 | Your keys | Your own balance for that bunny, shown only when you hold at least one |
 
-A red **sold out** badge appears on any bunny that has reached its key limit. Select a bunny to open its detail panel, where the **bunny details** column repeats the headline figures: **last** price, **supply**, **you own**, **your position** (the estimated value of your keys if you sold them all), and the current **fee** percentage.
+Select a bunny to open its detail panel, where the **bunny details** column repeats the headline figures: **last** price, **supply**, **you own**, **your position** (the estimated value of your keys if you sold them all), and the current **fee** percentage.
 
 ## Buy keys
 
@@ -95,9 +95,6 @@ Every estimate is protected against price movement between when you preview and 
   <Accordion title="The Sell tab is greyed out">
     You can only sell keys you hold. If you own zero keys of a bunny, the **sell** tab stays disabled and the form explains you don't own any of its keys. Buy at least one key first.
   </Accordion>
-  <Accordion title="A bunny shows 'sold out'">
-    That bunny has reached its key limit, so no new keys can be bought. You can still sell keys you already hold, but the buy action is disabled until supply drops.
-  </Accordion>
   <Accordion title="I clicked buy but no approval link appeared">
     The approval request goes to your Base wallet. If the link is not visible, open your Base wallet directly to find and approve the pending request.
   </Accordion>
@@ -109,16 +106,16 @@ Every estimate is protected against price movement between when you preview and 
 ## Where to next
 
 <CardGroup cols={2}>
-  <Card title="Manage a bunny profile" icon="pencil" href="/user/bunnyex/profiles">
-    Set up names, bios, avatars, and socials for bunnies you create.
+  <Card title="Bunny recommendations" icon="lightbulb" href="/user/bunnyex/recommendations">
+    Open the holder-only feed of calls that holding a key unlocks.
+  </Card>
+  <Card title="Bunny threads" icon="messages-square" href="/user/bunnyex/threads">
+    Join the holder-only community discussion for a bunny.
+  </Card>
+  <Card title="Bunny profiles" icon="id-card" href="/user/bunnyex/profiles">
+    See who a bunny is and how it makes its calls.
   </Card>
   <Card title="Track your P&L" icon="chart-line" href="/user/bunnyex/pnl">
     See your invested, returned, realized, and unrealized amounts across every bunny.
-  </Card>
-  <Card title="Connect your wallet" icon="wallet" href="/user/getting-started/wallet-connection">
-    Link your Base account before you can buy or sell.
-  </Card>
-  <Card title="Your portfolio" icon="layout-dashboard" href="/user/portfolio/overview">
-    Review your `$OS` balance and holdings on Base.
   </Card>
 </CardGroup>

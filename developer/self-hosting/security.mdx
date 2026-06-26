@@ -3,17 +3,17 @@ title: "Security model"
 description: "No private keys on the system, encryption at rest, and responsible disclosure."
 ---
 
-BunnyOS is designed so that the agent layer is open and auditable, while the part that actually moves money stays out of its reach. The agent can read, reason, and draft, but it cannot sign. Signing lives in your Base account, and every onchain action is an approval *you* make in Base's own UI. This page explains the guarantees the self-hosted stack makes, the cryptography behind stored secrets, how to report vulnerabilities, and what remains your responsibility as the operator.
+bunnyOS is designed so that the agent layer is open and auditable, while the part that actually moves money stays out of its reach. The agent can read, reason, and draft, but it cannot sign. Signing lives in your Base account, and every onchain action is an approval *you* make in Base's own UI. This page explains the guarantees the self-hosted stack makes, the cryptography behind stored secrets, how to report vulnerabilities, and what remains your responsibility as the operator.
 
 <Note>
-  Because BunnyOS is open-source ([AGPL-3.0](https://github.com/bunnyos/base-agent)), you can audit every claim on this page in the source. Nothing here depends on trusting a hosted operator, the cost and the code both live with whoever runs it.
+  Because bunnyOS is open-source ([AGPL-3.0](https://github.com/bunnyos/base-agent)), you can audit every claim on this page in the source. Nothing here depends on trusting a hosted operator, the cost and the code both live with whoever runs it.
 </Note>
 
 ## No private keys on the system
 
-The single most important property of the BunnyOS security model is that **your signing keys never touch the system**.
+The single most important property of the bunnyOS security model is that **your signing keys never touch the system**.
 
-- Your private keys live in your **Base account**, never in the BunnyOS database, environment, or process memory.
+- Your private keys live in your **Base account**, never in the bunnyOS database, environment, or process memory.
 - The agent has **no write capability of its own**. It cannot sign, broadcast, or move funds.
 - When an action needs to happen onchain, the agent can only ask your Base account to **draft a transaction**: which you then **approve in Base's UI**.
 
@@ -40,16 +40,16 @@ This separation also shapes the [Action system](/developer/self-hosting/overview
 
 ## Encryption at rest and signed sessions
 
-BunnyOS does store some sensitive values, third-party API keys you configure, and the OAuth tokens for your wallet connection. These are never written in plaintext. The cryptography is derived entirely from a single secret you control: `SESSION_SECRET`.
+bunnyOS does store some sensitive values, third-party API keys you configure, and the OAuth tokens for your wallet connection. These are never written in plaintext. The cryptography is derived entirely from a single secret you control: `SESSION_SECRET`.
 
 ### How the key material is derived
 
-`SESSION_SECRET` (a random string of **16 characters or more**, set in your environment) is run through **HKDF** to derive two domain-separated keys:
+`SESSION_SECRET` (a random string of **16 characters or more**, set in your environment) is the single root of trust behind two domain-separated keys:
 
 - A **cookie HMAC key** that signs session cookies.
-- An **at-rest AES-256-GCM key** that encrypts stored secrets.
+- An **at-rest AES-256-GCM key**, derived from `SESSION_SECRET` via **HKDF**, that encrypts stored secrets.
 
-Because both keys are derived from `SESSION_SECRET`, the two concerns share one root of trust but never share key material.
+Because both keys are derived from `SESSION_SECRET` but are domain-separated, the two concerns share one root of trust yet never share key material: leaking a session cookie cannot reveal stored data.
 
 | Protected value | Mechanism | Notes |
 |---|---|---|
@@ -71,7 +71,7 @@ Encryption at rest means a leaked database dump or backup does not hand an attac
 
 ## Responsible disclosure
 
-If you find a security issue in BunnyOS, please report it privately.
+If you find a security issue in bunnyOS, please report it privately.
 
 <Steps>
   <Step title="Do not open a public issue">
@@ -87,7 +87,7 @@ If you find a security issue in BunnyOS, please report it privately.
 
 ## Operational disclaimer
 
-BunnyOS is **experimental software**, and self-hosting puts the operational security in your hands. The cryptographic guarantees above are necessary but not sufficient on their own.
+bunnyOS is **experimental software**, and self-hosting puts the operational security in your hands. The cryptographic guarantees above are necessary but not sufficient on their own.
 
 Before interacting with onchain systems through the agent:
 
@@ -97,7 +97,7 @@ Before interacting with onchain systems through the agent:
 - **Protect `SESSION_SECRET` and `DATABASE_URL`** like the credentials they are, they gate your encrypted secrets and your data.
 
 <Warning>
-  **You are responsible for your own wallets and approvals.** No part of the BunnyOS stack can sign for you, and no part can undo an approval you make in your Base account. Self-hosting means you also own the security of the environment it runs in.
+  **You are responsible for your own wallets and approvals.** No part of the bunnyOS stack can sign for you, and no part can undo an approval you make in your Base account. Self-hosting means you also own the security of the environment it runs in.
 </Warning>
 
 ## Related pages

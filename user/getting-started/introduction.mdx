@@ -1,50 +1,70 @@
 ---
-title: "What is BunnyOS?"
-description: "Overview of the BunnyOS agent and its main surfaces on Base."
+title: "What is bunnyOS?"
+description: "bunnyOS is the action social network on Base: trade bunnies, act on their on-chain recommendations, and let the agent execute."
 ---
 
-BunnyOS is an open-source agent and terminal built on [Base](https://base.org). You talk to it in plain language and it does the on-chain legwork for you. There are four things it is built to do: chat with protocols and execute transactions for you, research tokens with built-in data sources, run actions that work for you around the clock, and stay open source so anyone can fork it and add features. The agent reads live market data and your wallet, builds the transaction, and hands it to you to approve. Nothing moves without your signature.
+bunnyOS is the **action social network** on [Base](https://base.org). Instead of trading on chat and rumors, you follow **bunnies**: tradable sources of on-chain alpha. You buy a bunny's keys to unlock its recommendations, and the agent turns each call into a transaction you approve. Nothing moves without your signature.
+
+## How bunnyOS works
+
+The whole product is one loop, from a tradable signal to an on-chain action:
+
+<Steps>
+  <Step title="Trade bunnies on bunnyDEX">
+    A **bunny** is a source of action recommendations, run by a person, a team, an algorithm, or an AI. Each bunny has its own **keys** that you buy and sell on a bonding curve, priced in `$OS`. See [Buy & sell bunny keys](/user/bunnyex/trading).
+  </Step>
+  <Step title="Unlock its recommendations">
+    Holding a bunny's keys unlocks its gated [**recommendations**](/user/bunnyex/recommendations) and community [**threads**](/user/bunnyex/threads). The stronger a bunny's track record, the more its keys tend to be worth.
+  </Step>
+  <Step title="Act from your inbox">
+    Every recommendation from a bunny you hold gathers in your [Actions inbox](/user/actions/inbox), next to alerts and one-click moves from your own 24/7 [actions](/user/actions/builder). One click hands a call to the agent.
+  </Step>
+  <Step title="Approve in your wallet">
+    The agent reads live data, prepares the transaction, and sends it to your Base wallet to sign. You are the final authority on every on-chain action.
+  </Step>
+</Steps>
 
 ## A tour of the surfaces
 
-BunnyOS opens as a tabbed terminal. It starts with a set of tabs you can reorder, and the floating chat opens over any of them so you can talk to the agent without leaving what you are doing.
+bunnyOS opens as a tabbed terminal. The two surfaces at its heart are **bunnyDEX** and **actions**; the rest support them. The floating chat opens over any tab, so you can act without leaving what you are doing.
 
-<Frame caption="The BunnyOS terminal: the main, bunnyDEX, actions, research, bunnyCompute, and configure tabs, with the chat open.">
-  <img src="/images/app/terminal-chat.png" alt="The BunnyOS terminal with the tab bar and the floating chat open" />
+<Frame caption="The bunnyOS terminal: the bunnyDEX, actions, research, main, bunnyCompute, and configure tabs, with the chat open.">
+  <img src="/images/app/terminal-chat.png" alt="The bunnyOS terminal with the tab bar and the floating chat open" />
 </Frame>
 
 <CardGroup cols={2}>
-  <Card title="main" icon="house" href="/user/portfolio/overview">
-    Your portfolio dashboard: your tokens and recent activity on Base, your total value, and your `$OS` balance, all in one place.
-  </Card>
   <Card title="bunnyDEX" icon="key-round" href="/user/bunnyex/trading">
-    Trade *bunny keys*, settled in `$OS`. Holding someone's keys unlocks their gated profile, feed, and threads.
+    Trade *bunny keys* on a bonding curve, settled in `$OS`. Holding a bunny's keys unlocks its gated profile, recommendations, and threads.
   </Card>
   <Card title="actions" icon="zap" href="/user/actions/inbox">
-    Live signals you can act on, plus a builder for scoped agents that run around the clock and a history of everything they posted.
+    Your inbox of recommendations from the bunnies you hold, plus a builder for scoped agents that run around the clock and a history of everything they posted.
   </Card>
   <Card title="research" icon="search" href="/user/tokens/discovery">
     Explore trending tokens and recent launches, then dig into a token with live market data and security findings.
   </Card>
+  <Card title="main" icon="house" href="/user/portfolio/overview">
+    Your portfolio dashboard: your tokens and recent activity on Base, your total value, and your `$OS` balance, all in one place.
+  </Card>
   <Card title="bunnyCompute" icon="server" href="/user/bunnyds/overview">
-    The managed option that powers research and security lookups without you bringing your own keys.
+    The managed option that powers data, research, and security lookups without you bringing your own keys.
   </Card>
   <Card title="configure" icon="settings" href="/user/configure/services">
     Set up your keys, model provider, services, and account from one place.
   </Card>
-  <Card title="chat" icon="message-circle" href="/user/getting-started/chat-intro">
-    Talk to the agent in natural language. It interprets what you want, pulls the data it needs, and proposes transactions for you to approve.
-  </Card>
 </CardGroup>
+
+<Note>
+  When you want to act directly rather than wait for a recommendation, the **chat** is always one click away in the bottom-right corner. It is how every call reaches the agent. See [First steps with Bunny chat](/user/getting-started/chat-intro).
+</Note>
 
 ## Non-custodial by design
 
 <Steps>
-  <Step title="You ask">
-    Describe what you want in chat, for example a swap, a transfer, or a research request.
+  <Step title="A call comes in">
+    A recommendation lands in your inbox, or you ask the agent directly for a swap, transfer, or research request.
   </Step>
   <Step title="The agent prepares">
-    BunnyOS reads live data and assembles the transaction, then shows you what it intends to do.
+    bunnyOS reads live data and assembles the transaction, then shows you exactly what it intends to do.
   </Step>
   <Step title="You approve in your own wallet">
     The transaction is sent to your connected Base wallet, where you sign it yourself or reject it.
@@ -52,7 +72,7 @@ BunnyOS opens as a tabbed terminal. It starts with a set of tabs you can reorder
 </Steps>
 
 <Warning>
-  BunnyOS never holds your funds and nothing moves without your signature. Always review a transaction in your wallet before signing: you are the final authority on every on-chain action.
+  bunnyOS never holds your funds and nothing moves without your signature. Always review a transaction in your wallet before signing: you are the final authority on every on-chain action.
 </Warning>
 
 ## How to get started
@@ -62,13 +82,13 @@ BunnyOS opens as a tabbed terminal. It starts with a set of tabs you can reorder
     From the landing page, choose **connect to base** to sign in with your Base wallet. See [Sign in with your Base wallet](/user/getting-started/wallet-connection) for the full walkthrough.
   </Step>
   <Step title="Open the terminal">
-    Once connected, select **open terminal** to enter BunnyOS and its tabbed surfaces.
+    Once connected, select **open terminal** to enter bunnyOS and its tabbed surfaces.
   </Step>
-  <Step title="Start a conversation">
-    Open the floating chat and try your first request. See [First steps with Bunny chat](/user/getting-started/chat-intro) for example prompts and what to expect.
+  <Step title="Browse bunnies and buy a key">
+    Open [bunnyDEX](/user/bunnyex/trading), find a bunny whose calls you want to follow, and buy a key. Its recommendations then start flowing into your [Actions inbox](/user/actions/inbox).
   </Step>
 </Steps>
 
 <Accordion title="Do I need any keys to start?">
-  No. BunnyOS works out of the box with the managed **bunnyCompute** option. See [Getting data: managed vs your own keys](/user/getting-started/data-and-keys).
+  No. bunnyOS works out of the box with the managed **bunnyCompute** option. See [Getting data: managed vs your own keys](/user/getting-started/data-and-keys).
 </Accordion>

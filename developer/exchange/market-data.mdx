@@ -3,7 +3,7 @@ title: "Market Data"
 description: "Read bunny-key listings, price candles, trade history, and profit-and-loss."
 ---
 
-The bunnyDEX REST API exposes the read side of the marketplace: the list of creators (bunnies), per-key price history, the global trade tape, and a caller's profit-and-loss ledger. These endpoints power dashboards, bots, and analytics without ever touching a private key.
+The bunnyDEX REST API exposes the read side of the marketplace: the list of bunnies, per-key price history, the global trade tape, and a caller's profit-and-loss ledger. These endpoints power dashboards, bots, and analytics without ever touching a private key.
 
 <Note>
 **Reads, not trades.** Buying and selling bunny keys happens **on-chain**, against the bonding-curve contract on **Base mainnet (chainId `8453`)**, not through this REST API. The endpoints on this page are read-only market and account data. See [Authentication](/developer/exchange/authentication) for how to mint a JWT and [bunnyDEX API overview](/developer/exchange/overview) for the full picture.
@@ -28,9 +28,9 @@ Reads accept an optional JWT or `x-api-key`; P&L endpoints require a JWT because
 | `/exchange/bunnies/{id}/pnl` | `GET` | JWT required |
 | `/exchange/portfolio/pnl` | `GET` | JWT required |
 
-## Listing creators (bunnies)
+## Listing bunnies
 
-A "bunny" is a creator whose keys trade on the bonding curve. Each bunny is identified by an on-chain id (its token id) and may also have a bunnyOS-hosted profile.
+A bunny is a tradable source of on-chain action recommendations: a person, team, algorithm, or AI whose keys trade on the bonding curve. Each bunny is identified by an on-chain id (its token id) and may also have a bunnyOS-hosted profile.
 
 | Endpoint | Method | Auth |
 | --- | --- | --- |
@@ -61,11 +61,8 @@ A bunny can exist **on-chain** (its keys trade) before anyone creates a bunnyOS 
 
 | Param | Required | Notes |
 | --- | --- | --- |
-| `interval` | Yes | One of `1m`, `5m`, `15m`, `1h`, `4h`, `1d`, `1w`. |
-| `limit` | No | `1`-`1000`. Defaults to unlimited (capped at 1000). |
-| `from` | No | ISO datetime lower bound. |
-| `to` | No | ISO datetime upper bound. |
-| `fill` | No | Boolean; fill gaps in the series. |
+| `interval` | No | One of `1m`, `5m`, `15m`, `1h`, `4h`, `1d`, `1w`. Defaults to `1h`. An unrecognized value is a `400`. |
+| `limit` | No | `1`-`1000`. Out-of-range values are a `400`. |
 
 ### Response
 
@@ -93,7 +90,7 @@ curl "https://api.bunnyos.ai/exchange/bunnies/42/candles?interval=1h&limit=200"
 ```
 
 <Warning>
-`open`, `high`, `low`, `close`, and `volumeValue` are wei decimal strings (see [token units](#bonding-curve-context--token-units) below). `interval` is required, omitting it is an error. `limit` is clamped to `1000`.
+`open`, `high`, `low`, `close`, and `volumeValue` are **raw wei decimal strings** in the smallest unit of the `$OS` token (see [token units](#bonding-curve-context--token-units) below); convert them with `formatUnits` using the OS token's decimals. `volumeKeys` is a count of keys. `interval` is optional and defaults to `1h`; an unrecognized value is a `400`.
 </Warning>
 
 ## Trade history (the trade tape)
@@ -118,12 +115,12 @@ curl "https://api.bunnyos.ai/exchange/bunnies/42/candles?interval=1h&limit=200"
   "bunnyId": "42",
   "transactions": [
     {
-      "pricePerKey": "1150000000000000",
+      "side": "buy",
       "amount": "3",
+      "pricePerKey": "1150000000000000",
       "total": "3450000000000000",
-      "timestamp": "2026-06-16T12:31:04Z",
       "trader": "0xabc...",
-      "side": "buy"
+      "timestamp": "2026-06-16T12:31:04Z"
     }
   ],
   "nextCursor": "eyJ...",
@@ -152,7 +149,7 @@ curl "https://api.bunnyos.ai/exchange/bunnies/42/transactions?limit=100&cursor=e
 </Steps>
 
 <Note>
-`pricePerKey` and `total` are wei decimal strings; `amount` is a count of keys. `side` distinguishes buys from sells. This is the public tape, so it works anonymously.
+`pricePerKey` and `total` are **raw wei decimal strings** in the smallest unit of the `$OS` token; `amount` is a count of keys. `side` distinguishes buys from sells. This is the public tape, so it works anonymously.
 </Note>
 
 ## Profit & loss (P&L)
@@ -182,6 +179,8 @@ curl https://api.bunnyos.ai/exchange/bunnies/42/pnl \
 }
 ```
 
+This endpoint requires a valid JWT. Without one it returns `401` (the credential is missing or expired); it does not fall back to an anonymous ledger.
+
 ### Portfolio P&L
 
 `GET /exchange/portfolio/pnl` aggregates across every bunny you hold and adds `totals`.
@@ -193,6 +192,12 @@ curl https://api.bunnyos.ai/exchange/portfolio/pnl \
 
 ```json
 {
+  "totals": {
+    "costBasis": "5000000000000000",
+    "realizedPnl": "200000000000000",
+    "unrealizedPnl": "1500000000000000",
+    "totalPnl": "1700000000000000"
+  },
   "bunnies": [
     {
       "bunnyId": "42",
@@ -202,13 +207,7 @@ curl https://api.bunnyos.ai/exchange/portfolio/pnl \
       "unrealizedPnl": "1500000000000000",
       "totalPnl": "1700000000000000"
     }
-  ],
-  "totals": {
-    "costBasis": "5000000000000000",
-    "realizedPnl": "200000000000000",
-    "unrealizedPnl": "1500000000000000",
-    "totalPnl": "1700000000000000"
-  }
+  ]
 }
 ```
 
@@ -222,11 +221,11 @@ The P&L ledger is built around **cost basis**, which is a more precise concept t
 - **`totalPnl`** combines both: `realizedPnl + unrealizedPnl`.
 
 <Tip>
-If you only track gross invested and gross returned, you will misattribute gains across partial exits. Use `costBasis` together with `realizedPnl` and `unrealizedPnl` to reconcile a position correctly. Every field except `balance` is a wei decimal string.
+If you only track gross invested and gross returned, you will misattribute gains across partial exits. Use `costBasis` together with `realizedPnl` and `unrealizedPnl` to reconcile a position correctly. Every value field except `balance` is a **raw wei decimal string** in the smallest unit of the `$OS` token; `balance` is a count of keys.
 </Tip>
 
 <Warning>
-**No JWT, no P&L.** P&L has no anonymous form. Without a valid JWT you get no position ledger, so calling code should treat the account as **`connected: false`** and prompt the user to sign in rather than rendering zeroed numbers as if they were real. (Optional-auth reads instead retry anonymously; see [Authentication](/developer/exchange/authentication).)
+**No JWT, no P&L.** P&L has no anonymous form. Without a valid JWT these endpoints return **`401`** rather than a ledger, so calling code should prompt the user to sign in rather than rendering zeroed numbers as if they were real. (Optional-auth reads instead retry anonymously; see [Authentication](/developer/exchange/authentication).)
 </Warning>
 
 ## Bonding-curve context & token units
@@ -240,18 +239,9 @@ Key prices on bunnyOS are set by a **bonding curve** on Base: each successive ke
 Two unit conventions matter throughout:
 
 1. **`amount` / `balance` / `volumeKeys`** are **counts of keys**: small integers.
-2. **All price and value fields** (`open`/`high`/`low`/`close`, `volumeValue`, `pricePerKey`, `total`, `costBasis`, `realizedPnl`, `unrealizedPnl`, `totalPnl`) are **wei decimal strings**.
+2. **All price and value fields** (`open`/`high`/`low`/`close`, `volumeValue`, `pricePerKey`, `total`, `costBasis`, `realizedPnl`, `unrealizedPnl`, `totalPnl`) are **raw wei decimal strings** in the smallest unit of the `$OS` token (for example `"1150000000000000"`), not already-converted token amounts. To get a human `$OS` amount, run them through `formatUnits` (or divide by `10 ** decimals`) using the OS token's on-chain `decimals` (read from the `$OS` ERC-20 token contract on Base).
 
-Always wrap a wei string in `BigInt` before any arithmetic (parsing it as a `Number` loses precision), then convert to human-readable token units with big-integer math:
-
-```ts
-import { formatUnits } from "viem";
-
-// decimals from the bunnyDEX config (token-unit conversion)
-const tokenUnits = formatUnits(BigInt(weiString), decimals);
-```
-
-This wei-string convention applies to every money field the bunnyDEX API returns.
+These are strings rather than JSON numbers to preserve precision. Convert them with a decimal- or BigInt-aware library when you need exact arithmetic; the values are too large to read safely as a plain JavaScript `Number`.
 
 ### Worked example: read a bunny end to end
 

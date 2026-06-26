@@ -3,7 +3,7 @@ title: "Recommendations"
 description: "A bunny's recorded action feed: natural-language calls and display-only contract calls."
 ---
 
-Recommendations are exposed through a bunny's **actions** feed on the bunnyDEX API (`https://api.bunnyos.ai`). An action is either a natural-language note (`type: "body"`) or a recorded contract call (`type: "contract_call"`). Both appear in the "from-bunnies" feed; how a client treats them differs.
+Recommendations are exposed through a bunny's **actions** feed on the bunnyDEX API (`https://api.bunnyos.ai`). An action is either a natural-language note (`type: "body"`) or a recorded contract call (`type: "contract_call"`). Both appear in the "from bunnies" feed; how a client treats them differs.
 
 <Note>
 Every actions route requires a JWT signed for `chainId` `8453`; see [Authentication](/developer/exchange/authentication).
@@ -26,7 +26,7 @@ An action object:
 
 ```json
 {
-  "id": "action_...",
+  "id": "...",
   "bunnyId": "42",
   "type": "body",
   "body": "Consider rotating into stables before the unlock.",

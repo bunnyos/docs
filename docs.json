@@ -45,15 +45,31 @@
             "pages": [
               "user/getting-started/introduction",
               "user/getting-started/wallet-connection",
-              "user/getting-started/chat-intro",
               "user/getting-started/data-and-keys"
             ]
           },
           {
-            "group": "Portfolio",
-            "icon": "wallet",
+            "group": "bunnyDEX",
+            "icon": "key-round",
+            "expanded": true,
             "pages": [
-              "user/portfolio/overview"
+              "user/bunnyex/trading",
+              "user/bunnyex/profiles",
+              "user/bunnyex/recommendations",
+              "user/bunnyex/threads",
+              "user/bunnyex/pnl",
+              "user/bunnyex/create",
+              "user/bunnyex/claim"
+            ]
+          },
+          {
+            "group": "Actions",
+            "icon": "zap",
+            "expanded": true,
+            "pages": [
+              "user/actions/inbox",
+              "user/actions/builder",
+              "user/actions/management"
             ]
           },
           {
@@ -65,21 +81,10 @@
             ]
           },
           {
-            "group": "bunnyDEX",
-            "icon": "key-round",
+            "group": "Portfolio",
+            "icon": "wallet",
             "pages": [
-              "user/bunnyex/trading",
-              "user/bunnyex/profiles",
-              "user/bunnyex/pnl"
-            ]
-          },
-          {
-            "group": "Actions",
-            "icon": "zap",
-            "pages": [
-              "user/actions/inbox",
-              "user/actions/builder",
-              "user/actions/management"
+              "user/portfolio/overview"
             ]
           },
           {
@@ -88,6 +93,13 @@
             "pages": [
               "user/bunnyds/overview",
               "user/bunnyds/spending"
+            ]
+          },
+          {
+            "group": "Chat",
+            "icon": "message-circle",
+            "pages": [
+              "user/getting-started/chat-intro"
             ]
           },
           {

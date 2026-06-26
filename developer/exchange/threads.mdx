@@ -21,11 +21,11 @@ Every thread route requires a JWT signed for `chainId` `8453` (Base mainnet); se
 | `POST` | `/exchange/bunnies/{id}/threads/posts/{postId}/comments` | JWT |
 | `DELETE` | `/exchange/bunnies/{id}/threads/posts/{postId}/comments/{commentId}` | JWT |
 
-List endpoints accept optional `sort` (`new` or `top`), `limit`, and `offset` query params. The maximum `limit` is `200`; a larger value returns `400`. Each list response carries its items plus a `total` count.
+List endpoints accept optional `sort` (`new` or `top`, default `new`), `limit`, and `offset` query params. Each list response carries its items plus a `total` count.
 
 ```bash
 # List the newest posts for a bunny
-curl https://api.bunnyos.ai/exchange/bunnies/42/threads/posts?sort=new&limit=50 \
+curl "https://api.bunnyos.ai/exchange/bunnies/42/threads/posts?sort=new&limit=50" \
   -H "Authorization: Bearer <jwt>"
 ```
 

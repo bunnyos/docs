@@ -1,35 +1,33 @@
 ---
 title: "Configuration"
-description: "Environment variables and the toggleable protocol and tooling sources for self-hosted BunnyOS."
+description: "Environment variables and the toggleable protocol and tooling sources for self-hosted bunnyOS."
 ---
 
-BunnyOS is configured in two places: a small set of **environment variables** that the
+bunnyOS is configured in two places: a small set of **environment variables** that the
 API server and interface read at boot, and a set of **runtime toggles** for MCP and
-tooling sources that you flip inside the running app under `configure → protocols`.
+tooling sources that you flip inside the running app under `configure → services`.
 
 This page covers both. If you have not yet cloned and started the agent, begin with the
 [quickstart](/developer/self-hosting/quickstart); for the trust and encryption model that
 backs these settings, see [security](/developer/self-hosting/security).
 
 <Note>
-  BunnyOS requires **node 24**, **pnpm**, and **postgres 18**. The API server runs on
-  `:3000` and the interface on `:5173` (the UI proxies `/api` to the API). Do not
-  introduce ports, services, or environment variables beyond the ones documented here.
+  bunnyOS requires **node 24**, **pnpm**, and **postgres 18**. Both the API server and the
+  interface read the port they listen on from the `PORT` environment variable, and the
+  interface additionally requires `BASE_PATH`. Do not introduce services or environment
+  variables beyond the ones documented here.
 </Note>
 
 ## Environment variables
 
-All three variables below are **required**. Copy the example file and fill them in before
-pushing the schema or starting either process:
-
-```bash
-cp .env.example .env
-```
+All four variables below are **required** before you push the schema or start either
+process:
 
 | var | required | what it does |
 |---|---|---|
 | `DATABASE_URL` | yes | Postgres connection string. All persistent state, users, chats, actions, protocol toggles, memory, and encrypted secrets, lives in Postgres. |
 | `SESSION_SECRET` | yes | A random string of **at least 16 characters**. Signs the session cookie and encrypts stored API keys and wallet OAuth tokens at rest. See below. |
+| `PORT` | yes | The port each process listens on. Both the API server and the interface read it at boot, so set it for whichever process you are starting. |
 | `BASE_PATH` | yes | The base path the interface is served under. Use `/` for local dev. |
 
 <Tip>
@@ -85,7 +83,7 @@ under a sub-path behind a reverse proxy.
 
 ## MCP and tooling sources
 
-BunnyOS speaks **MCP** natively and ships a first-party tool library on top of it. Each
+bunnyOS speaks **MCP** natively and ships a first-party tool library on top of it. Each
 source is exposed to the agent as a catalog of tools, and each one is an independent
 **toggle** you control at runtime.
 
@@ -94,28 +92,32 @@ In the monorepo, the interface (`@workspace/interface`) and the API server
 shared `lib/*` packages, where the per-source tool libraries and integrations live. The
 result is that turning a source on or off is a runtime setting, not a code change.
 
-| source | what it gives the agent | key required |
+This list is representative, not exhaustive: the exact set of sources is whatever the
+running API server registers, and each appears in `configure → services` with its own
+toggle. The common ones are:
+
+| source | what it gives the agent | credential |
 |---|---|---|
-| **Base account MCP** | Wallet, balances, portfolio, sends, swaps, and EIP-5792 batched calls. | yes |
-| **Moralis** | Multi-chain EVM history, token balances and USD values, NFTs, DeFi positions, and trending tokens. | yes |
-| **CoinGecko** | Token quotes, listings, metadata, and on-chain DEX pairs. | yes |
-| **GMGN** | Token security and risk checks. | yes |
-| **DeFi Llama** | TVL, yield pools, stablecoin flows, and DEX volumes. | no |
-| **Bankr** | Recent token launches. | no |
-| **Morpho MCP** | Lending markets and vault data. | no |
+| **base mcp** | Wallet, balances, portfolio, sends, swaps, and EIP-5792 batched calls. | wallet authorization (no pasted key) |
+| **moralis** | Multi-chain EVM history, token balances and USD values, NFTs, DeFi data, and metadata. | API key |
+| **coingecko** | Token prices, market listings, metadata, and on-chain DEX data. | API key |
+| **gmgn** | Token security and risk checks. | API key |
+| **defillama** | TVL, yield pools, stablecoins, and DEX volumes. | none |
+| **bankr** | Recent token launches. | none |
+| **morpho** | Lending markets and vault data. | none |
 
 ### Toggling sources
 
-The MCP and tooling system is the fourth of the four systems that compose BunnyOS. Each
-source is a toggle in **`configure → protocols`**:
+The MCP and tooling system is the fourth of the four systems that compose bunnyOS. Each
+source is a toggle in **`configure → services`**:
 
 <Steps>
   <Step title="Open the configure screen">
     In the terminal UI, open a `configure` tab. Configure screens are isolated contexts
     like any other tab, so you can keep one open while you work.
   </Step>
-  <Step title="Go to protocols">
-    Switch to the `protocols` section. Every MCP and tooling source listed above appears
+  <Step title="Go to services">
+    Switch to the `services` section. Every MCP and tooling source listed above appears
     here with its own toggle.
   </Step>
   <Step title="Flip a source on or off">
@@ -136,14 +138,15 @@ Most sources require credentials, but several are usable with no key at all:
 
 <CardGroup cols={2}>
   <Card title="No key required" icon="unlock">
-    **DeFi Llama** (TVL, yield pools, stablecoin flows, DEX volumes), **Bankr** (recent
-    token launches), and **Morpho MCP** (lending markets and vault data) work without any
-    API key. You can toggle them on immediately.
+    **defillama** (TVL, yield pools, stablecoins, DEX volumes), **bankr** (recent token
+    launches), and **morpho** (lending markets and vault data) work without any API key.
+    You can toggle them on immediately.
   </Card>
   <Card title="Key required" icon="key">
-    **Base account MCP**, **Moralis**, **CoinGecko**, and **GMGN** (token security and
-    risk checks) require credentials. Provide each source's key before enabling it so its
-    tools work.
+    **moralis**, **coingecko**, and **gmgn** (token security and risk checks) take a pasted
+    API key. Set it from the source's row in `configure → services` before enabling it so
+    its tools work. **base mcp** needs no pasted key but does require you to authorize your
+    Base wallet.
   </Card>
 </CardGroup>
 
