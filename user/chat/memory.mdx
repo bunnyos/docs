@@ -1,0 +1,89 @@
+---
+title: Personalize bunny with memory
+description: Give bunny a single free-form note about you that it reads on every request, so it personalizes its help without you repeating yourself.
+---
+
+Every conversation with bunny starts fresh. Memory is the one thing that carries over: a single free-form note about you that bunny reads on every request. Write it once, and bunny personalizes its help without you repeating yourself each time.
+
+<Frame caption="The memory note in Settings">
+  <img src="/images/app/memory.png" alt="The memory settings area with a text box and save and revert buttons" />
+</Frame>
+
+## What memory is
+
+Memory is one text box in **Settings**. Whatever you put in it is added to the start of every request, so bunny always knows it. It works with plain sentences, and markdown is fine too if you like headings or bullet points.
+
+Think of it as standing instructions to an assistant, not a database. You are telling bunny how to help you, not filing away records to look up later.
+
+<Note>
+  Memory is optional. You can leave it empty and bunny still works normally.
+</Note>
+
+## Edit and save your note
+
+<Steps>
+  <Step title="Open the memory area in Settings">
+    Go to **Settings** and open the **Memory** section.
+  </Step>
+  <Step title="Write or edit your note">
+    Type in the text box. Use plain sentences or markdown, whatever feels natural.
+  </Step>
+  <Step title="Save or revert">
+    Your changes are not saved as you type. Select **Save** to keep them, or **Revert** to discard your edits and go back to the last saved version.
+  </Step>
+</Steps>
+
+## What to put in it
+
+Good memory notes tell bunny your preferences, your context, and the things it cannot figure out on its own. A few examples:
+
+| Add this | For example |
+| --- | --- |
+| How you like bunny to respond | "Keep answers short and skip the preamble." |
+| Your timezone or location | "I'm on Pacific time. Assume that when I mention scheduling." |
+| A recurring task | "Every Monday I write a team update. Help me outline it." |
+| Context bunny can't look up | "I'm planning a move to Denver in March." |
+
+<Tip>
+  Keep it current. As a project wraps up or a preference changes, edit the note and select **Save** so bunny stays in step with you.
+</Tip>
+
+<Warning>
+  Memory is for context, not secrets. Never paste passwords, private keys, or anything you would not want read back to you. bunny reads this note on every request.
+</Warning>
+
+## Import and export your note
+
+You can move your note in and out as a file.
+
+- **Export** downloads your note as a markdown file, handy for a backup or to reuse elsewhere.
+- **Import** replaces your note from a file.
+
+<Warning>
+  Importing overwrites your current note. It replaces what you have rather than merging with it, so export a copy first if you want to keep the existing version.
+</Warning>
+
+## Common questions
+
+<AccordionGroup>
+  <Accordion title="Does bunny remember our past chats automatically?">
+    No. Each conversation starts fresh, and past chats are not carried into new ones. Memory is the single note that bunny always reads. Your earlier conversations are kept separately in your chat history, which you can reopen from the sidebar. See [Chat with bunny](/user/chat/chat-intro).
+  </Accordion>
+  <Accordion title="Does memory apply everywhere bunny runs?">
+    Yes. bunny reads your note on every request, whether it is running privately on your device or in the cloud.
+  </Accordion>
+</AccordionGroup>
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Chat with bunny" icon="message-circle" href="/user/chat/chat-intro">
+    The conversation, streaming replies, and your chat history.
+  </Card>
+  <Card title="Built-in tools" icon="wrench" href="/user/chat/built-in-tools">
+    The native tools bunny uses automatically, and how to turn them on or off.
+  </Card>
+  <Card title="Signing in" icon="log-in" href="/user/getting-started/sign-in">
+    How your account works and what is tied to it.
+  </Card>
+</CardGroup>

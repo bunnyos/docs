@@ -1,0 +1,80 @@
+---
+title: Run a native worker
+description: Dedicate a GPU or Apple Silicon computer to bunnyCompute full-time with the command-line native worker, and manage your worker keys.
+---
+
+A native worker is a small program you run on a computer to dedicate it to bunnyCompute full-time. It serves jobs from the moment you start it until you stop it, so it earns Carrots more steadily than the [browser worker](/user/compute/browser-worker). Use it when you have a desktop or a dedicated GPU box you want to leave running.
+
+<Frame caption="A native worker serving jobs from a terminal">
+  <img src="/images/app/native-worker.png" alt="A native worker running in a terminal, connected and serving jobs" />
+</Frame>
+
+<Note>
+  This is the most technical page in the docs — it involves typing one command into a terminal. Everything else happens in the app. If you would rather not touch a terminal, [supply compute from your browser](/user/compute/browser-worker) instead.
+</Note>
+
+## Before you start
+
+Your machine needs a few things in place:
+
+- A computer with a real GPU or Apple Silicon.
+- Node.js 18.17 or newer (version 22 or newer is recommended).
+- About 6 GB of free disk space for the model.
+- Ollama installed, from [ollama.com/download](https://ollama.com/download). The worker starts it and downloads the model for you.
+
+## Get a worker key and run it
+
+<Steps>
+  <Step title="Register the worker">
+    In the app, open **Settings** › **Workers** and select **Register a native worker**. Copy the key it shows you.
+  </Step>
+  <Step title="Run the command">
+    Open a terminal on the machine you want to dedicate, then run the command below, pasting your key in place of `<your key>`.
+  </Step>
+  <Step title="Let it warm up">
+    On the first run it installs the model, then warms up and prints its measured speed. Once it connects, it starts serving jobs. Press **Ctrl-C** to stop it at any time.
+  </Step>
+</Steps>
+
+```bash
+npx @bunnyosai/worker@latest --key <your key>
+```
+
+Add `--save-creds` to the command if you want the worker to remember the key so you do not have to paste it next time.
+
+<Warning>
+  The worker key is shown only **once**. Copy it before you leave the screen — it cannot be retrieved later. If you lose it, register a new worker.
+</Warning>
+
+## Manage your workers
+
+Everything you run shows up under **Settings** › **Workers**, including [browser workers](/user/compute/browser-worker), which appear automatically when you supply compute from a device. Each worker shows its current status:
+
+| Status | What it means |
+| --- | --- |
+| Online | Connected and serving jobs. |
+| Idle | Connected but not currently serving a job. |
+| Offline | Not connected, or the key has been revoked. |
+
+From this screen you can:
+
+- **Rename** a worker to label the machine it runs on, so you can tell your devices apart.
+- **Revoke** a worker to shut it out immediately. Revoking permanently disables that key, so the worker cannot reconnect — you would register a fresh one to bring the machine back.
+
+<Tip>
+  If a worker is ever turned away as "too slow", it is falling below the network's speed floor. Close other graphics-heavy apps on that machine, or move the worker to a faster GPU. See [how contributing works](/user/compute/overview) for the details.
+</Tip>
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="How contributing works" icon="cpu" href="/user/compute/overview">
+    Worker types, per-job earnings, the speed floor, and privacy.
+  </Card>
+  <Card title="Supply compute from your browser" icon="globe" href="/user/compute/browser-worker">
+    The one-button browser worker, with no terminal needed.
+  </Card>
+  <Card title="Your Carrots" icon="carrot" href="/user/carrots/your-carrots">
+    Check your balance, history, and top-up options.
+  </Card>
+</CardGroup>

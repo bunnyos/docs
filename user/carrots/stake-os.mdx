@@ -1,0 +1,72 @@
+---
+title: "Stake OS to earn Carrots"
+description: "Lock the $OS token on Base to earn a steady daily stream of Carrots, and learn how to stake, unstake, and withdraw."
+---
+
+Staking locks up your `$OS` token (on [Base](https://base.org)) so it earns Carrots for you. It's a hands-off way to keep your balance topped up: there's no trading and nothing to manage day to day. You need to [sign in](/user/getting-started/sign-in) and link a wallet first.
+
+<Frame caption="The Stake $OS panel, showing your staked balance, wallet balance, and rewards estimate.">
+  <img src="/images/app/stake-os.png" alt="The Stake $OS panel in bunnyOS Settings" />
+</Frame>
+
+## What you earn
+
+Staked `$OS` pays about **50 Carrots per day for every full 25,000 `$OS`** you have staked. Rewards are counted per wallet and then added up across your wallets.
+
+The reward is paid automatically once a day, at 00:00 UTC, and shows up in your [Carrots history](/user/carrots/your-carrots) as a **Staking** entry. There's no button to claim: the Carrots simply appear.
+
+<Warning>
+  Because rewards are counted in full 25,000 `$OS` buckets **per wallet**, splitting a stake across wallets can earn you less. For example, two wallets holding 15,000 `$OS` each earn nothing, while a single wallet holding 30,000 `$OS` earns one bucket, about 50 Carrots per day. To get the most, keep your stake together in one wallet.
+</Warning>
+
+## Stake your OS
+
+Open **Settings** › **Stake \$OS**, then:
+
+<Steps>
+  <Step title="Connect your Base wallet">
+    Connect (or reconnect) the Base wallet that holds your `$OS`. The panel then shows your wallet balance.
+  </Step>
+  <Step title="Enter an amount">
+    Type how much `$OS` you want to stake. The rewards estimate updates to show what that amount would earn.
+  </Step>
+  <Step title="Choose Stake">
+    Select **Stake**. If your wallet prompts you to approve first, confirm that, then confirm the stake. The transaction happens on-chain through your wallet.
+  </Step>
+</Steps>
+
+Once it confirms, your staked balance updates and your daily Carrots begin at the next 00:00 UTC payout.
+
+## Unstake and withdraw
+
+Unstaking has a **24-hour cooldown**: you request it, wait a day, then withdraw. Your `$OS` stays staked and keeps earning until you withdraw.
+
+<Steps>
+  <Step title="Request unstake">
+    In the same **Stake \$OS** panel, choose **Request unstake** for the amount you want back. This starts the 24-hour cooldown.
+  </Step>
+  <Step title="Wait 24 hours">
+    Your `$OS` is locked during the cooldown. You can't withdraw it early.
+  </Step>
+  <Step title="Withdraw">
+    After the cooldown ends, choose **Withdraw** to return the `$OS` to your Base wallet. Confirm the transaction in your wallet.
+  </Step>
+</Steps>
+
+<Note>
+  Staking, unstaking, and withdrawing all happen on-chain and need a transaction in your wallet. The daily Carrot rewards, by contrast, land automatically inside bunnyOS.
+</Note>
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Carrots & OS explained" icon="carrot" href="/user/carrots/explained">
+    What Carrots and `$OS` are, and every way to get and spend Carrots.
+  </Card>
+  <Card title="Your Carrots" icon="wallet" href="/user/carrots/your-carrots">
+    Check your balance, review your transaction history, and top up.
+  </Card>
+  <Card title="Signing in" icon="log-in" href="/user/getting-started/sign-in">
+    Sign in and link the wallet you'll stake from.
+  </Card>
+</CardGroup>

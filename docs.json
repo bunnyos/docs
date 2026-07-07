@@ -1,8 +1,8 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "almond",
-  "name": "BunnyOS",
-  "description": "Guides and references for discovering, deploying, and managing autonomous DeFi agents on BunnyOS.",
+  "name": "bunnyOS",
+  "description": "Guides for using bunnyOS: chat privately with bunny, give it tools and apps, and earn Carrots by contributing compute or staking OS.",
   "colors": {
     "primary": "#2962FF",
     "light": "#5B82FF",
@@ -25,11 +25,6 @@
           "anchor": "Home",
           "icon": "house",
           "href": "/"
-        },
-        {
-          "anchor": "GitHub",
-          "icon": "github",
-          "href": "https://github.com/bunnyos/base-agent"
         }
       ]
     },
@@ -39,116 +34,58 @@
         "icon": "book-open",
         "groups": [
           {
-            "group": "Getting Started",
+            "group": "Getting started",
             "icon": "rocket",
             "expanded": true,
             "pages": [
               "user/getting-started/introduction",
-              "user/getting-started/wallet-connection",
-              "user/getting-started/data-and-keys"
+              "user/getting-started/sign-in"
             ]
           },
           {
-            "group": "bunnyDEX",
-            "icon": "key-round",
-            "expanded": true,
-            "pages": [
-              "user/bunnyex/trading",
-              "user/bunnyex/profiles",
-              "user/bunnyex/recommendations",
-              "user/bunnyex/threads",
-              "user/bunnyex/pnl",
-              "user/bunnyex/create",
-              "user/bunnyex/claim"
-            ]
-          },
-          {
-            "group": "Actions",
-            "icon": "zap",
-            "expanded": true,
-            "pages": [
-              "user/actions/inbox",
-              "user/actions/builder",
-              "user/actions/management"
-            ]
-          },
-          {
-            "group": "Token Research",
-            "icon": "search",
-            "pages": [
-              "user/tokens/discovery",
-              "user/tokens/research"
-            ]
-          },
-          {
-            "group": "Portfolio",
-            "icon": "wallet",
-            "pages": [
-              "user/portfolio/overview"
-            ]
-          },
-          {
-            "group": "bunnyCompute",
-            "icon": "server",
-            "pages": [
-              "user/bunnyds/overview",
-              "user/bunnyds/spending"
-            ]
-          },
-          {
-            "group": "Chat",
+            "group": "Chatting with bunny",
             "icon": "message-circle",
+            "expanded": true,
             "pages": [
-              "user/getting-started/chat-intro"
+              "user/chat/chat-intro",
+              "user/chat/on-device-vs-cloud",
+              "user/chat/built-in-tools",
+              "user/chat/connectors-and-servers",
+              "user/chat/permissions",
+              "user/chat/memory"
             ]
           },
           {
-            "group": "Configuration",
-            "icon": "settings",
+            "group": "bunnyApps",
+            "icon": "layout-grid",
             "pages": [
-              "user/configure/api-keys",
-              "user/configure/llm",
-              "user/configure/services",
-              "user/configure/memory",
-              "user/configure/bunnyos-account"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "Developer",
-        "icon": "code",
-        "groups": [
-          {
-            "group": "Introduction",
-            "icon": "book-open",
-            "expanded": true,
-            "pages": [
-              "developer/overview"
+              "user/apps/app-store"
             ]
           },
           {
-            "group": "bunnyDEX API",
-            "icon": "key-round",
-            "expanded": true,
+            "group": "Community & devices",
+            "icon": "sparkles",
             "pages": [
-              "developer/exchange/overview",
-              "developer/exchange/authentication",
-              "developer/exchange/market-data",
-              "developer/exchange/profile",
-              "developer/exchange/recommendations",
-              "developer/exchange/threads"
+              "user/community/generate-images",
+              "user/community/bunny-b1"
             ]
           },
           {
-            "group": "Self-Hosting",
-            "icon": "server",
-            "expanded": true,
+            "group": "Carrots & OS",
+            "icon": "carrot",
             "pages": [
-              "developer/self-hosting/overview",
-              "developer/self-hosting/quickstart",
-              "developer/self-hosting/configuration",
-              "developer/self-hosting/security"
+              "user/carrots/explained",
+              "user/carrots/your-carrots",
+              "user/carrots/stake-os"
+            ]
+          },
+          {
+            "group": "Contribute compute",
+            "icon": "cpu",
+            "pages": [
+              "user/compute/overview",
+              "user/compute/browser-worker",
+              "user/compute/native-worker"
             ]
           }
         ]
@@ -168,8 +105,8 @@
     "links": [],
     "primary": {
       "type": "button",
-      "label": "Launch App",
-      "href": "https://bunnyos.ai"
+      "label": "Launch app",
+      "href": "https://platform.bunnyos.ai"
     }
   },
   "footer": {

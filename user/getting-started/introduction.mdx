@@ -1,94 +1,78 @@
 ---
 title: "What is bunnyOS?"
-description: "bunnyOS is the action social network on Base: trade bunnies, act on their on-chain recommendations, and let the agent execute."
+description: "bunnyOS is an AI platform where you chat with bunny, your personal agent that runs privately on your device or in the cloud, uses tools, and runs mini-apps."
 ---
 
-bunnyOS is the **action social network** on [Base](https://base.org). Instead of trading on chat and rumors, you follow **bunnies**: tradable sources of on-chain alpha. You buy a bunny's keys to unlock its recommendations, and the agent turns each call into a transaction you approve. Nothing moves without your signature.
+bunnyOS is an AI platform built around **bunny**, your personal AI agent. You chat with bunny in plain language, and it can reason, use tools, and take action for you.
 
-## How bunnyOS works
-
-The whole product is one loop, from a tradable signal to an on-chain action:
-
-<Steps>
-  <Step title="Trade bunnies on bunnyDEX">
-    A **bunny** is a source of action recommendations, run by a person, a team, an algorithm, or an AI. Each bunny has its own **keys** that you buy and sell on a bonding curve, priced in `$OS`. See [Buy & sell bunny keys](/user/bunnyex/trading).
-  </Step>
-  <Step title="Unlock its recommendations">
-    Holding a bunny's keys unlocks its gated [**recommendations**](/user/bunnyex/recommendations) and community [**threads**](/user/bunnyex/threads). The stronger a bunny's track record, the more its keys tend to be worth.
-  </Step>
-  <Step title="Act from your inbox">
-    Every recommendation from a bunny you hold gathers in your [Actions inbox](/user/actions/inbox), next to alerts and one-click moves from your own 24/7 [actions](/user/actions/builder). One click hands a call to the agent.
-  </Step>
-  <Step title="Approve in your wallet">
-    The agent reads live data, prepares the transaction, and sends it to your Base wallet to sign. You are the final authority on every on-chain action.
-  </Step>
-</Steps>
-
-## A tour of the surfaces
-
-bunnyOS opens as a tabbed terminal. The two surfaces at its heart are **bunnyDEX** and **actions**; the rest support them. The floating chat opens over any tab, so you can act without leaving what you are doing.
-
-<Frame caption="The bunnyOS terminal: the bunnyDEX, actions, research, main, bunnyCompute, and configure tabs, with the chat open.">
-  <img src="/images/app/terminal-chat.png" alt="The bunnyOS terminal with the tab bar and the floating chat open" />
+<Frame caption="The Meet bunny! welcome screen, where bunny introduces itself.">
+  <img src="/images/app/meet-bunny.png" alt="The bunnyOS welcome screen introducing bunny" />
 </Frame>
 
+<Note>
+  You sign in before you start. bunnyOS lets you sign in with a wallet, an email, or a social account. See [Signing in](/user/getting-started/sign-in).
+</Note>
+
+## Why "small models"
+
+bunny is powered by **small models**: fast, efficient AI models compact enough to run on everyday computers. They used to be too limited to be useful on their own. That has changed. Today's small models can reason, use tools, and take action, and that is exactly what makes bunny possible.
+
+Because the model is small, it can run right on your own device, not only in a distant data center. That single fact shapes everything about how bunnyOS works.
+
+## Where bunny runs
+
+bunny can run in two places, and you choose which one to use.
+
+- **On your device.** bunny runs privately on your own computer. It is free, and nothing you say leaves your machine.
+- **In the bunnyCompute cloud.** bunny runs on **bunnyCompute**, a network of GPUs supplied by other people. Each request spends Carrots.
+
+You can switch between them at any time. See [Where bunny runs](/user/chat/on-device-vs-cloud) for the full picture.
+
+## What you can do with bunny
+
+bunny is more than a chat box. You can extend what it can do, one piece at a time.
+
+- **Chat.** Have a conversation with bunny, ask questions, and get things done. See [Chat with bunny](/user/chat/chat-intro).
+- **Give it built-in tools.** bunny comes with native tools it can use on its own, and you decide which are on. See [Built-in tools](/user/chat/built-in-tools).
+- **Connect your apps and tool servers.** Link accounts like Gmail and Calendar, or connect remote tool servers, so bunny can act across them. See [Connect apps & tool servers](/user/chat/connectors-and-servers).
+- **Run mini-apps.** Launch **bunnyApps**, small purpose-built apps that run inside bunnyOS. See [bunnyApps & the App Store](/user/apps/app-store).
+
+## The economy in brief
+
+**Carrots** are the credit you spend to run bunny in the cloud. New accounts start with a one-time grant of Carrots to get going.
+
+You can also earn more. Contribute your computer's spare compute to bunnyCompute, or stake the `$OS` token, and either one earns you Carrots. See [Carrots & OS explained](/user/carrots/explained) for how it all fits together.
+
+## Take a tour
+
 <CardGroup cols={2}>
-  <Card title="bunnyDEX" icon="key-round" href="/user/bunnyex/trading">
-    Trade *bunny keys* on a bonding curve, settled in `$OS`. Holding a bunny's keys unlocks its gated profile, recommendations, and threads.
+  <Card title="Chat with bunny" icon="message-circle" href="/user/chat/chat-intro">
+    Start a conversation and see how bunny replies, remembers, and helps.
   </Card>
-  <Card title="actions" icon="zap" href="/user/actions/inbox">
-    Your inbox of recommendations from the bunnies you hold, plus a builder for scoped agents that run around the clock and a history of everything they posted.
+  <Card title="Where bunny runs" icon="cpu" href="/user/chat/on-device-vs-cloud">
+    Run bunny privately on your device or in the bunnyCompute cloud.
   </Card>
-  <Card title="research" icon="search" href="/user/tokens/discovery">
-    Explore trending tokens and recent launches, then dig into a token with live market data and security findings.
+  <Card title="bunnyApps" icon="layout-grid" href="/user/apps/app-store">
+    Browse the App Store and run mini-apps built for bunnyOS.
   </Card>
-  <Card title="main" icon="house" href="/user/portfolio/overview">
-    Your portfolio dashboard: your tokens and recent activity on Base, your total value, and your `$OS` balance, all in one place.
-  </Card>
-  <Card title="bunnyCompute" icon="server" href="/user/bunnyds/overview">
-    The managed option that powers data, research, and security lookups without you bringing your own keys.
-  </Card>
-  <Card title="configure" icon="settings" href="/user/configure/services">
-    Set up your keys, model provider, services, and account from one place.
+  <Card title="Contribute compute" icon="server" href="/user/compute/overview">
+    Share your computer's power with the network and earn Carrots.
   </Card>
 </CardGroup>
 
-<Note>
-  When you want to act directly rather than wait for a recommendation, the **chat** is always one click away in the bottom-right corner. It is how every call reaches the agent. See [First steps with Bunny chat](/user/getting-started/chat-intro).
-</Note>
+## Related pages
 
-## Non-custodial by design
-
-<Steps>
-  <Step title="A call comes in">
-    A recommendation lands in your inbox, or you ask the agent directly for a swap, transfer, or research request.
-  </Step>
-  <Step title="The agent prepares">
-    bunnyOS reads live data and assembles the transaction, then shows you exactly what it intends to do.
-  </Step>
-  <Step title="You approve in your own wallet">
-    The transaction is sent to your connected Base wallet, where you sign it yourself or reject it.
-  </Step>
-</Steps>
-
-<Warning>
-  bunnyOS never holds your funds and nothing moves without your signature. Always review a transaction in your wallet before signing: you are the final authority on every on-chain action.
-</Warning>
-
-## How to get started
-
-<Steps>
-  <Step title="Connect to Base">
-    From the landing page, choose **connect to base** to sign in with your Base wallet. See [Sign in with your Base wallet](/user/getting-started/wallet-connection) for the full walkthrough.
-  </Step>
-  <Step title="Open the terminal">
-    Once connected, select **open terminal** to enter bunnyOS and its tabbed surfaces.
-  </Step>
-  <Step title="Browse bunnies and buy a key">
-    Open [bunnyDEX](/user/bunnyex/trading), find a bunny whose calls you want to follow, and buy a key. Its recommendations then start flowing into your [Actions inbox](/user/actions/inbox).
-  </Step>
-</Steps>
-
-<Accordion title="Do I need any keys to start?">
-  No. bunnyOS works out of the box with the managed **bunnyCompute** option. See [Getting data: managed vs your own keys](/user/getting-started/data-and-keys).
-</Accordion>
+<CardGroup cols={2}>
+  <Card title="Signing in" icon="log-in" href="/user/getting-started/sign-in">
+    Sign in with a wallet, email, or social account to start using bunny.
+  </Card>
+  <Card title="Chat with bunny" icon="message-circle" href="/user/chat/chat-intro">
+    The conversation itself: composer, replies, and your chat history.
+  </Card>
+  <Card title="Carrots & OS explained" icon="carrot" href="/user/carrots/explained">
+    What Carrots and `$OS` are, and how to get and spend Carrots.
+  </Card>
+  <Card title="How contributing works" icon="server" href="/user/compute/overview">
+    Supply compute to bunnyCompute and earn Carrots for each job.
+  </Card>
+</CardGroup>

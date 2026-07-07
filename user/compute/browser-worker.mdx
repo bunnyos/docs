@@ -1,0 +1,58 @@
+---
+title: Supply compute from your browser
+description: Turn a browser tab into a bunnyCompute worker with one button and earn Carrots per job, with nothing to install.
+---
+
+The browser worker turns the tab you are in into a bunnyCompute worker. Your browser loads bunny's model and starts running other people's jobs on your computer's graphics, earning Carrots for each one. There is nothing to install.
+
+<Frame caption="The Supply Compute live card, online and earning Carrots.">
+  <img src="/images/app/supply-compute.png" alt="The Supply Compute panel showing an online status dot, uptime, jobs served, and Carrots earned." />
+</Frame>
+
+## What you need
+
+You need a recent desktop **Chrome** or **Edge**, because the worker uses your computer's graphics. Safari, Firefox, and phones generally cannot supply compute. If your browser cannot, the app tells you so and the start button stays unavailable.
+
+## Start supplying
+
+<Steps>
+  <Step title="Sign in and open the panel">
+    Sign in, then go to **Settings** › **Supply Compute**. You can also get there from the **Supply compute** button on the Carrots screen.
+  </Step>
+  <Step title="Press Start supplying">
+    Press **Start supplying**. The first time, a progress bar loads bunny's model. This can take a moment.
+  </Step>
+  <Step title="Watch the live card">
+    Once loaded, a live card shows a status dot that reads **Online** (or **Serving a job** while a request is running), an uptime clock, how many jobs you have served, and the Carrots you have earned.
+  </Step>
+</Steps>
+
+## Stop supplying
+
+Press **Stop supplying** on the live card whenever you want to end. Your worker goes offline and stops taking new jobs.
+
+<Warning>
+The browser worker runs only while that page stays open. Navigating away, closing the tab, or signing out stops it. There is no background earning, so leave the tab open for as long as you want to supply compute.
+</Warning>
+
+## About the Carrots figure
+
+The Carrot number on the live card is a running estimate for your current session. Your authoritative balance and full history live on the Carrots screen.
+
+<Tip>
+Want a worker that keeps running on a dedicated machine even when no browser is open? See [Run a native worker](/user/compute/native-worker).
+</Tip>
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="How contributing works" icon="cpu" href="/user/compute/overview">
+    Worker types, what you earn per job, and where your stats appear.
+  </Card>
+  <Card title="Run a native worker" icon="server" href="/user/compute/native-worker">
+    Set up a dedicated machine to supply compute around the clock.
+  </Card>
+  <Card title="Your Carrots" icon="carrot" href="/user/carrots/your-carrots">
+    Check your true balance, history, and top-up options.
+  </Card>
+</CardGroup>

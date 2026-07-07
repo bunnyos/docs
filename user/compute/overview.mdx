@@ -1,0 +1,68 @@
+---
+title: "How contributing works"
+description: "Contribute your computer's spare power to run small AI jobs for the bunnyCompute network and earn Carrots each time a job finishes."
+---
+
+Contributing means letting your computer run small AI jobs for other people on the [bunnyCompute](/user/chat/on-device-vs-cloud) network. Each time a job finishes, you earn [Carrots](/user/carrots/explained). It is a way to turn a spare graphics card into usage credit without buying anything.
+
+<Frame caption="The public Network Stats screen shows how busy the network is right now.">
+  <img src="/images/app/network-stats.png" alt="The bunnyOS Network Stats screen with live network activity" />
+</Frame>
+
+## Two ways to contribute
+
+You can join the network in one of two ways.
+
+- A **browser worker** needs no install. You turn it on with one button in the app, and it runs only while its page stays open. It is the quickest way to try contributing.
+- A **native worker** is a small command-line program you run on a spare machine. It runs full-time in the background, so it is the choice for a dedicated GPU computer.
+
+| | Browser worker | Native worker |
+| --- | --- | --- |
+| Install | None | A small command-line program |
+| Runs when | Only while its page is open | Full-time, in the background |
+| Best for | Trying it out on your everyday computer | A spare or dedicated GPU machine |
+
+<Tip>
+  Not sure which to pick? Start with the [browser worker](/user/compute/browser-worker) to see how it feels, then set up a [native worker](/user/compute/native-worker) if you have a machine you can leave running.
+</Tip>
+
+## How you earn
+
+A cloud request costs the person who asks for it 10 Carrots. The worker that runs the job earns 8 of those Carrots, about 80%, and the network keeps the small difference.
+
+If a job fails, the requester is refunded and no one is charged for it.
+
+Your earnings land automatically in your Carrots history as **Earned** entries. You do not claim anything or press a button to collect. See [Your Carrots](/user/carrots/your-carrots) to watch your balance and history.
+
+## Keeping the network fast
+
+To keep replies quick for everyone, the network checks how fast your device is when it joins. A device that is too slow is turned away with a "too slow" message, and a worker that keeps running slowly is dropped.
+
+If you see this, a few things help:
+
+- Use a computer with faster graphics or more memory.
+- Close other heavy apps so more power is free for jobs.
+
+## Your privacy
+
+Jobs run entirely on your own device. The network only hands out jobs and keeps score of the Carrots you earn. Your computer does the work locally, and nothing about a job lives on the network beyond that.
+
+## Where your workers show up
+
+Every worker you run, browser or native, appears under **Settings** › **Workers** with a live status, so you can see at a glance whether it is connected and busy. For managing workers and their keys, see [Run a native worker](/user/compute/native-worker).
+
+The public **Network Stats** screen shows how busy the whole network is at any moment, across everyone contributing.
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Supply compute from your browser" icon="globe" href="/user/compute/browser-worker">
+    Turn on the one-button browser worker and start earning while its page is open.
+  </Card>
+  <Card title="Run a native worker" icon="server" href="/user/compute/native-worker">
+    Set up the full-time command-line worker for a spare GPU machine and manage its keys.
+  </Card>
+  <Card title="Your Carrots" icon="carrot" href="/user/carrots/your-carrots">
+    Track your balance, see your Earned entries, and explore your top-up options.
+  </Card>
+</CardGroup>

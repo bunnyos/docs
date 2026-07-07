@@ -1,0 +1,68 @@
+---
+title: Connect apps and tool servers
+description: Give bunny extra abilities by connecting outside apps like Gmail and Google Calendar, or by adding remote MCP tool servers.
+---
+
+bunny already comes with a set of [built-in tools](/user/chat/built-in-tools). You can give it even more to work with in two ways: connect an outside app, or add a remote tool server. Both live in **Settings** and both need you to be signed in.
+
+<Frame caption="Connectors in Settings.">
+  <img src="/images/app/connectors.png" alt="The Connectors screen in bunny Settings, showing services you can switch on." />
+</Frame>
+
+<Note>
+  Whenever bunny wants to use a connector or a tool server, it asks for your approval first. See [Tool approvals](/user/chat/permissions).
+</Note>
+
+## Connect an app
+
+Connectors link bunny to apps you already use, like Gmail and Google Calendar, so it can act on them for you. Once a connector is on, you can ask bunny to read your recent emails or list your upcoming events, and it does the work in that app.
+
+<Steps>
+  <Step title="Open Connectors">
+    Go to **Settings** › **Connectors**.
+  </Step>
+  <Step title="Switch a service on">
+    Flip a service on. A popup opens its own sign-in and consent screen so you can approve access.
+  </Step>
+  <Step title="Confirm it connected">
+    When it finishes, the service shows **Connected**.
+  </Step>
+</Steps>
+
+Inside a connected app you can enable or disable its individual tools, so bunny only gets the abilities you want. To cut off access entirely, disconnect the service.
+
+## Add a tool server (MCP)
+
+An MCP server is an add-on tool server that bunny connects to over the internet. Connecting one hands bunny a fresh set of tools it did not have before. This is a more advanced option, so reach for it when someone gives you a server address to add.
+
+<Steps>
+  <Step title="Open MCP">
+    Go to **Settings** › **MCP**.
+  </Step>
+  <Step title="Add the server">
+    Choose **Add MCP server**, then give it a name and its address (a URL).
+  </Step>
+  <Step title="Sign in if needed">
+    If the server requires a login, tick **Sign in with OAuth** and complete the sign-in.
+  </Step>
+</Steps>
+
+Each server lists the tools it adds. You can toggle any server on or off, and remove servers you added. A **Base MCP** server comes pre-installed and is off by default, so switch it on if you want it.
+
+<Warning>
+  Only add tool servers you trust. A connected server can offer bunny new tools, and bunny will ask your approval before using any of them.
+</Warning>
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Tool approvals" icon="shield-check" href="/user/chat/permissions">
+    How bunny asks before it acts, and the Permissions settings.
+  </Card>
+  <Card title="Built-in tools" icon="wrench" href="/user/chat/built-in-tools">
+    The native tools bunny uses automatically, and how to turn them on or off.
+  </Card>
+  <Card title="Chat with bunny" icon="messages-square" href="/user/chat/chat-intro">
+    The conversation itself: the composer, replies, and history.
+  </Card>
+</CardGroup>
