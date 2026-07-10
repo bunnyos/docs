@@ -5,19 +5,15 @@ description: See how bunny asks before running a connected app or tool server, a
 
 When bunny wants to use a tool from a connected app or a tool server, it asks you first. You stay in control of what runs.
 
-<Frame caption="bunny asks before running an add-on tool.">
-  <img src="/images/app/tool-approval.png" alt="The tool approval prompt showing the tool name, what it will do, and the Allow once, Always allow, and Deny buttons." />
-</Frame>
-
 ## The approval prompt
 
 Before bunny runs a tool from a [connected app or tool server](/user/chat/connectors-and-servers), a prompt appears. It shows the tool's name and what it is about to do, so you can check the action before it happens.
 
 You have three choices:
 
-- **Allow once** — run the tool this one time.
-- **Always allow** — run it now and remember this tool, so bunny won't ask for it again.
-- **Deny** — cancel the action and don't run it.
+- **Allow once**: run the tool this one time.
+- **Always allow**: run it now and remember this tool, so bunny won't ask for it again.
+- **Deny**: cancel the action and don't run it.
 
 <Tip>Use **Always allow** for tools you trust and use often, like sending yourself a calendar invite. Keep **Allow once** for anything you'd rather review each time.</Tip>
 
@@ -25,15 +21,11 @@ You have three choices:
 
 Open **Settings** › **Permissions** to change how approvals work.
 
-- **Allow all tool calls** — turn this on to skip every prompt and let all tools run automatically. Turn it off to go back to being asked each time.
-- **Request timeout** — set how long bunny waits for a tool to finish before giving up on that call.
-- **Reset** your always-allowed list — clear every tool you saved with **Always allow**, so bunny asks about them again.
+- **Allow all tool calls**: turn this on to skip every prompt and let all tools run automatically. Turn it off to go back to being asked each time.
+- **Request timeout**: set how long bunny waits for a tool to finish before giving up on that call.
+- **Reset** your always-allowed list: clear every tool you saved with **Always allow**, so bunny asks about them again.
 
 <Warning>Turning on **Allow all tool calls** means bunny can use any connected tool without checking with you first. Only do this if you trust the apps and servers you've connected.</Warning>
-
-## Built-in tools don't ask
-
-The [built-in tools](/user/chat/built-in-tools) that bunny uses on its own always run without a prompt. They are not affected by these settings, and they never appear in your always-allowed list. Approvals apply only to tools from apps and servers you connect yourself.
 
 ## Related pages
 
@@ -41,7 +33,7 @@ The [built-in tools](/user/chat/built-in-tools) that bunny uses on its own alway
   <Card title="Built-in tools" icon="wrench" href="/user/chat/built-in-tools">
     The native tools bunny uses automatically, and how to turn them on or off.
   </Card>
-  <Card title="Connect apps & tool servers" icon="plug" href="/user/chat/connectors-and-servers">
+  <Card title="External connections" icon="plug" href="/user/chat/connectors-and-servers">
     Link Gmail, Calendar, and tool servers so bunny can do more for you.
   </Card>
 </CardGroup>

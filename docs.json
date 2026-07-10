@@ -51,8 +51,7 @@
               "user/chat/on-device-vs-cloud",
               "user/chat/built-in-tools",
               "user/chat/connectors-and-servers",
-              "user/chat/permissions",
-              "user/chat/memory"
+              "user/chat/permissions"
             ]
           },
           {
