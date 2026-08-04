@@ -1,84 +1,53 @@
 ---
-title: "What is bunnyOS?"
-description: "Personalized agent and decentralized inference platform powered by small models."
+title: "What is bunnyOS"
+description: "bunnyOS is a decentralized network that runs small language models, and bunny is the personal AI agent it powers inside Telegram."
 ---
 
-bunnyOS is a decentralized inference platform for **small language models**, AI compact enough to run on everyday hardware, yet capable today of reasoning, using tools, and taking action.
-
-The inference is served by **bunnyCompute**, a network of computers supplied by people around the world. Rather than route every request to a specialized data center, it spreads the work across ordinary hardware that people already own.
-
-On top of that platform runs **bunny**, your personal AI agent. You chat with it in plain language, and it handles the rest, answering questions, reasoning through a problem, using tools, and taking action for you. You decide where it runs, privately on your own device or in the cloud, and how much it can do on its own.
-
-<Frame caption="The Meet bunny! welcome screen, where bunny introduces itself.">
-  <img src="/images/app/meet-bunny.png" alt="The bunnyOS welcome screen introducing bunny" />
-</Frame>
-
-<Note>
-  You sign in before you start. bunnyOS lets you sign in with a wallet, an email, or a social account. See [Signing in](/user/getting-started/sign-in).
-</Note>
-
-## Why "small models"
-
-Small models are what make the whole platform work. Because a model this light runs on hardware people already own, bunnyCompute can serve it from a decentralized network instead of a data center, and you can run it right on your own device, private and free. Big-model AI can do neither. That is why bunnyOS is built on small models from the ground up.
-
 <Frame>
-  <img src="/images/hero/bunny-15b-model.jpeg" alt="bunny in a battle pose beside a giant 15B, the size of a small model" />
+  <img src="/images/hero/bunny-gpu-network.jpeg" alt="bunny standing in front of a network of GPUs" />
 </Frame>
 
-## Where bunny runs
+bunnyOS is a decentralized network built around **small language models**. These are AI models compact enough to run on everyday hardware. They can still reason, use tools, and get real work done.
 
-bunny can run in two places, and you choose which one to use.
+The answers are served by **bunnyCompute**, a network of machines supplied by people all over the world. Instead of routing every request to a data center, bunnyOS spreads the work across ordinary computers that people already own. Those people earn Carrots for every job their machine handles.
 
-- **On your device.** bunny runs privately on your own computer. It is free, and nothing you say leaves your machine.
-- **In the bunnyCompute cloud.** bunny runs on **bunnyCompute**, a network of computers supplied by other people. Each request spends Carrots.
+The flagship product built on that network is **bunny**, a personal AI agent that lives inside Telegram. Open [@bunnyagentbot](https://t.me/bunnyagentbot), send a message, and bunny answers.
 
-You can switch between them at any time. See [Where bunny runs](/user/chat/on-device-vs-cloud) for the full picture.
+## Why small models
 
-## What you can do with bunny
+A small model is light enough to run on a gaming GPU or an Apple Silicon laptop. That one fact changes everything about who can serve it. A frontier model needs racks of specialized hardware in a data center, so a handful of companies decide what it costs and who gets access. A small model does not.
 
-bunny is more than a chat box. You can extend what it can do, one piece at a time.
+Because the model is cheap and fast to run, the cost per answer stays low enough that everyone can chat for close to free. Machines that were sitting idle become Carrots for the people who supply them. Small is what makes both sides of that trade possible.
 
-- **Chat.** Have a conversation with bunny, ask questions, and get things done. See [Chat with bunny](/user/chat/chat-intro).
-- **Give it built-in tools.** bunny comes with native tools it can use on its own, and you decide which are on. See [Built-in tools](/user/chat/built-in-tools).
-- **Connect your apps and tool servers.** Link accounts like Gmail and Calendar, or connect remote tool servers, so bunny can act across them. See [External connections](/user/chat/connectors-and-servers).
-- **Run mini-apps.** Launch **bunnyApps**, small purpose-built apps that run inside bunnyOS. See [About bunnyApps](/user/apps/app-store).
+## What bunny can do
 
-## The economy in brief
+bunny is a full agent, not a chat box. Here is the short version, with the details on their own pages.
 
-**Carrots** are the credit you spend to run bunny in the cloud. New accounts start with a one-time grant of Carrots to get going.
+- **Chat, and remember you.** Talk to bunny like a friend who gets things done, and it saves the things worth keeping.
+- **Search the live web.** News, prices, facts from this morning, and full pages you paste in.
+- **Find places and plan travel.** Places, restaurants, hotels, and flights from live data, and longer lists of picks become a page you can share with anyone.
+- **Write documents.** Ask for a PDF or a Word document and bunny sends the file straight into the chat.
+- **Keep your calendar.** Events, reminders that ping you, and automations that run a task and message you the result.
+- **Gmail and Google Calendar integration.** Connect them once and bunny can search and summarize what is in your inbox and your calendar.
+- **Join your group chats.** Add bunny to a group and it answers when you summon it.
 
-You can also earn more. Contribute your computer's spare compute to bunnyCompute, or stake the `$OS` token, and either one earns you Carrots. See [Carrots & OS explained](/user/carrots/explained) for how it all fits together.
+## What Carrots are for
+
+Chatting runs on **free usage** that refills every day, so most people never think about cost. When usage runs out, answers spend **Carrots**, the backup credit of the bunnyCompute network. New accounts start with a grant of them, and you can earn more by supplying compute or staking `$OS`. See [Carrots and OS explained](/user/carrots/explained).
 
 ## Take a tour
 
 <CardGroup cols={2}>
-  <Card title="Chat with bunny" icon="message-circle" href="/user/chat/chat-intro">
-    Start a conversation and see how bunny replies, remembers, and helps.
+  <Card title="Start chatting" icon="message-circle" href="/user/getting-started/start-chatting">
+    Open the bot, say hello, and see what bunny does with your first message.
   </Card>
-  <Card title="Where bunny runs" icon="cpu" href="/user/chat/on-device-vs-cloud">
-    Run bunny privately on your device or in the bunnyCompute cloud.
+  <Card title="The Mini App" icon="layout-grid" href="/user/getting-started/mini-app">
+    Your control panel inside Telegram for balances, memory, and everything else.
   </Card>
-  <Card title="bunnyApps" icon="layout-grid" href="/user/apps/app-store">
-    Browse the App Store and run mini-apps built for bunnyOS.
+  <Card title="Carrots and OS explained" icon="carrot" href="/user/carrots/explained">
+    What Carrots and `$OS` are, and how to get more of them.
   </Card>
   <Card title="Contribute compute" icon="server" href="/user/compute/overview">
-    Share your computer's power with the network and earn Carrots.
-  </Card>
-</CardGroup>
-
-## Related pages
-
-<CardGroup cols={2}>
-  <Card title="Signing in" icon="log-in" href="/user/getting-started/sign-in">
-    Sign in with a wallet, email, or social account to start using bunny.
-  </Card>
-  <Card title="Chat with bunny" icon="message-circle" href="/user/chat/chat-intro">
-    The conversation itself: composer, replies, and your chat history.
-  </Card>
-  <Card title="Carrots & OS explained" icon="carrot" href="/user/carrots/explained">
-    What Carrots and `$OS` are, and how to get and spend Carrots.
-  </Card>
-  <Card title="How contributing works" icon="server" href="/user/compute/overview">
-    Supply compute to bunnyCompute and earn Carrots for each job.
+    Put your GPU to work on the network and earn Carrots per job.
   </Card>
 </CardGroup>

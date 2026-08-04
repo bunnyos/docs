@@ -1,0 +1,66 @@
+---
+title: "Calendar and automations"
+description: "bunny keeps its own calendar of events, reminders, and automations, all created by simply asking in chat."
+---
+
+bunny keeps a calendar of its own. You never fill in a form to use it. Say what you want in chat and bunny puts it in the right place, then messages you when the time comes.
+
+## The three kinds of items
+
+| Kind | What happens at the time |
+| --- | --- |
+| Event | It sits on your calendar so you can see it coming. bunny gives you a heads up as it starts. |
+| Reminder | bunny messages you in Telegram to say it is time. This is the default when you ask for something. |
+| Automation | bunny actually runs a task at that time and messages you the result, without you being there. |
+
+## Just ask in chat
+
+There is no special syntax. Talk the way you would to a person.
+
+- "remind me to call mom tomorrow at 9"
+- "put dentist on my calendar for friday 3pm"
+- "every morning summarize my day"
+- "every monday at 8, check the weather for the week and send it to me"
+
+bunny confirms what it saved and shows the time in your timezone. If you want an event rather than a reminder, say so, otherwise bunny reaches for a reminder.
+
+Anything can repeat, or not. bunny handles once, daily, weekly, monthly, and yearly.
+
+## What automations can do
+
+An automation is not just a message with a fixed body. When it fires, bunny does the task with everything it normally has. It can search the live web, pull together a list, or write you a document while you are away. Ask for a morning news digest or a weekly inbox summary, and it lands in your chat on its own.
+
+<Tip>
+Automations are the difference between bunny nudging you and bunny doing the work. If a request starts with "every morning" or "every week", you probably want one.
+</Tip>
+
+## In the Mini App
+
+Open the Mini App with `/app` to see everything laid out.
+
+- **Calendar** shows your agenda grouped by day, with each item's time, its kind, and how often it repeats. Remove anything you no longer want, and removing a repeating item stops all of its future occurrences.
+- **Automations** lists your automations with their schedules, and lets you add one with **+ New Automation** or edit an existing one. You write the task in plain language and set a **Repeats** option and a time.
+
+That screen also offers two ready-made automations you can add with a single tap, **Summarise my calendar for the day** and **Summarise my new emails from the last day**, both set to every day at 8:00 AM.
+
+## Getting the timing right
+
+Everything fires in your local time, so bunny needs to know where you are. Tell it your city once ("i'm in Lisbon") and it saves that for good. Opening the Mini App also picks up your timezone automatically.
+
+## Your Google events, side by side
+
+If you connect Google Calendar, your Google events for the next 60 days show up in the same agenda as everything bunny made for you. Anything you ask bunny to schedule goes on the bunny calendar. See [Connected apps](/user/chat/connected-apps) to hook it up.
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Connected apps" icon="link" href="/user/chat/connected-apps">
+    Connect Gmail and Google Calendar so bunny can read them.
+  </Card>
+  <Card title="Memory" icon="brain" href="/user/chat/memory">
+    What bunny remembers about you between conversations.
+  </Card>
+  <Card title="The Mini App" icon="layout-grid" href="/user/getting-started/mini-app">
+    Your control panel for calendar, automations, and everything else.
+  </Card>
+</CardGroup>

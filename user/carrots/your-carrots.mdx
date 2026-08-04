@@ -1,62 +1,72 @@
 ---
-title: Your Carrots
-description: Check your Carrot balance, read your transaction history, and find the ways to top up.
+title: "Your Carrots and usage"
+description: "Check your Carrot balance, read your history entry by entry, and see how much of your free usage is left."
 ---
 
-Your Carrots wallet is the one screen that shows how many Carrots you have and where they came from. Open it whenever you want to check your balance or review recent activity.
+Chatting draws on your free usage first and your Carrot balance after. This page shows you where to look to see what you have, what you have spent, and how much of today's usage is left.
 
-<Frame caption="The Manage Carrot screen: live balance, transaction history, and top-up options.">
-  <img src="/images/app/manage-carrot.png" alt="The Manage Carrot screen showing a Carrot balance and a list of transactions." />
-</Frame>
+## Checking your balance
 
-## Open your wallet
+There are two ways, one quick and one detailed.
 
-There are two ways to get there:
+<Steps>
+  <Step title="Ask in chat">
+    Send `/carrots` to bunny and it replies with your balance. This is the fastest check.
+  </Step>
+  <Step title="Open the Mini App">
+    Open the [Mini App](/user/getting-started/mini-app) and choose **Carrots Balance** under **Manage**. The screen leads with your balance in large type. Everything below it is your history.
+  </Step>
+</Steps>
 
-- In the sidebar, click **Menu** (shortcut Cmd/Ctrl+Y).
-- Or open **Settings** › **Manage Carrot**.
+<Note>
+Your balance belongs to your Telegram account. `/carrots` in chat and the Mini App always show the same number.
+</Note>
 
-Both open the same screen.
+## Your history
 
-## Read your balance
+Under the balance is every Carrot movement on your account, newest first. Entries are grouped by day under headers like `Today` and `Yesterday`. Each row shows what happened and when on the left, and the amount on the right. Amounts you spent are negative. Amounts you gained carry a `+`.
 
-The top of the screen shows your live Carrot balance, rounded to one decimal place. This is the number bunny draws from every time it answers a request in the cloud.
+Rows load 50 at a time. Tap **Show more** at the bottom to keep going back.
 
-<Tip>New to how Carrots work? Start with [Carrots & OS explained](/user/carrots/explained) for the big picture.</Tip>
-
-## Read your history
-
-Below the balance is your transaction history, newest first. Click load more at the bottom to see older entries. Each entry is one of these types:
-
-| Type | What it means |
+| Entry | What it means |
 | --- | --- |
-| Grant | Your one-time welcome Carrots for joining. |
-| Usage | Carrots spent on a cloud request. |
-| Earned | Carrots your worker earned for serving a job. |
-| Staking | A daily reward from `$OS` you have staked. |
-| Refund | Carrots returned when a request didn't complete. |
-| Adjustment | A manual correction to your balance. |
+| Inference | An answer you asked for, in chat or through the API |
+| Worker earning | Carrots your machine earned by answering a job for the network |
+| Refund | Carrots returned to your balance |
+| Starter grant | The one-time batch of Carrots every new account receives |
+| Stake | Your daily reward for `$OS` you have staked |
+| Adjustment | A correction to your balance |
 
-## Get more carrots
+## The Usage screen
 
-The **Get more carrots** section lists your top-up options:
+Chatting rarely touches your balance. Your free usage is spent first, and it refills every day. See [Carrots and OS explained](/user/carrots/explained) for the full spending order.
 
-- **Subscribe**: a `$4.99`/mo top-up, coming soon.
-- **Stake `$OS`**: lock the `$OS` token to earn a daily stream of Carrots.
-- **Supply compute**: run a worker and earn Carrots for each job you serve.
+Tap **Usage** under **Manage** to see where you stand.
 
-<Note>Subscribe is coming soon. In the meantime, staking and supplying compute are the two ways to keep your balance topped up.</Note>
+- **FREE DAILY USAGE** shows a **Daily allowance** row with the percentage used, a progress bar, and how long until it resets (for example `Resets in 5h`).
+- **SUBSCRIPTION** shows a **Pro quota** row the same way if you are on [bunny pro](/user/carrots/bunny-pro), along with your renewal date. If you are not subscribed, it invites you to get pro from the main menu instead.
+
+<Tip>
+Usage is always shown as a percentage. Exact Carrot amounts appear only on the **Carrots Balance** screen, in your balance and history.
+</Tip>
+
+## When you run out
+
+You do not have to watch the meter. If a message lands with nothing left to spend, bunny tells you right there in chat. The message arrives with two buttons, one to open the Mini App and one to subscribe to [bunny pro](/user/carrots/bunny-pro). For every way to earn more, see [Carrots and OS explained](/user/carrots/explained).
 
 ## Related pages
 
 <CardGroup cols={2}>
-  <Card title="Carrots & OS explained" icon="carrot" href="/user/carrots/explained">
-    What Carrots and `$OS` are, and how they fit together.
+  <Card title="Carrots and OS explained" icon="carrot" href="/user/carrots/explained">
+    What Carrots are, what `$OS` is, and how the two fit together.
   </Card>
-  <Card title="Stake OS to earn Carrots" icon="lock" href="/user/carrots/stake-os">
-    Lock `$OS` to earn a daily Carrot stream.
+  <Card title="bunny pro" icon="star" href="/user/carrots/bunny-pro">
+    Much more monthly usage and a sharper model, paid with Telegram Stars.
   </Card>
-  <Card title="How contributing works" icon="cpu" href="/user/compute/overview">
-    Earn Carrots by serving jobs from your machine.
+  <Card title="Stake OS" icon="lock" href="/user/carrots/stake-os">
+    Lock `$OS` on Base to earn a daily stream of Carrots.
+  </Card>
+  <Card title="Contribute compute" icon="cpu" href="/user/compute/overview">
+    Let your machine answer jobs for the network and earn Carrots.
   </Card>
 </CardGroup>

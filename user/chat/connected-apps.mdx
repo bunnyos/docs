@@ -1,0 +1,59 @@
+---
+title: "Connected apps"
+description: "Connect Gmail and Google Calendar so bunny can see your recent mail and upcoming events."
+---
+
+You can hook up two apps to bunny, Gmail and Google Calendar. Once connected, your recent mail and your upcoming events flow into bunny so you can ask about them in plain language.
+
+## Connect an app
+
+<Steps>
+  <Step title="Send /connect">
+    In your chat with bunny, send `/connect`. bunny asks which app you want and lists the two options.
+  </Step>
+  <Step title="Pick the app">
+    Send `/connect gmail` or `/connect googlecalendar`. bunny replies with a link.
+  </Step>
+  <Step title="Authorize with Google">
+    Tap the link. A Google sign-in and consent page opens in your browser. Sign in and approve the access it asks for.
+  </Step>
+  <Step title="Come back to the chat">
+    Return to Telegram. bunny can use the account right away, no extra step needed.
+  </Step>
+</Steps>
+
+You can also connect from the [Mini App](/user/getting-started/mini-app). On the **Inbox** screen tap **Connect Email Account**, and on the **Calendar** screen tap **Connect Google Account**. Both open the same Google page.
+
+<Tip>
+You can connect more than one account of the same kind. Add a personal and a work Gmail, or two Google Calendars, and bunny reads them all together.
+</Tip>
+
+## What you get
+
+**Gmail** flows into your bunny inbox. The last 14 days of mail from every connected account land there, searchable by sender, subject, or keyword. So you can ask things like "any new emails from my landlord?" or "summarize what came in this morning" and bunny answers from your real mail. You can also browse it on the **Inbox** screen in the Mini App.
+
+**Google Calendar** flows into your bunny calendar. Events for the next 60 days appear alongside bunny's own events, reminders, and automations, so a question like "what does my Thursday look like?" covers both. See [Calendar and automations](/user/chat/calendar-and-automations) for what bunny can put on the calendar itself.
+
+## Check what is connected
+
+Send `/connections` and bunny lists Gmail and Google Calendar with the status of each, connected or not connected. The Mini App shows the same thing per account on the **Inbox** and **Calendar** screens.
+
+## Disconnect
+
+Send `/disconnect` and pick the app, the same way you connected it. In the Mini App, tap the trash icon next to an account on the **Inbox** or **Calendar** screen.
+
+Removing an account also removes its copied mail and events from your bunny inbox and bunny calendar. Your real mailbox and your real Google Calendar are untouched. Nothing is deleted on Google's side.
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Calendar and automations" icon="calendar" href="/user/chat/calendar-and-automations">
+    Events, reminders, and tasks bunny runs for you on a schedule.
+  </Card>
+  <Card title="What bunny can do" icon="sparkles" href="/user/chat/built-in-tools">
+    Web search, places, documents, and everything else bunny reaches for.
+  </Card>
+  <Card title="The Mini App" icon="layout-grid" href="/user/getting-started/mini-app">
+    Your control panel for inbox, calendar, balances, and more.
+  </Card>
+</CardGroup>

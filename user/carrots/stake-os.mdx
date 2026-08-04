@@ -1,70 +1,80 @@
 ---
-title: "Stake OS to earn Carrots"
-description: "Lock the $OS token on Base to earn a steady daily stream of Carrots, and learn how to stake, unstake, and withdraw."
+title: "Stake OS"
+description: "Stake $OS on Base from the Mini App and earn Carrots every day, credited automatically to your bunnyOS account."
 ---
 
 <Frame>
   <img src="/images/hero/bunny-to-the-moon.jpeg" alt="bunny rocketing toward the moon" />
 </Frame>
 
-Staking locks up your `$OS` token (on [Base](https://base.org)) so it earns Carrots for you. It's a hands-off way to keep your balance topped up: there's no trading and nothing to manage day to day. You need to [sign in](/user/getting-started/sign-in) and link a wallet first.
-
-<Frame caption="The Stake $OS panel, showing your staked balance, wallet balance, and rewards estimate.">
-  <img src="/images/app/stake-os.png" alt="The Stake $OS panel in bunnyOS Settings" />
-</Frame>
+Staking locks up your `$OS` on the Base network so it earns Carrots for you. It is the hands-off way to keep your balance topped up, with no trading and nothing to manage day to day. Everything happens on the **Stake \$OS** screen in [the Mini App](/user/getting-started/mini-app).
 
 ## What you earn
 
-Staked `$OS` pays about **50 Carrots per day for every full 25,000 `$OS`** you have staked. The reward lands automatically in your [Carrots history](/user/carrots/your-carrots) as a **Staking** entry, with nothing to claim.
+Staked `$OS` earns Carrots every day. The bigger your stake, the more you earn. The **Carrots per day** row on the staking screen shows exactly what yours brings in.
 
-## Stake your OS
+The Carrots are credited automatically to your bunnyOS account and show up in [your Carrots history](/user/carrots/your-carrots) as **Stake** entries. There is nothing to claim.
 
-Open **Settings** › **Stake \$OS**, then:
+## How to stake
 
 <Steps>
-  <Step title="Connect your Base wallet">
-    Connect (or reconnect) the Base wallet that holds your `$OS`. The panel then shows your wallet balance.
+  <Step title="Open the staking screen">
+    Open the [Mini App](/user/getting-started/mini-app) and choose **Stake \$OS** under **Earn Carrots**.
   </Step>
-  <Step title="Enter an amount">
-    Type how much `$OS` you want to stake. The rewards estimate updates to show what that amount would earn.
+  <Step title="Connect your wallet">
+    Tap **Connect Wallet** and pick the wallet that holds your `$OS`. bunnyOS staking is on Base.
   </Step>
-  <Step title="Choose Stake">
-    Select **Stake**. If your wallet prompts you to approve first, confirm that, then confirm the stake. The transaction happens on-chain through your wallet.
+  <Step title="Link the wallet to your account">
+    Your wallet asks you to sign a short message. Signing is free and costs no gas. It tells bunnyOS which account to send the Carrots to, and rewards only flow to a linked wallet.
+  </Step>
+  <Step title="Enter an amount and stake">
+    Type how much `$OS` you want to stake (or tap **Max**), then tap **Stake** and confirm in your wallet. If your wallet asks for a token approval first, confirm that too, then the stake goes through.
   </Step>
 </Steps>
 
-Once it confirms, your staked balance updates and your daily Carrots begin.
+## What the screen shows
 
-## Unstake and withdraw
+| Row | What it means |
+| --- | --- |
+| **Staked** | How much `$OS` you currently have staked. |
+| **Carrots per day** | Your most recent daily reward. |
+| **Wallet balance** | The `$OS` sitting in your connected wallet, ready to stake. |
+| **Pending unstake** | `$OS` waiting out the unstake cooldown. |
+| **Network total staked** | How much everyone has staked, across the whole network. |
 
-Unstaking has a **24-hour cooldown**: you request it, wait a day, then withdraw. Your `$OS` stays staked and keeps earning until you withdraw.
+<Note>
+A brand new stake shows its first reward after the next daily credit, so **Carrots per day** may read `first credit pending` for a while. Nothing is wrong, your Carrots are on their way.
+</Note>
+
+## Unstaking
+
+Getting your `$OS` back takes two steps, with a cooldown in between.
 
 <Steps>
   <Step title="Request unstake">
-    In the same **Stake \$OS** panel, choose **Request unstake** for the amount you want back. This starts the 24-hour cooldown.
-  </Step>
-  <Step title="Wait 24 hours">
-    Your `$OS` is locked during the cooldown. You can't withdraw it early.
+    Enter the amount and tap **Request unstake**. The screen then shows a live countdown until the tokens are ready.
   </Step>
   <Step title="Withdraw">
-    After the cooldown ends, choose **Withdraw** to return the `$OS` to your Base wallet. Confirm the transaction in your wallet.
+    Once the countdown finishes, tap **Withdraw** to send the `$OS` back to your wallet. Changed your mind? Tap **Cancel** at any point while the request is open and the tokens go straight back to earning.
   </Step>
 </Steps>
 
-<Note>
-  Staking, unstaking, and withdrawing all happen on-chain and need a transaction in your wallet. The daily Carrot rewards, by contrast, land automatically inside bunnyOS.
-</Note>
+`$OS` waiting in the cooldown earns nothing, so only request an unstake when you actually want the tokens back.
+
+<Warning>
+If you unlink your wallet, your daily Carrots stop until you link a wallet again.
+</Warning>
 
 ## Related pages
 
 <CardGroup cols={2}>
-  <Card title="Carrots & OS explained" icon="carrot" href="/user/carrots/explained">
-    What Carrots and `$OS` are, and every way to get and spend Carrots.
+  <Card title="Carrots and OS explained" icon="carrot" href="/user/carrots/explained">
+    What Carrots and `$OS` are, and every way to earn and spend them.
   </Card>
-  <Card title="Your Carrots" icon="wallet" href="/user/carrots/your-carrots">
-    Check your balance, review your transaction history, and top up.
+  <Card title="Your Carrots and usage" icon="wallet" href="/user/carrots/your-carrots">
+    Check your balance and find your Stake entries.
   </Card>
-  <Card title="Signing in" icon="log-in" href="/user/getting-started/sign-in">
-    Sign in and link the wallet you'll stake from.
+  <Card title="The Mini App" icon="layout-grid" href="/user/getting-started/mini-app">
+    The control panel where staking, compute, and balances live.
   </Card>
 </CardGroup>

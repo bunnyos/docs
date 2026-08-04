@@ -1,56 +1,54 @@
 ---
-title: Built-in tools
-description: The native tools bunny uses automatically to answer better, and how to turn each one on or off.
+title: "What bunny can do"
+description: "The abilities bunny reaches for on its own, from live web search and travel picks to documents, reminders, and shareable lists."
 ---
 
-bunny comes with a handful of small built-in tools. It reaches for them on its own when a question needs one, so you get accurate answers instead of guesses.
+bunny has a set of abilities it uses without being asked. There is nothing to switch on and nothing to configure. Just say what you want in plain language, and bunny picks the right ability for the job and folds the result into its reply.
 
-<Frame caption="Turn each built-in tool on or off under Settings › Native Tools.">
-  <img src="/images/app/native-tools.png" alt="The Native Tools settings, listing each built-in tool with an on/off toggle." />
-</Frame>
+## The abilities
 
-## What the built-in tools are
-
-These tools run automatically whenever they are relevant. bunny decides when to use one, calls it, and folds the result into its reply. They are on by default and you do not have to do anything to trigger them.
-
-| Tool | What it does |
+| Ask for this | What bunny does |
 | --- | --- |
-| Date and time | Gets the current date and time, so answers about "today" or "now" stay correct. |
-| Calculator | Works out math reliably instead of estimating in its head. |
-| Web search | Searches the live web for up-to-date information. |
-| Web read | Reads a specific web page that you or bunny point it at. |
+| "what's happening with the election" | Searches the live web for news, prices, and facts from today. Every search is saved to your **Web Search** history in the Mini App. |
+| "read this and tell me the gist" plus a link | Opens the page you pasted and answers from what is actually on it. |
+| "best ramen near me", "hotels in Lisbon in May", "flights to Tokyo" | Searches live places, restaurants, hotels, and flights, with real ratings and prices. Three or more picks turn into a shareable list page. Flights link out to Google Flights. |
+| "make me a PDF of that" or "write it up as a Word doc" | Builds the document and sends it straight into the chat as a Telegram attachment. |
+| "remind me to call mom on Sunday" | Adds it to your bunny calendar as an event, reminder, or automation. See [Calendar and automations](/user/chat/calendar-and-automations). |
+| "remember that I'm allergic to shellfish" | Saves the fact for good, so you never have to repeat it. See [Memory](/user/chat/memory). |
+| "what's in my inbox today" | Reads your connected Gmail and Google Calendar, if you have hooked them up. See [Connected apps](/user/chat/connected-apps). |
+| "what's 18% of 4,320" | Works the numbers out properly instead of guessing. |
+
+## Shareable lists
+
+When bunny recommends three or more places, restaurants, hotels, or flights, it does not dump them into the chat. It builds a proper web page and sends you one line plus the link.
+
+The page is public, so you can forward it to anyone. They do not need Telegram or a bunnyOS account to open it. It is handy for planning a trip with friends, sending dinner options to the group, or keeping a shortlist you can come back to.
+
+Every list you make is also collected under **Lists** in the Mini App, so nothing gets lost in your chat history.
+
+## Sharing your location
+
+For anything "near me", bunny needs to know where you are. It sends you a one-tap **share location** button, you tap it, and the search finishes on its own.
+
+Your spot is saved, so "near me" keeps working without you sharing it every time. If it gets old, bunny asks for a fresh one. Location sharing works in private chats only, so it never happens in a group.
 
 <Note>
-Web search and web read need you to be signed in. Date and time and the calculator work either way.
+If a search was waiting on your location, bunny completes it the moment you share, usually with the list link right there in the reply.
 </Note>
-
-## Turn a tool on or off
-
-Want to keep bunny off the web, or stop it from searching? You can switch any built-in tool on or off.
-
-<Steps>
-  <Step title="Open Settings">
-    Go to **Settings** › **Native Tools**.
-  </Step>
-  <Step title="Toggle a tool">
-    Turn any tool off to stop bunny from using it, or back on to allow it again.
-  </Step>
-</Steps>
-
-<Tip>
-Leave them all on for the most capable bunny. Turn web search and web read off if you'd rather bunny answer only from what it already knows.
-</Tip>
 
 ## Related pages
 
 <CardGroup cols={2}>
-  <Card title="External connections" icon="plug" href="/user/chat/connectors-and-servers">
-    Add Gmail, Calendar, and remote tool servers for bunny to use.
+  <Card title="Calendar and automations" icon="calendar" href="/user/chat/calendar-and-automations">
+    Events, reminders, and tasks bunny runs for you on a schedule.
   </Card>
-  <Card title="Tool approvals" icon="shield-check" href="/user/chat/permissions">
-    How the approval prompt and Permissions settings work.
+  <Card title="Connected apps" icon="plug" href="/user/chat/connected-apps">
+    Hook up Gmail and Google Calendar so bunny can read them.
   </Card>
-  <Card title="Chat with bunny" icon="message-circle" href="/user/chat/chat-intro">
-    The composer, replies, history, and the sidebar.
+  <Card title="Memory" icon="brain" href="/user/chat/memory">
+    What bunny remembers about you, and how to review or erase it.
+  </Card>
+  <Card title="Chatting with bunny" icon="message-circle" href="/user/chat/chat-intro">
+    How a normal conversation with bunny works.
   </Card>
 </CardGroup>

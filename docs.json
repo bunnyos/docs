@@ -2,7 +2,7 @@
   "$schema": "https://mintlify.com/docs.json",
   "theme": "almond",
   "name": "bunnyOS",
-  "description": "Guides for using bunnyOS: chat privately with bunny, give it tools and apps, and earn Carrots by contributing compute or staking OS.",
+  "description": "Guides for bunny, the personal AI agent that lives in Telegram, and the bunnyOS network behind it. Chat, remember, research, and earn Carrots by staking OS or supplying compute.",
   "colors": {
     "primary": "#2962FF",
     "light": "#5B82FF",
@@ -39,7 +39,8 @@
             "expanded": true,
             "pages": [
               "user/getting-started/introduction",
-              "user/getting-started/sign-in"
+              "user/getting-started/start-chatting",
+              "user/getting-started/mini-app"
             ]
           },
           {
@@ -48,25 +49,11 @@
             "expanded": true,
             "pages": [
               "user/chat/chat-intro",
-              "user/chat/on-device-vs-cloud",
               "user/chat/built-in-tools",
-              "user/chat/connectors-and-servers",
-              "user/chat/permissions"
-            ]
-          },
-          {
-            "group": "bunnyApps",
-            "icon": "layout-grid",
-            "pages": [
-              "user/apps/app-store"
-            ]
-          },
-          {
-            "group": "Community & devices",
-            "icon": "sparkles",
-            "pages": [
-              "user/community/generate-images",
-              "user/community/bunny-b1"
+              "user/chat/memory",
+              "user/chat/calendar-and-automations",
+              "user/chat/connected-apps",
+              "user/chat/group-chats"
             ]
           },
           {
@@ -75,7 +62,9 @@
             "pages": [
               "user/carrots/explained",
               "user/carrots/your-carrots",
-              "user/carrots/stake-os"
+              "user/carrots/bunny-pro",
+              "user/carrots/stake-os",
+              "user/carrots/migrate-carrots"
             ]
           },
           {
@@ -83,18 +72,24 @@
             "icon": "cpu",
             "pages": [
               "user/compute/overview",
-              "user/compute/browser-worker",
               "user/compute/native-worker"
+            ]
+          },
+          {
+            "group": "Developers",
+            "icon": "code",
+            "pages": [
+              "user/developer/inference-api"
             ]
           }
         ]
-      },
-      {
-        "tab": "Whitepaper",
-        "icon": "scroll-text",
-        "href": "https://bunnyos.ai/whitepaper"
       }
     ]
+  },
+  "x-disabled-whitepaper-tab": {
+    "tab": "Whitepaper",
+    "icon": "scroll-text",
+    "href": "https://bunnyos.ai/whitepaper"
   },
   "logo": {
     "light": "/logo/light.png",
@@ -104,8 +99,8 @@
     "links": [],
     "primary": {
       "type": "button",
-      "label": "Launch app",
-      "href": "https://platform.bunnyos.ai"
+      "label": "Chat with bunny",
+      "href": "https://t.me/bunnyagentbot"
     }
   },
   "footer": {

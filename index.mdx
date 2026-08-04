@@ -1,6 +1,6 @@
 ---
-title: Home
-description: bunnyOS is a decentralized inference platform for small language models, served by bunnyCompute, a network of computers supplied by people worldwide. Chat with bunny, your personal AI agent, and earn Carrots for the compute you share.
+title: "Home"
+description: "bunny is your personal AI agent inside Telegram, powered by bunnyCompute, a decentralized network of volunteer machines."
 mode: frame
 ---
 
@@ -9,8 +9,15 @@ mode: frame
     <img src="/logo/light.png" alt="bunnyOS" className="block h-14 w-auto dark:hidden" />
     <img src="/logo/dark.png" alt="bunnyOS" className="hidden h-14 w-auto dark:block" />
     <p className="text-balance text-base leading-relaxed tracking-tight text-gray-600 dark:text-gray-400">
-      Personalized agent and decentralized inference platform powered by small models.
+      Your personal AI agent, inside Telegram. Powered by bunnyCompute, a decentralized network of volunteer machines run by people like you.
     </p>
+    <a
+      href="https://t.me/bunnyagentbot"
+      className="mt-1 inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-white no-underline shadow-sm shadow-gray-950/10 transition hover:opacity-90 dark:shadow-black/30"
+    >
+      <Icon icon="send" color="white" size={16} className="shrink-0" />
+      Chat with bunny on Telegram
+    </a>
   </div>
 
   <img
@@ -26,14 +33,14 @@ mode: frame
 
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
       <a
-        href="/user/getting-started/introduction"
-        className="rounded-2xl flex flex-col gap-4 border bg-gray-50 p-4 outline-none shadow-sm shadow-gray-950/5 transition hover:border-primary hover:shadow-md dark:bg-gray-950 dark:shadow-black/20 dark:hover:border-primary"
+        href="/user/getting-started/start-chatting"
+        className="rounded-2xl flex flex-col gap-4 border bg-gray-50 p-4 outline-none shadow-sm shadow-gray-950/5 transition hover:border-primary hover:shadow-md dark:bg-gray-950 dark:shadow-black/20 dark:hover:border-primary sm:col-span-2"
       >
         <Icon icon="rocket" color="rgb(var(--primary))" size={18} className="shrink-0" />
         <div className="flex flex-col gap-1">
-          <span className="text-base font-medium text-gray-900 dark:text-gray-50">Get started</span>
+          <span className="text-base font-medium text-gray-900 dark:text-gray-50">Start chatting</span>
           <span className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
-            New here? See what bunnyOS is and take a two-minute tour.
+            Open the bot, send <code>/start</code>, and say hello. No app to install, no account to create.
           </span>
         </div>
       </a>
@@ -43,21 +50,9 @@ mode: frame
       >
         <Icon icon="message-circle" color="rgb(var(--primary))" size={18} className="shrink-0" />
         <div className="flex flex-col gap-1">
-          <span className="text-base font-medium text-gray-900 dark:text-gray-50">Chat with bunny</span>
+          <span className="text-base font-medium text-gray-900 dark:text-gray-50">Chatting with bunny</span>
           <span className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
-            Start a conversation, stream replies, and keep your chat history.
-          </span>
-        </div>
-      </a>
-      <a
-        href="/user/chat/on-device-vs-cloud"
-        className="rounded-2xl flex flex-col gap-4 border bg-gray-50 p-4 outline-none shadow-sm shadow-gray-950/5 transition hover:border-primary hover:shadow-md dark:bg-gray-950 dark:shadow-black/20 dark:hover:border-primary"
-      >
-        <Icon icon="cpu" color="rgb(var(--primary))" size={18} className="shrink-0" />
-        <div className="flex flex-col gap-1">
-          <span className="text-base font-medium text-gray-900 dark:text-gray-50">Where bunny runs</span>
-          <span className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
-            Run bunny privately on your device, or in the cloud for Carrots.
+            How a conversation works, what bunny remembers, and the commands you can send.
           </span>
         </div>
       </a>
@@ -67,21 +62,21 @@ mode: frame
       >
         <Icon icon="wrench" color="rgb(var(--primary))" size={18} className="shrink-0" />
         <div className="flex flex-col gap-1">
-          <span className="text-base font-medium text-gray-900 dark:text-gray-50">Tools & connectors</span>
+          <span className="text-base font-medium text-gray-900 dark:text-gray-50">What bunny can do</span>
           <span className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
-            Let bunny search the web, do math, and act on your connected apps.
+            Live web search, places and travel, documents, reminders, and more.
           </span>
         </div>
       </a>
       <a
-        href="/user/apps/app-store"
+        href="/user/getting-started/mini-app"
         className="rounded-2xl flex flex-col gap-4 border bg-gray-50 p-4 outline-none shadow-sm shadow-gray-950/5 transition hover:border-primary hover:shadow-md dark:bg-gray-950 dark:shadow-black/20 dark:hover:border-primary"
       >
         <Icon icon="layout-grid" color="rgb(var(--primary))" size={18} className="shrink-0" />
         <div className="flex flex-col gap-1">
-          <span className="text-base font-medium text-gray-900 dark:text-gray-50">bunnyApps</span>
+          <span className="text-base font-medium text-gray-900 dark:text-gray-50">The Mini App</span>
           <span className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
-            Open mini-apps that run on bunny's model, right beside your chat.
+            Your control panel inside Telegram for balances, memory, staking, and supplying compute.
           </span>
         </div>
       </a>
@@ -91,21 +86,9 @@ mode: frame
       >
         <Icon icon="carrot" color="rgb(var(--primary))" size={18} className="shrink-0" />
         <div className="flex flex-col gap-1">
-          <span className="text-base font-medium text-gray-900 dark:text-gray-50">Carrots & OS</span>
+          <span className="text-base font-medium text-gray-900 dark:text-gray-50">Carrots and OS explained</span>
           <span className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
-            The credit that runs bunny in the cloud, and how to earn it.
-          </span>
-        </div>
-      </a>
-      <a
-        href="/user/compute/overview"
-        className="rounded-2xl flex flex-col gap-4 border bg-gray-50 p-4 outline-none shadow-sm shadow-gray-950/5 transition hover:border-primary hover:shadow-md dark:bg-gray-950 dark:shadow-black/20 dark:hover:border-primary"
-      >
-        <Icon icon="server" color="rgb(var(--primary))" size={18} className="shrink-0" />
-        <div className="flex flex-col gap-1">
-          <span className="text-base font-medium text-gray-900 dark:text-gray-50">Contribute compute</span>
-          <span className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
-            Share your computer's spare power to earn Carrots per job.
+            The credit every answer spends, and the token you can stake to earn more.
           </span>
         </div>
       </a>
@@ -117,7 +100,31 @@ mode: frame
         <div className="flex flex-col gap-1">
           <span className="text-base font-medium text-gray-900 dark:text-gray-50">Stake OS</span>
           <span className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
-            Stake the OS token on Base to earn a daily stream of Carrots.
+            Lock <code>$OS</code> on Base and earn a daily stream of Carrots, credited automatically.
+          </span>
+        </div>
+      </a>
+      <a
+        href="/user/compute/overview"
+        className="rounded-2xl flex flex-col gap-4 border bg-gray-50 p-4 outline-none shadow-sm shadow-gray-950/5 transition hover:border-primary hover:shadow-md dark:bg-gray-950 dark:shadow-black/20 dark:hover:border-primary"
+      >
+        <Icon icon="server" color="rgb(var(--primary))" size={18} className="shrink-0" />
+        <div className="flex flex-col gap-1">
+          <span className="text-base font-medium text-gray-900 dark:text-gray-50">Contribute compute</span>
+          <span className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
+            Put your own machine to work answering jobs for the network and earn Carrots.
+          </span>
+        </div>
+      </a>
+      <a
+        href="/user/carrots/bunny-pro"
+        className="rounded-2xl flex flex-col gap-4 border bg-gray-50 p-4 outline-none shadow-sm shadow-gray-950/5 transition hover:border-primary hover:shadow-md dark:bg-gray-950 dark:shadow-black/20 dark:hover:border-primary"
+      >
+        <Icon icon="star" color="rgb(var(--primary))" size={18} className="shrink-0" />
+        <div className="flex flex-col gap-1">
+          <span className="text-base font-medium text-gray-900 dark:text-gray-50">bunny pro</span>
+          <span className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
+            A bigger, sharper model and much more usage for <code>$9</code> a month.
           </span>
         </div>
       </a>

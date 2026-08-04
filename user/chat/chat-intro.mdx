@@ -1,89 +1,62 @@
 ---
-title: Chat with bunny
-description: Send messages, read streaming replies, follow tool cards, and manage your chat history and shortcuts when talking with bunny.
+title: "Chatting with bunny"
+description: "How a conversation with bunny works, from casual replies and photos to progress signals and fresh starts."
 ---
 
 <Frame>
   <img src="/images/hero/bunny-hero-closeup.jpeg" alt="A close-up hero portrait of bunny with a fist raised" />
 </Frame>
 
-Chat is where you and bunny actually talk. You type a message, bunny replies, and the whole conversation is saved so you can pick it back up later. This page covers the conversation itself.
+Talking to bunny is just texting. There is no prompt to get right and no special syntax to learn. Open the chat, say what you want, and bunny answers.
 
-<Frame caption="The chat window, with your conversation history in the sidebar.">
-  <img src="/images/app/chat.png" alt="The bunny chat window with the message box and the sidebar of recent chats" />
-</Frame>
+## Just text it like a friend
 
-## Send a message
+bunny writes back the way a friend would, casual, lowercase, and short. Two or three sentences beats a paragraph, so you get the answer instead of an essay.
 
-<Steps>
-  <Step title="Type in the box">
-    Click the **chat with bunny** box at the bottom and type your message.
-  </Step>
-  <Step title="Press Enter to send">
-    Your message appears and bunny starts replying. To add a new line without sending, press **Shift+Enter**.
-  </Step>
-</Steps>
+When there is more to show, bunny can send a table or hide a spoiler behind a tap to reveal. Times arrive as tappable timestamps shown in your own local time.
 
-You can ask bunny anything: a question, a request, or a task to work through with you.
+## While it works
 
-## How replies work
+bunny gives you a running read on what it is doing, so you are never left staring at a silent chat.
 
-Replies stream in word by word, so you see the answer form in real time. A thinking indicator shows while bunny is working something out before it writes.
-
-bunny writes in markdown, so replies can include lists, tables, code blocks, and clickable links, all formatted for easy reading.
-
-To cut a reply short, press the square **Stop** button. bunny stops generating right away and keeps whatever it had written so far, so you can send a follow-up.
-
-### Tool cards
-
-Sometimes bunny does more than talk. When it uses a tool, an expandable tool card appears inside the reply. Click the card to open it and see what bunny did. To learn which tools bunny can use and how to turn them on or off, see [Built-in tools](/user/chat/built-in-tools).
-
-<Note>
-  Every reply comes from the same bunny, but bunny can run privately on your own device or in the bunnyCompute cloud. See [Where bunny runs](/user/chat/on-device-vs-cloud) to choose and switch.
-</Note>
-
-## Your chat history
-
-Every conversation is saved to your account and auto-titled from your first message, so it is easy to find later. Your saved chats live in the sidebar.
-
-- **New Chat** starts a fresh conversation.
-- The **Recent** list in the sidebar switches between your saved chats.
-- To rename a chat, click the pencil icon or double-click its title.
-- To delete a chat, click the trash icon.
-- Clicking the bunny logo returns you home to a new chat.
-
-## Keyboard shortcuts
-
-Move around faster with these shortcuts. Hold **Cmd** on Mac or **Ctrl** on Windows, then press the key.
-
-| Shortcut | What it does |
+| Signal | What it means |
 | --- | --- |
-| Cmd/Ctrl + J | New Chat |
-| Cmd/Ctrl + Y | Menu / Carrots |
-| Cmd/Ctrl + K | App Store |
-| Cmd/Ctrl + I | Generate |
-| Cmd/Ctrl + E | Connectors |
-| Cmd/Ctrl + G | Settings / Model |
-| Cmd/Ctrl + B | Account |
+| 👀 reaction on your message | bunny has seen it and started |
+| Typing indicator | bunny is working on the answer |
+| Gray status bubble | What bunny is doing right now, with a live timer counting the seconds |
+| ⚡ reaction on your message | The answer has landed |
 
-## Interface sounds
+The status bubble appears in private chats only, and only if the answer takes more than a moment. It names the step (searching the web, checking the calendar, writing a document) and swaps to the answer text as soon as bunny starts writing.
 
-bunny can play small click and open sounds as you use the app. To mute or unmute them, click the speaker icon at the bottom of the sidebar.
+## Sending photos
+
+Send a photo and bunny looks at it. Add a caption to say what you want to know ("what plant is this", "translate this menu"), or send it with no caption at all and bunny will just tell you what it sees.
+
+Photos can be up to 10 MB. They work in [group chats](/user/chat/group-chats) too.
+
+## Fresh starts
+
+Send `/reset` to wipe the conversation history for that chat. bunny forgets what you were just talking about and starts clean. That is useful when you switch topics and the old conversation is getting in the way.
+
+`/reset` only touches the chat you send it in, so resetting a group leaves your private chat untouched. Your long-term memory survives a reset. See [Memory](/user/chat/memory) for how to view or clear that.
 
 <Note>
-  Sending images, documents, and PDFs in chat is coming soon.
+  bunny handles text, photos, and shared locations today. Voice notes, videos, stickers, and file uploads are not supported yet.
 </Note>
 
 ## Related pages
 
 <CardGroup cols={2}>
-  <Card title="Where bunny runs" icon="cpu" href="/user/chat/on-device-vs-cloud">
-    Run bunny privately on your device or in the cloud, and switch anytime.
+  <Card title="What bunny can do" icon="wrench" href="/user/chat/built-in-tools">
+    Search, places, documents, calendar, and the rest of bunny's toolkit.
   </Card>
-  <Card title="Built-in tools" icon="wrench" href="/user/chat/built-in-tools">
-    See the tools bunny uses automatically and turn them on or off.
+  <Card title="Memory" icon="brain" href="/user/chat/memory">
+    What bunny remembers about you long-term, and how to edit it.
   </Card>
-  <Card title="About bunnyApps" icon="layout-grid" href="/user/apps/app-store">
-    Browse and run mini-apps right inside bunnyOS.
+  <Card title="bunny in group chats" icon="users" href="/user/chat/group-chats">
+    Add bunny to a group and learn the four ways to summon it.
+  </Card>
+  <Card title="Start chatting" icon="message-circle" href="/user/getting-started/start-chatting">
+    Open the bot and send your first message.
   </Card>
 </CardGroup>
