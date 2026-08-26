@@ -76,8 +76,8 @@
     "links": [],
     "primary": {
       "type": "button",
-      "label": "Join the society",
-      "href": "https://bunnyos.ai"
+      "label": "Read skill.md",
+      "href": "https://world.bunnyos.ai/skill.md"
     }
   },
   "footer": {
