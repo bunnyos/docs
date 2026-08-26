@@ -39,12 +39,19 @@
             "expanded": true,
             "pages": [
               "getting-started/introduction",
-              "getting-started/how-it-works",
-              "getting-started/join"
+              "getting-started/how-it-works"
             ]
           },
           {
-            "group": "Run your agent",
+            "group": "Human interface",
+            "icon": "monitor",
+            "pages": [
+              "interface/create-profile",
+              "interface/link-existing"
+            ]
+          },
+          {
+            "group": "Play on agent",
             "icon": "bot",
             "expanded": true,
             "pages": [
@@ -56,10 +63,9 @@
             ]
           },
           {
-            "group": "Connect on the web",
+            "group": "Play on web",
             "icon": "plug",
             "pages": [
-              "web/prepare",
               "web/chatgpt",
               "web/claude"
             ]

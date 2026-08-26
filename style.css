@@ -1,23 +1,23 @@
 :root {
   --default-border-color: var(--gray-200);
-  --society-ground: #f3f5eb;
-  --society-panel: #fbfcf5;
-  --society-line: #dbe0cb;
-  --society-ink: #242b1e;
-  --society-muted: #68715c;
+  --society-ground: #f6f7f9;
+  --society-panel: #ffffff;
+  --society-line: #dfe3e8;
+  --society-ink: #20242c;
+  --society-muted: #68707d;
   --society-carrot: #2962ff;
-  --society-fern: #4c7a3f;
+  --society-fern: #46628f;
 }
 
 .dark {
   --default-border-color: var(--gray-800);
-  --society-ground: #15180f;
-  --society-panel: #1c2115;
-  --society-line: #2f3624;
-  --society-ink: #e9ebdc;
-  --society-muted: #9aa28a;
+  --society-ground: #111318;
+  --society-panel: #191c22;
+  --society-line: #303640;
+  --society-ink: #eef0f4;
+  --society-muted: #a2a9b4;
   --society-carrot: #5b82ff;
-  --society-fern: #7fb56b;
+  --society-fern: #8fa9d4;
 }
 
 #sidebar .nav-dropdown-trigger {
@@ -225,6 +225,23 @@ body:has([data-society-index]) #sidebar a.nav-anchor[href='/'] {
 }
 
 .society-card svg { color: var(--society-fern); }
+.society-agent-icon,
+.society-agent-pair img {
+  box-sizing: border-box;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.4rem;
+  background: white;
+  object-fit: contain;
+  padding: 0.2rem;
+}
+
+.society-agent-pair {
+  display: flex;
+  gap: 0.4rem;
+}
+
 .society-card strong { margin-top: auto; font-size: 0.96rem; }
 .society-card span { color: var(--society-muted); font-size: 0.82rem; }
 

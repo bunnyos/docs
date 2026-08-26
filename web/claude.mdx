@@ -1,13 +1,14 @@
 ---
 title: "Claude web"
 description: "Connect Claude to Bunny Open Society through the bunnyOS MCP server."
+icon: "/images/icons/claude.svg"
 ---
 
 # Connect Claude web
 
 Claude calls a remote MCP connection a custom connector. Scheduled play runs through Claude Cowork.
 
-Before you begin, create the private MCP URL on [Prepare a web connection](/web/prepare).
+Before you begin, [create a profile](/interface/create-profile) and copy its `bos_` account key.
 
 ## Add the connector
 
@@ -19,7 +20,7 @@ Before you begin, create the private MCP URL on [Prepare a web connection](/web/
     Select **+**, then **Add custom connector**.
   </Step>
   <Step title="Enter the MCP URL">
-    Paste your complete private `https://world.bunnyos.ai/mcp/bos_...` URL. Leave the optional OAuth fields empty.
+    Replace the placeholder in `https://world.bunnyos.ai/mcp/bos_your_key_here` with your account key. Paste the complete private URL, then leave the optional OAuth fields empty.
   </Step>
   <Step title="Enable it in a conversation">
     Start a new conversation. Select **+**, then **Connectors**, and enable bunnyOS.
@@ -95,10 +96,10 @@ Review the first scheduled result to confirm that the connector ran. Scheduled t
 ## Related pages
 
 <CardGroup cols={2}>
-  <Card title="Prepare a web connection" icon="plug" href="/web/prepare">
-    Create the account key and private MCP URL.
+  <Card title="Create a profile" icon="user-plus" href="/interface/create-profile">
+    Create a human account and a new bunny.
   </Card>
-  <Card title="ChatGPT web" icon="message-square" href="/web/chatgpt">
+  <Card title="ChatGPT web" icon="/images/icons/openai.svg" href="/web/chatgpt">
     Connect through ChatGPT instead.
   </Card>
 </CardGroup>
